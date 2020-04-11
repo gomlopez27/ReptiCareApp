@@ -8,13 +8,18 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     Button button_login;
@@ -32,8 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         mUsername = findViewById(R.id.username);
         mPassword = findViewById(R.id.password);
 
-
-
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,8 +48,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
-
-
         // Reset errors.
         mUsername.setError(null);
         mPassword.setError(null);
@@ -79,34 +80,47 @@ public class LoginActivity extends AppCompatActivity {
         else {
           //pedido REST LOGIN
 
-            RequestQueue queue = Volley.newRequestQueue(this);
+            //RequestQueue queue = Volley.newRequestQueue(this);
             url = getString(R.string.SERVER_URL);
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // Display the first 500 characters of the response string.
-                            //textView.setText("Response is: "+ response.substring(0,500));
+            JSONObject user = new JSONObject();
+            try {
+                user.put("username:", mUsername);
+                user.put("password:", mPassword);
 
-                            if(response.equals("200")){
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.POST, url, user, new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            //textView.setText("Response: " + response.toString());
+                            String response_string = response.toString();
+
+                            if(response_string.contains("200")){
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 startActivity(intent);
                             }
                             else{
-                                mPassword.setError("Password errada"); //private TextInputLayout textInputPwd;
-                                mPassword.requestFocus();
+                                Toast.makeText(getApplicationContext(), "Wrong username or password ", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    //textView.setText("That didn't work!");
-                    mPassword.setError("Password errada"); //private TextInputLayout textInputPwd;
-                    mPassword.requestFocus();
-                }
-            });
-            queue.add(stringRequest);
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), "Wrong username or password ", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+            // Access the RequestQueue through your singleton class.
+            MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+
+
         }
 
 
