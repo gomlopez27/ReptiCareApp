@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
           //pedido REST LOGIN
 
             //RequestQueue queue = Volley.newRequestQueue(this);
-            url = getString(R.string.SERVER_URL);
+            url = getString(R.string.SERVER_URL_GI) + "login/";
 
             JSONObject user = new JSONObject();
             try {
@@ -99,8 +99,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             //textView.setText("Response: " + response.toString());
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                startActivity(intent);
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intent);
                         }
                     }, new Response.ErrorListener() {
 
