@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -85,34 +86,28 @@ public class LoginActivity extends AppCompatActivity {
 
             JSONObject user = new JSONObject();
             try {
-                user.put("username:", mUsername);
-                user.put("password:", mPassword);
+                user.put("username", username);
+                user.put("password", password);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+            Log.e("kk", user.toString());
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.POST, url, user, new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject response) {
                             //textView.setText("Response: " + response.toString());
-                            String response_string = response.toString();
-
-                            if(response_string.contains("200")){
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 startActivity(intent);
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(), "Wrong username or password ", Toast.LENGTH_SHORT).show();
-                            }
                         }
                     }, new Response.ErrorListener() {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), "Wrong username or password ", Toast.LENGTH_SHORT).show();
+                            Log.e("kk",error.toString());
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
                     });
