@@ -40,19 +40,19 @@
         android:layout_below="@+id/password"
         android:text="Login"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
         />
 
-        <TextView
-            android:id="@+id/register_here"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/login_button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp"
-            android:text="Register here">
+    <TextView
+        android:id="@+id/register_here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="Register here">
 
-
-        </TextView>
+    </TextView>
 
 </RelativeLayout>
 
