@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     Button button_login;
     EditText mUsername, mPassword;
     String url;
+    TextView register_here;
     // Instantiate the RequestQueue.
 
 
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         button_login = findViewById(R.id.login_button);
         mUsername = findViewById(R.id.username);
         mPassword = findViewById(R.id.password);
+        register_here = findViewById(R.id.register_here);
 
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +48,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
         });
+
+        register_here.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
