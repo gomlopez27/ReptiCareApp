@@ -28,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText mUsername, mPassword;
     String url;
     TextView register_here;
-    // Instantiate the RequestQueue.
 
 
     @Override
@@ -57,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void attemptLogin() {
@@ -73,14 +71,14 @@ public class LoginActivity extends AppCompatActivity {
 
         // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(password)) {
-            mPassword.setError("É necessario colocar uma password.");
+            mPassword.setError("É necessário colocar uma password.");
             focusView = mPassword;
             cancel = true;
         }
 
         // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(username)) {
-            mUsername.setError("É necessario colocar um username.");
+            mUsername.setError("É necessário colocar um username.");
             focusView = mUsername;
             cancel = true;
         }
@@ -93,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
         else {
           //pedido REST LOGIN
 
-            //RequestQueue queue = Volley.newRequestQueue(this);
             url = getString(R.string.SERVER_URL_GI) + "login/";
 
             JSONObject user = new JSONObject();
@@ -126,14 +123,6 @@ public class LoginActivity extends AppCompatActivity {
 
             // Access the RequestQueue through your singleton class.
             MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
-
-
         }
-
-
-
-
-
-
     }
 }

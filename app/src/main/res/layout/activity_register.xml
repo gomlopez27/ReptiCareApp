@@ -44,11 +44,22 @@
             android:hint="Password"
             />
 
+        <EditText
+            android:id="@+id/password_confirm_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/password_register"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:layout_marginBottom="20dp"
+            android:hint="Confirm Password"
+            />
+
         <Button
             android:id="@+id/register_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/password_register"
+            android:layout_below="@+id/password_confirm_register"
             android:text="Register"
             android:layout_centerHorizontal="true"
             />
