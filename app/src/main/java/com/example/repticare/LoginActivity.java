@@ -3,6 +3,7 @@ package com.example.repticare;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,8 +27,8 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     Button button_login;
     EditText mUsername, mPassword;
-    String url;
     TextView register_here;
+    String url;
 
 
     @Override
@@ -45,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 attemptLogin();
                 }
-
         });
 
         register_here.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void attemptLogin() {
@@ -82,13 +81,12 @@ public class LoginActivity extends AppCompatActivity {
             focusView = mUsername;
             cancel = true;
         }
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
-        }
-
-        else {
+        } else {
           //pedido REST LOGIN
 
             url = getString(R.string.SERVER_URL_GI) + "login/";
@@ -108,8 +106,14 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             //textView.setText("Response: " + response.toString());
+                            SharedPreferences settings = getSharedPreferences("AUTHENTICATION", 0);
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putString("logged", "true");
+                            editor.commit();
+
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
+                            finish();
                         }
                     }, new Response.ErrorListener() {
 
@@ -117,7 +121,6 @@ public class LoginActivity extends AppCompatActivity {
                         public void onErrorResponse(VolleyError error) {
                             Log.e("kk",error.toString());
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-
                         }
                     });
 

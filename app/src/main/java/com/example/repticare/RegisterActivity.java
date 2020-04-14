@@ -22,8 +22,8 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
     Toolbar toolbar;
-    EditText mUsername, mEmail, mPassword, mPasswordConfirm;
     Button register_button;
+    EditText mUsername, mEmail, mPassword, mPasswordConfirm;
     String url;
 
 
@@ -78,8 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
             mPassword.setError("É necessario colocar uma password.");
             focusView = mPassword;
             cancel = true;
-        }
-        else if(password.length() < 4) {
+        } else if(password.length() < 4) {
             mPasswordConfirm.setError("A password tem de ter pelo menos 4 caracteres.");
             focusView = mPassword;
             cancel = true;
@@ -152,7 +151,6 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onErrorResponse(VolleyError error) {
                             Log.e("kk",error.toString());
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-
                         }
                     });
 
