@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_register);
+        toolbar = findViewById(R.id.toolbar_register);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white));
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -124,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             //pedido REST REGISTER
 
-            url = getString(R.string.SERVER_URL_GI) + "register/";
+            url = getString(R.string.SERVER_URL_ANDRE) + "user/register/";
 
             JSONObject user = new JSONObject();
             try {
