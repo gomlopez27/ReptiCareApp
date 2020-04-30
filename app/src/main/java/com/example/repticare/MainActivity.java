@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ListTerrariumsActivity.class);
                     startActivity(intent);
                     finish();
                 }
