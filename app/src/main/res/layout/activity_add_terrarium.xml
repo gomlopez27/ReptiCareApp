@@ -1,9 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".AddTerrariumActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_gravity="center"
+            android:background="@color/colorBackground"
+            android:fitsSystemWindows="true"
+            tools:context=".AddTerrariumActivity">
+
+            <android.widget.Toolbar
+                android:id="@+id/toolbar_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/name_add_terrarium"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="20dp"
+                android:hint="Name"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                android:layout_marginTop="35dp"
+                />
+
+            <EditText
+                android:id="@+id/min_temp_add_terrarium"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_add_terrarium"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="20dp"
+                android:hint="Min Temperature"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:id="@+id/max_temp_add_terrarium"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/min_temp_add_terrarium"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="20dp"
+                android:hint="Max Temperature"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:id="@+id/min_hum_add_terrarium"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/max_temp_add_terrarium"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="20dp"
+                android:hint="Min Humidity"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:id="@+id/max_hum_add_terrarium"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/min_hum_add_terrarium"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="20dp"
+                android:hint="Max Humidity"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:id="@+id/min_uv_add_terrarium"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/max_hum_add_terrarium"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="20dp"
+                android:hint="Min UV"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:id="@+id/max_uv_add_terrarium"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/min_uv_add_terrarium"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="20dp"
+                android:hint="Max UV"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                />
+
+            <Button
+                android:id="@+id/add_terrarium_button"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Add Terrarium"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_background_login"
+                />
+
+
+        </LinearLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
