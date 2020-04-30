@@ -1,11 +1,11 @@
 package com.example.repticare;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private static int TIME = 1000;
@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
                     editor.clear();
                     editor.commit();
 
+                    //Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     Intent intent = new Intent(getApplicationContext(), ListTerrariumsActivity.class);
+
                     startActivity(intent);
                     finish();
                 } else {
