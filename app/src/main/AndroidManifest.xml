@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".AddUserActivity"></activity>
+        <activity android:name=".EditUsersActivity" />
+        <activity android:name=".IssueActivity" />
+        <activity android:name=".TerrariumActivity" />
+        <activity android:name=".EditTerrariumActivity" />
+        <activity android:name=".AddTerrariumActivity" />
+        <activity android:name=".NotificationSettingsActivity" />
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".EditAccountActivity" />
+        <activity android:name=".AccountActivity" />
+        <activity android:name=".ListIssuesActivity" />
+        <activity android:name=".ListTerrariumsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,10 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity"/>
-
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>

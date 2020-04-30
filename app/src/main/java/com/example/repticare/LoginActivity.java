@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("logged", "true");
                             editor.commit();
 
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, ListTerrariumsActivity.class);
                             startActivity(intent);
                             finish();
                         }
