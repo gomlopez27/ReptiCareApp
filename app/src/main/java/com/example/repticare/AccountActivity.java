@@ -1,12 +1,12 @@
 package com.example.repticare;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,20 +29,16 @@ public class AccountActivity extends AppCompatActivity {
                     case R.id.ic_terrarium_bottom_nav:
                         Intent intent1 = new Intent(AccountActivity.this, ListTerrariumsActivity.class);
                         startActivity(intent1);
+                        overridePendingTransition(0,0);
                         break;
-
                     case R.id.ic_issues_bottom_nav:
                         Intent intent2 = new Intent(AccountActivity.this, ListIssuesActivity.class);
                         startActivity(intent2);
+                        overridePendingTransition(0,0);
                         break;
-
                     case R.id.ic_account_bottom_nav:
-
                         break;
-
                 }
-
-
                 return false;
             }
         });

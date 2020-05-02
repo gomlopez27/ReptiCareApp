@@ -1,37 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".ListIssuesActivity">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".ListIssuesActivity">
 
-    <RelativeLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_issues"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list"
-        >
+        android:layout_height="wrap_content">
 
-        <TextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_issues"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="ISSUES"
-            android:textSize="50dp"
-            android:textColor="#000000"
-            android:gravity="center_vertical"
-            />
-    </RelativeLayout>
-
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            app:layout_collapseMode="pin"
+            app:title="Issues"
+            app:titleTextColor="@color/colorAppTitle"
+            app:layout_scrollFlags="scroll|enterAlways"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/bottomBar"
-        android:layout_alignParentBottom="true">
+        android:orientation="horizontal"
+        android:id="@+id/unresolved_issues_box"
+        android:layout_below="@+id/app_bar_issues"
+        android:background="@drawable/box_background"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        >
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_curr_unresolved_issues"
+                android:text="Currently unresolved issues: "
+                android:textSize="20dp"
+                >
+            </TextView>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nr_of_curr_unresolved_issues"
+                android:text="2 "
+                android:textSize="20dp"
+                android:layout_toRightOf="@+id/text_curr_unresolved_issues"
+                />
+        </RelativeLayout>
     </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_my_issues"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/unresolved_issues_box"
+        android:layout_above="@id/bottomNav_issues"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
+        />
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
@@ -39,10 +78,10 @@ tools:context=".ListIssuesActivity">
         android:id="@+id/bottomNav_issues"
         android:background="@color/colorAppTitle"
         app:menu="@menu/bottom_navigation_menu"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:theme="@style/BottomNavigationTheme"
         >
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

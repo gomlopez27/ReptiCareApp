@@ -1,29 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".ListTerrariumsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_terrariums"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_terrariums"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            app:layout_collapseMode="pin"
+            app:title="Terrariums"
+            app:titleTextColor="@color/colorAppTitle"
+            app:layout_scrollFlags="scroll|enterAlways"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list"
+        android:layout_height="50dp"
+        android:id="@+id/nr_of_terrariums_box"
+        android:layout_below="@+id/app_bar_terrariums"
+        android:background="@drawable/box_background"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         >
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_my_terrariums"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
-       />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_curr_monitored"
+                android:text="Currently monitored terrariums: "
+                android:textSize="20dp"
+                >
+            </TextView>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nr_of_curr_monitored"
+                android:text="2 "
+                android:textSize="20dp"
+                android:layout_toRightOf="@+id/text_curr_monitored"
+                />
+        </RelativeLayout>
     </RelativeLayout>
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_my_terrariums"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/nr_of_terrariums_box"
+        android:layout_above="@id/bottomNav_terrarium"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_terrarium_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="55dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_add_white_24dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
@@ -31,9 +86,10 @@
         android:id="@+id/bottomNav_terrarium"
         android:background="@color/colorAppTitle"
         app:menu="@menu/bottom_navigation_menu"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:theme="@style/BottomNavigationTheme"
         >
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
