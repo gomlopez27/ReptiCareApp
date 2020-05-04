@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="profile_image" type="id">profile_image</item>
+    <item name="username_account" type="id">username_account</item>
+    <item name="email_account" type="id">email_account</item>
+    <item name="nr_terrariums_acc" type="id">nr_terrariums_acc</item>
+    <item name="toolbar_account" type="id">toolbar_account</item>
+    <item name="total_terrariums_acc" type="id">total_terrariums_acc</item>
+    <item name="unresolved_issues_acc" type="id">unresolved_issues_acc</item>
+    <item name="total_nr_terrariums_acc" type="id">total_nr_terrariums_acc</item>
+    <item name="box1" type="id">box1</item>
+</resources>

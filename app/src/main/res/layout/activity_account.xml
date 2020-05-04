@@ -8,22 +8,170 @@
     android:background="@color/colorBackground"
     tools:context=".AccountActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_account"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_account"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_collapseMode="pin"
+        app:title="Account"
+        app:titleTextColor="@color/colorAppTitle"
+        />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_account"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_account"
+        android:layout_marginBottom="50dp">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_account"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_collapseMode="pin"
-            app:title="Account"
-            app:titleTextColor="@color/colorAppTitle"
-            app:layout_scrollFlags="scroll|enterAlways"/>
-    </com.google.android.material.appbar.AppBarLayout>
+            android:layout_height="wrap_content"
+            android:background="@color/colorAppTitle">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_account"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@android:color/transparent"
+                app:expandedTitleTextAppearance="@android:color/transparent"
+                app:layout_scrollFlags="exitUntilCollapsed|scroll">
+
+                <RelativeLayout
+                    android:id="@+id/header_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/activity_horizontal_margin">
+
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:civ_border="false"
+                    app:civ_border_width="3dp"
+                    app:civ_shadow="true"
+                    android:layout_centerHorizontal="true"
+                    ></com.mikhaellopez.circularimageview.CircularImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/username_account"
+                    android:text="username"
+                    android:textSize="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/profile_image"
+                    android:paddingTop="5dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/email_account"
+                    android:text="email"
+                    android:textSize="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/username_account"
+                    android:paddingTop="5dp"
+                    />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/email_account"
+                        android:paddingTop="10dp"
+                        android:gravity="center"
+                        >
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/box1"
+                            android:background="@drawable/light_stroke_dark_background"
+                            android:layout_marginRight="15dp"
+                            >
+                            <TextView
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/total_terrariums_acc"
+                                android:text="Total Number of Terrariums"
+                                android:textAppearance="bold"
+                                android:textAlignment="center"
+                                android:textSize="20dp"
+
+                                />
+                            <TextView
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/total_nr_terrariums_acc"
+                                android:text="5"
+                                android:textAlignment="center"
+                                android:textSize="20dp"
+                                android:layout_below="@+id/total_terrariums_acc"
+                                />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/box2"
+                            android:layout_toRightOf="@+id/box1"
+                            android:background="@drawable/light_stroke_dark_background"
+                            android:layout_marginLeft="15dp">
+
+                            <TextView
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/unresolved_issues_acc"
+                                android:text="Unresolved Issues"
+                                android:textAppearance="bold"
+                                android:textAlignment="center"
+                                android:textSize="20dp" />
+
+                            <TextView
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/nr_unresolved_issues_acc"
+                                android:text="2"
+                                android:textAlignment="center"
+                                android:textSize="20dp"
+                                android:layout_below="@+id/unresolved_issues_acc" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+        
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollViewProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 
 
