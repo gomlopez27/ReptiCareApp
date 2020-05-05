@@ -100,7 +100,7 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/total_terrariums_acc"
                                 android:text="Total Number of Terrariums"
-                                android:textAppearance="bold"
+                                android:textStyle="bold"
                                 android:textAlignment="center"
                                 android:textSize="20dp"
 
@@ -129,7 +129,7 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/unresolved_issues_acc"
                                 android:text="Unresolved Issues"
-                                android:textAppearance="bold"
+                                android:textStyle="bold"
                                 android:textAlignment="center"
                                 android:textSize="20dp" />
 
@@ -163,9 +163,41 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
-
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_acc_button"
+                    android:text="Edit Account"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edit_text_background"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/change_pwd_button"
+                    android:text="Change Password"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edit_text_background"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notifications_button"
+                    android:text="Notification"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edit_text_background"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/logout_button"
+                    android:text="Logout"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edit_text_background"/>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

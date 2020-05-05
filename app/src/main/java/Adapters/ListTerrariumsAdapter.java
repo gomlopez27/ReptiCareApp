@@ -29,7 +29,7 @@ public class ListTerrariumsAdapter extends RecyclerView.Adapter<ListTerrariumsAd
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.card_item_my_terrarriums, parent, false);
+        View view = inflater.inflate(R.layout.item_my_terrarriums, parent, false);
         final MyViewHolder viewHolder = new MyViewHolder(view);
 
 

@@ -7,15 +7,30 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
+
 public class ListIssuesActivity extends AppCompatActivity {
+    RecyclerView recyclerView;
+    ArrayList mList;
+    //ListIssuesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_issues);
+
+        recyclerView = findViewById(R.id.list_my_issues);
+
+        //adapter = new ListIssuesAdapter(getApplicationContext(), mList);
+        //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
+        //recyclerView.setAdapter(adapter);
+        //recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_issues);
         Menu menu = bottomNavigationView.getMenu();

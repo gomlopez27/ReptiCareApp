@@ -28,10 +28,6 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_terrariums);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_terrarium);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(0);
-        menuItem.setChecked(true);
 
         //recyclerView with adapter
         recyclerView = findViewById(R.id.list_my_terrariums);
@@ -55,10 +51,15 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
 
-
         TextView nrOfTerrariums_tv = findViewById(R.id.nr_of_curr_monitored);
         int listSize = mList.size();
         nrOfTerrariums_tv.setText(Integer.toString(listSize));
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_terrarium);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
