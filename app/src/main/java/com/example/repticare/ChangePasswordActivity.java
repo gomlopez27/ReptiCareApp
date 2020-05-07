@@ -42,7 +42,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 finish();
             }
         });
-        
+
         confirm_button = findViewById(R.id.confirm_change_password_button);
         mCurrPassword = findViewById(R.id.current_password_change);
         nNewPassword = findViewById(R.id.new_password_change);
