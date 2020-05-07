@@ -1,7 +1,5 @@
 package com.example.repticare;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,17 +31,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
-        toolbar = findViewById(R.id.toolbar_register);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white));
+        toolbar = findViewById(R.id.toolbar_change_password);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
-
+        
         confirm_button = findViewById(R.id.confirm_change_password_button);
         mCurrPassword = findViewById(R.id.current_password_change);
         nNewPassword = findViewById(R.id.new_password_change);
