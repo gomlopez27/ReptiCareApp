@@ -43,6 +43,8 @@ public class EditAccountActivity extends AppCompatActivity {
         //TODO fazer upload de imagens
         profileImage = findViewById(R.id.profile_image);
         editProfileImage = findViewById(R.id.button_change_image);
+
+
         //faz o user escolher uma foto da galeria
         editProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
