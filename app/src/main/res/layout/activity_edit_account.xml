@@ -1,9 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".EditAccountActivity">
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/colorBackground"
+tools:context=".EditAccountActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar_edit_acc"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_edit_acc"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_collapseMode="pin"
+        app:title="Edit Account"
+        app:titleTextColor="@color/colorAppTitle"
+        app:layout_scrollFlags="scroll|enterAlways"/>
+</com.google.android.material.appbar.AppBarLayout>
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/profile_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_launcher_background"
+        app:civ_border="false"
+        app:civ_border_width="3dp"
+        app:civ_shadow="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/app_bar_edit_acc"
+        ></com.mikhaellopez.circularimageview.CircularImageView>
+
+    <Button
+        android:id="@+id/button_change_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_image"
+        android:layout_centerHorizontal="true"
+        android:text="Upload image"
+        android:textColor="@color/white"
+        android:background="@drawable/light_stroke_dark_background"
+        android:padding="10dp"
+        />
+
+    <EditText
+        android:id="@+id/change_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:drawableLeft="@drawable/ic_email_dark_blue_24dp"
+        android:layout_gravity="center"
+        android:drawablePadding="10dp"
+        android:background="@drawable/edit_text_background"
+        android:padding="10dp"
+        android:layout_below="@+id/button_change_image"
+        />
+
+
+    <Button
+        android:id="@+id/edit_acc_save_changes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/change_email"
+        android:text="Save Changes"
+        android:textColor="@color/white"
+        android:background="@drawable/save_button_background"
+        android:padding="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        />
+
+</RelativeLayout>
