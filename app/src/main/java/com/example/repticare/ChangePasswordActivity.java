@@ -48,7 +48,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         nNewPassword = findViewById(R.id.new_password_change);
         mPasswordConfirm = findViewById(R.id.password_confirm_change);
 
-
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
