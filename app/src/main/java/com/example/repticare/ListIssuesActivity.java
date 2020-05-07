@@ -7,17 +7,21 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
+import Adapters.ListIssuesAdapter;
+import Items.IssueItem;
+
 
 public class ListIssuesActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList mList;
-    //ListIssuesAdapter adapter;
+    ListIssuesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +29,24 @@ public class ListIssuesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_issues);
 
         recyclerView = findViewById(R.id.list_my_issues);
+        mList = new ArrayList<IssueItem>();
 
-        //adapter = new ListIssuesAdapter(getApplicationContext(), mList);
+        IssueItem item1 = new IssueItem("Issue 1");
+        IssueItem item2 = new IssueItem("Issue 2");
+        IssueItem item3 = new IssueItem("Issue 3");
+        IssueItem item4 = new IssueItem("Issue 4");
+        IssueItem item5 = new IssueItem("Issue 5");
+
+        mList.add(item1);
+        mList.add(item2);
+        mList.add(item3);
+        mList.add(item4);
+        mList.add(item5);
+
+        adapter = new ListIssuesAdapter(getApplicationContext(), mList);
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
-        //recyclerView.setAdapter(adapter);
-        //recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        recyclerView.setAdapter(adapter);
+       recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_issues);

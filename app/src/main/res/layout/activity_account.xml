@@ -90,7 +90,7 @@
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="60dp"
                             android:id="@+id/box1"
                             android:background="@drawable/light_stroke_dark_background"
                             android:layout_marginRight="15dp"
@@ -102,7 +102,7 @@
                                 android:text="Total Number of Terrariums"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
-                                android:textSize="20dp"
+                                android:textSize="15dp"
 
                                 />
                             <TextView
@@ -111,27 +111,28 @@
                                 android:id="@+id/total_nr_terrariums_acc"
                                 android:text="5"
                                 android:textAlignment="center"
-                                android:textSize="20dp"
+                                android:textSize="15dp"
                                 android:layout_below="@+id/total_terrariums_acc"
                                 />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="60dp"
                             android:id="@+id/box2"
                             android:layout_toRightOf="@+id/box1"
                             android:background="@drawable/light_stroke_dark_background"
-                            android:layout_marginLeft="15dp">
+                            android:layout_marginLeft="15dp"
+                            >
 
                             <TextView
                                 android:layout_width="150dp"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/unresolved_issues_acc"
-                                android:text="Unresolved Issues"
+                                android:text="Total Unresolved of Issues"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
-                                android:textSize="20dp" />
+                                android:textSize="15dp" />
 
                             <TextView
                                 android:layout_width="150dp"
@@ -139,7 +140,7 @@
                                 android:id="@+id/nr_unresolved_issues_acc"
                                 android:text="2"
                                 android:textAlignment="center"
-                                android:textSize="20dp"
+                                android:textSize="15dp"
                                 android:layout_below="@+id/unresolved_issues_acc" />
 
                         </RelativeLayout>
