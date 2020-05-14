@@ -30,6 +30,8 @@ public class TerrariumActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.edit_terrarium_button);
+
 
         //TODO: onclick do botao dos settings
         //Intent i = new Intent(TerrariumActivity.this, EditTerrariumActivity.class);
