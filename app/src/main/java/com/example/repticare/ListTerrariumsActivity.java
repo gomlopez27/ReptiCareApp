@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -55,6 +57,14 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         int listSize = mList.size();
         nrOfTerrariums_tv.setText(Integer.toString(listSize));
 
+        FloatingActionButton fab = findViewById(R.id.add_terrarium_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(ListTerrariumsActivity.this, AddTerrariumActivity.class);
+                startActivity(intent1);
+            }
+        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_terrarium);
         Menu menu = bottomNavigationView.getMenu();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,10 @@ public class ListIssuesActivity extends AppCompatActivity {
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
         recyclerView.setAdapter(adapter);
        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+
+        TextView nrOfIssues_tv = findViewById(R.id.nr_of_curr_unresolved_issues);
+        int listSize = mList.size();
+        nrOfIssues_tv.setText(Integer.toString(listSize));
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_issues);
