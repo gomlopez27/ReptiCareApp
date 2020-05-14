@@ -28,5 +28,11 @@ public class TerrariumActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        });    }
+        });
+
+
+        //TODO: onclick do botao dos settings
+        //Intent i = new Intent(TerrariumActivity.this, EditTerrariumActivity.class);
+        //i.putExtra("terrarium_name", terrariumName);
+    }
 }
