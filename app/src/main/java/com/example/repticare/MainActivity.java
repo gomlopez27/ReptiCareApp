@@ -23,12 +23,13 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = settings.edit();
                 String logged = settings.getString("logged", "false");
 
+
                 if(logged.equalsIgnoreCase("false")){
                     editor.clear();
                     editor.commit();
 
-                    //Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    Intent intent = new Intent(getApplicationContext(), ListTerrariumsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    //Intent intent = new Intent(getApplicationContext(), ListTerrariumsActivity.class);
 
                     startActivity(intent);
                     finish();

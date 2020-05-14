@@ -1,27 +1,45 @@
 package com.example.repticare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import Adapters.ListTerrariumsAdapter;
 import Items.TerrariumItem;
 
 public class ListTerrariumsActivity extends AppCompatActivity {
-
+    private static final String SET_COOKIE_KEY = "Set-Cookie";
+    private static final String COOKIE_KEY = "Cookie";
+    private static final String SESSION_COOKIE = "sessionid";
     RecyclerView recyclerView;
     ArrayList mList;
     ListTerrariumsAdapter adapter;
@@ -33,20 +51,14 @@ public class ListTerrariumsActivity extends AppCompatActivity {
 
         //recyclerView with adapter
         recyclerView = findViewById(R.id.list_my_terrariums);
-        mList = new ArrayList<TerrariumItem>();
+        mList = new ArrayList();
+        getTerrariums();
+        // TODO : remove this delay
+        for(int i = 0 ;  i < 500000000 ; i++){
+            ;
+        }
+        Log.i("it", (String.valueOf(mList.size())));
 
-
-        TerrariumItem item1 = new TerrariumItem("Terrarium 1");
-        TerrariumItem item2 = new TerrariumItem("Terrarium 2");
-        TerrariumItem item3 = new TerrariumItem("Terrarium 3");
-        TerrariumItem item4 = new TerrariumItem("Terrarium 4");
-        TerrariumItem item5 = new TerrariumItem("Terrarium 5");
-
-        mList.add(item1);
-        mList.add(item2);
-        mList.add(item3);
-        mList.add(item4);
-        mList.add(item5);
 
         adapter = new ListTerrariumsAdapter(getApplicationContext(), mList);
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
@@ -92,5 +104,79 @@ public class ListTerrariumsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getTerrariums() {
+        final ArrayList res = new ArrayList<TerrariumItem>();
+
+        String url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/";
+
+
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
+                (Request.Method.GET, url,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        mList.addAll(parseTerrariums(response));
+                        Log.i("it", (String.valueOf(mList.size()) + " After Response"));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("resp", error.toString());
+                    }
+                })  {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String>  params = new HashMap<String, String>();
+                        addSessionCookie(params);
+                        return params;
+                    }
+
+                };
+
+
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+    }
+
+
+    private final void addSessionCookie(Map<String, String> headers) {
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String sessionId = settings.getString(SESSION_COOKIE, "");
+        if (sessionId.length() > 0) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(SESSION_COOKIE);
+            builder.append("=");
+            builder.append(sessionId);
+            if (headers.containsKey(COOKIE_KEY)) {
+                builder.append("; ");
+                builder.append(headers.get(COOKIE_KEY));
+            }
+            headers.put(COOKIE_KEY, builder.toString());
+        }
+    }
+
+
+    private ArrayList<TerrariumItem> parseTerrariums(JSONArray response){
+        try {
+            JSONArray items = response;
+            ArrayList res = new ArrayList<TerrariumItem>();
+            for (int i = 0 ; i < items.length(); i++){
+                JSONObject item = items.getJSONObject(i);
+                TerrariumItem terrariumItem = new TerrariumItem(item.getString("name"));
+                res.add(terrariumItem);
+            }
+
+         return res;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+        return null;
     }
 }
