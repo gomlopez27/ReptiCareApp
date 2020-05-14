@@ -3,6 +3,7 @@ package com.example.repticare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,7 +16,7 @@ public class TerrariumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terrarium);
 
-        String terrariumName = getIntent().getExtras().getString("Name");
+        final String terrariumName = getIntent().getExtras().getString("Name");
         toolbar = findViewById(R.id.toolbar_terrarium);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(terrariumName);
@@ -30,11 +31,16 @@ public class TerrariumActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.edit_terrarium_button);
+        Button editTerrarium = findViewById(R.id.edit_terrarium_button);
+        editTerrarium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TerrariumActivity.this, EditTerrariumActivity.class);
+                i.putExtra("terrarium_name", terrariumName);
+                startActivity(i);
+            }
+        });
 
 
-        //TODO: onclick do botao dos settings
-        //Intent i = new Intent(TerrariumActivity.this, EditTerrariumActivity.class);
-        //i.putExtra("terrarium_name", terrariumName);
     }
 }

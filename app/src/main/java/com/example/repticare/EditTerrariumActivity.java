@@ -16,13 +16,12 @@ public class EditTerrariumActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_terrarium);
 
 
-        //String terrariumName = getIntent().getExtras().getString("terrarium_name"); //TODO APANHAR DA INTENT DA PAGINA DO TERRARIUM
+        String terrariumName = getIntent().getExtras().getString("terrarium_name");
         toolbar = findViewById(R.id.toolbar_edit_terrarium);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
 
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle("Edit " + terrariumName);
-        getSupportActionBar().setTitle("Edit " + "olaaaaaa");
+        getSupportActionBar().setTitle("Edit " + terrariumName);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

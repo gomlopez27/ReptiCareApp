@@ -9,4 +9,5 @@
     <item name="unresolved_issues_acc" type="id"></item>
     <item name="total_nr_terrariums_acc" type="id"></item>
     <item name="box1" type="id"></item>
+    <item name="toolbar_edit_other_users" type="id" />
 </resources>
