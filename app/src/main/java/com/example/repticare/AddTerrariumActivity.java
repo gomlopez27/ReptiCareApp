@@ -83,6 +83,7 @@ public class AddTerrariumActivity extends AppCompatActivity {
         String maxUv = mMaxUv.getText().toString();
         String otherUsers = mOtherUsers.getText().toString();
 
+
         boolean cancel = false;
         View focusView = null;
 
@@ -92,87 +93,109 @@ public class AddTerrariumActivity extends AppCompatActivity {
             focusView = mName;
             cancel = true;
         }
+
         // Check for a valid min temp, if the user entered one.
         if (TextUtils.isEmpty(minTemp)) {
             mMinTemp.setError("É necessário colocar uma temperatura mínima.");
             focusView = mMinTemp;
             cancel = true;
         }
+        else {
+            float minTempF = Float.parseFloat(mMinTemp.getText().toString());
+
+            // Check for a valid min temp, if the user entered one.
+            if (minTempF < 5 || minTempF > 40) {
+                mMinTemp.setError("A temperatura tem de estar entre 5 e 40ºC.");
+                focusView = mMinTemp;
+                cancel = true;
+            }
+        }
+
         // Check for a valid max temp, if the user entered one.
         if (TextUtils.isEmpty(maxTemp)) {
             mMaxTemp.setError("É necessário colocar uma temperatura máxima.");
             focusView = mMaxTemp;
             cancel = true;
         }
+        else {
+            float maxTempF = Float.parseFloat(mMaxTemp.getText().toString());
+
+            // Check for a valid max temp, if the user entered one.
+            if (maxTempF < 5 || maxTempF > 40) {
+                mMaxTemp.setError("A temperatura tem de estar entre 5 e 40ºC.");
+                focusView = mMaxTemp;
+                cancel = true;
+            }
+        }
+
         // Check for a valid min hum, if the user entered one.
         if (TextUtils.isEmpty(minHum)) {
             mMinHum.setError("É necessário colocar uma humidade mínima.");
             focusView = mMinHum;
             cancel = true;
         }
+        else {
+            int minHumI = Integer.parseInt(mMinHum.getText().toString());
+
+            // Check for a valid min hum, if the user entered one.
+            if (minHumI < 25 || minHumI > 85) {
+                mMinHum.setError("A humidade tem de estar entre 25 e 85%.");
+                focusView = mMinHum;
+                cancel = true;
+            }
+        }
+
         // Check for a valid max hum, if the user entered one.
         if (TextUtils.isEmpty(maxHum)) {
             mMaxHum.setError("É necessário colocar uma humidade máxima.");
             focusView = mMaxHum;
             cancel = true;
         }
+        else {
+            int maxHumI = Integer.parseInt(mMaxHum.getText().toString());
+
+            // Check for a valid max hum, if the user entered one.
+            if (maxHumI < 25 || maxHumI > 85) {
+                mMaxHum.setError("A humidade tem de estar entre 25 e 85%.");
+                focusView = mMaxHum;
+                cancel = true;
+            }
+        }
+
         // Check for a valid min uv, if the user entered one.
         if (TextUtils.isEmpty(minUv)) {
             mMinUv.setError("É necessário colocar a radiação UV mínima.");
             focusView = mMinUv;
             cancel = true;
         }
+        else {
+            int minUvI = Integer.parseInt(mMinUv.getText().toString());
+
+            // Check for a valid min uv, if the user entered one.
+            if (minUvI < 200 || minUvI > 370) {
+                mMinUv.setError("A radiação UV tem de estar entre 200 e 370nm.");
+                focusView = mMinUv;
+                cancel = true;
+            }
+        }
+
         // Check for a valid max uv, if the user entered one.
         if (TextUtils.isEmpty(maxUv)) {
             mMaxUv.setError("É necessário colocar a radiação UV máxima.");
             focusView = mMaxUv;
             cancel = true;
         }
+        else {
+            int maxUvI = Integer.parseInt(mMaxUv.getText().toString());
 
-        float minTempF = Float.parseFloat(mMinTemp.getText().toString());
-        float maxTempF = Float.parseFloat(mMaxTemp.getText().toString());
-        int minHumI = Integer.parseInt(mMinHum.getText().toString());
-        int maxHumI = Integer.parseInt(mMaxHum.getText().toString());
-        int minUvI = Integer.parseInt(mMinUv.getText().toString());
-        int maxUvI = Integer.parseInt(mMaxUv.getText().toString());
+            // Check for a valid max uv, if the user entered one.
+            if (maxUvI < 25 || maxUvI > 85) {
+                mMaxUv.setError("A radiação UV tem de estar entre 200 e 370nm.");
+                focusView = mMaxUv;
+                cancel = true;
+            }
+        }
 
-
-        // Check for a valid min temp, if the user entered one.
-        if (minTempF < 5 || minTempF > 40) {
-            mMinTemp.setError("A temperatura tem de estar entre 5 e 40ºC.");
-            focusView = mMinTemp;
-            cancel = true;
-        }
-        // Check for a valid max temp, if the user entered one.
-        if (maxTempF < 5 || maxTempF > 40) {
-            mMaxTemp.setError("A temperatura tem de estar entre 5 e 40ºC.");
-            focusView = mMaxTemp;
-            cancel = true;
-        }
-        // Check for a valid min hum, if the user entered one.
-        if (minHumI < 25 || minHumI > 85) {
-            mMinHum.setError("A humidade tem de estar entre 25 e 85%.");
-            focusView = mMinHum;
-            cancel = true;
-        }
-        // Check for a valid max hum, if the user entered one.
-        if (maxHumI < 25 || maxHumI > 85) {
-            mMaxHum.setError("A humidade tem de estar entre 25 e 85%.");
-            focusView = mMaxHum;
-            cancel = true;
-        }
-        // Check for a valid min uv, if the user entered one.
-        if (minUvI < 200 || minUvI > 370) {
-            mMinUv.setError("A radiação UV tem de estar entre 200 e 370nm.");
-            focusView = mMinUv;
-            cancel = true;
-        }
-        // Check for a valid max uv, if the user entered one.
-        if (maxUvI < 25 || maxUvI > 85) {
-            mMaxUv.setError("A radiação UV tem de estar entre 200 e 370nm.");
-            focusView = mMaxUv;
-            cancel = true;
-        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
