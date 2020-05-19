@@ -170,10 +170,10 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button_remove_terrarium"
+        android:id="@+id/button_delete_terrarium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="Delete Terrarium"
         android:textColor="@color/white"
         android:background="@drawable/save_button_background"
         android:padding="10dp"
@@ -189,20 +189,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttons_box"
-        android:layout_below="@+id/button_remove_terrarium">
-
-    <Button
-        android:id="@+id/button_cancel_changes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:textColor="@color/white"
-        android:background="@drawable/cancel_button_background"
-        android:padding="10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        />
+        android:layout_below="@+id/button_delete_terrarium">
 
     <Button
         android:id="@+id/button_confirm_changes"
@@ -214,7 +201,7 @@
         android:padding="10dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         />
     </RelativeLayout>
 
