@@ -8,21 +8,56 @@
     android:background="@color/colorBackground"
     tools:context=".IssueActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_issue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_issue"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_issue"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_collapseMode="pin"
+        app:title="Issue Name"
+        app:titleTextColor="@color/colorAppTitle"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/toolbar_issue"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/box_background"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/description_block"
+        android:layout_margin="20dp"
+        >
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_collapseMode="pin"
-            app:title="Issue Name"
-            app:titleTextColor="@color/colorAppTitle"
-            app:layout_scrollFlags="scroll|enterAlways"/>
-    </com.google.android.material.appbar.AppBarLayout>
+            android:layout_height="400dp"
+            android:id="@+id/text_issue_description"
+            android:text="Display description here!"
+            android:textSize="20dp"
+            />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_resolve_issue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I have resolved this issue"
+        android:textColor="@color/white"
+        android:background="@drawable/save_button_background"
+        android:padding="10dp"
+        android:layout_below="@+id/description_block"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        />
 
 </RelativeLayout>
