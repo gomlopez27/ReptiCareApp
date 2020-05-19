@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -69,7 +69,7 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         adapter = new ListTerrariumsAdapter(ListTerrariumsActivity.this, mList);
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
         nrOfTerrariums_tv = findViewById(R.id.nr_of_curr_monitored);
         int listSize = mList.size();
