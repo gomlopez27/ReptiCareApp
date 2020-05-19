@@ -3,7 +3,6 @@ package com.example.repticare;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,10 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +53,7 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.list_my_terrariums);
         mList = new ArrayList();
 
-      /*  TerrariumItem item1 = new TerrariumItem("Terrarium 1");
+        TerrariumItem item1 = new TerrariumItem("Terrarium 1");
         TerrariumItem item2 = new TerrariumItem("Terrarium 2");
         TerrariumItem item3 = new TerrariumItem("Terrarium 3");
         TerrariumItem item4 = new TerrariumItem("Terrarium 4");
@@ -69,7 +64,7 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         mList.add(item3);
         mList.add(item4);
         mList.add(item5);
-        */
+
         getTerrariums();
         adapter = new ListTerrariumsAdapter(ListTerrariumsActivity.this, mList);
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
