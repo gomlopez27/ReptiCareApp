@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,12 +23,17 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AddTerrariumActivity extends AppCompatActivity {
     Button button_add_terrarium;
     EditText mName, mMinTemp, mMaxTemp, mMinHum, mMaxHum, mMinUv, mMaxUv, mOtherUsers;
     String url;
     Toolbar toolbar;
-
+    private static final String SET_COOKIE_KEY = "Set-Cookie";
+    private static final String COOKIE_KEY = "Cookie";
+    private static final String SESSION_COOKIE = "sessionid";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,7 +196,7 @@ public class AddTerrariumActivity extends AppCompatActivity {
             int maxUvI = Integer.parseInt(mMaxUv.getText().toString());
 
             // Check for a valid max uv, if the user entered one.
-            if (maxUvI < 25 || maxUvI > 85) {
+            if (maxUvI < 200 || maxUvI > 370) {
                 mMaxUv.setError("A radiação UV tem de estar entre 200 e 370nm.");
                 focusView = mMaxUv;
                 cancel = true;
@@ -204,34 +211,27 @@ public class AddTerrariumActivity extends AppCompatActivity {
         } else {
             //pedido REST ADD TERRARIUM
 
-            url = getString(R.string.SERVER_URL_GI) + "addTerrarium/";
+            url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/register/";
 
-            JSONObject user = new JSONObject();
+            JSONObject terrarium = new JSONObject();
             try {
-                user.put("name", name);
-                user.put("minTemp", minTemp);
-                user.put("maxTemp", maxTemp);
-                user.put("minHum", minHum);
-                user.put("maxHum", maxHum);
-                user.put("minUv", minUv);
-                user.put("maxUv", maxUv);
-                user.put("otherUsers", otherUsers);
+                terrarium.put("name", name);
+                terrarium.put("min_temp", minTemp);
+                terrarium.put("max_temp", maxTemp);
+                terrarium.put("min_hum", minHum);
+                terrarium.put("max_hum", maxHum);
+                terrarium.put("min_uv", minUv);
+                terrarium.put("max_uv", maxUv);
+                terrarium.put("other_users", otherUsers);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e("kk", user.toString());
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                    (Request.Method.POST, url, user, new Response.Listener<JSONObject>() {
+                    (Request.Method.POST, url, terrarium, new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject response) {
-                            //textView.setText("Response: " + response.toString());
-                            SharedPreferences settings = getSharedPreferences("AUTHENTICATION", 0);
-                            SharedPreferences.Editor editor = settings.edit();
-                            editor.putString("logged", "true");
-                            editor.commit();
-
                             Intent intent = new Intent(AddTerrariumActivity.this, ListTerrariumsActivity.class);
                             startActivity(intent);
                             finish();
@@ -240,13 +240,41 @@ public class AddTerrariumActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("kk",error.toString());
+                            Log.e("AddTerra",error.getMessage());
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String>  params = new HashMap<String, String>();
+                        addSessionCookie(params);
+                        return params;
+                    }
+
+                };
 
             // Access the RequestQueue through your singleton class.
             MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        }
+    }
+
+    /**
+     * Adds session cookie to headers if exists.
+     * @param headers
+     */
+    private final void addSessionCookie(Map<String, String> headers) {
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String sessionId = settings.getString(SESSION_COOKIE, "");
+        if (sessionId.length() > 0) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(SESSION_COOKIE);
+            builder.append("=");
+            builder.append(sessionId);
+            if (headers.containsKey(COOKIE_KEY)) {
+                builder.append("; ");
+                builder.append(headers.get(COOKIE_KEY));
+            }
+            headers.put(COOKIE_KEY, builder.toString());
         }
     }
 }
