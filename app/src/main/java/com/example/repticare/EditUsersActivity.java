@@ -9,6 +9,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,5 +63,15 @@ public class EditUsersActivity extends AppCompatActivity {
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+
+        FloatingActionButton fab = findViewById(R.id.add_other_user_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(EditUsersActivity.this, AddUserActivity.class);
+                intent1.putExtra("terrarium_name", terrariumName);
+                startActivity(intent1);
+            }
+        });
     }
 }
