@@ -4,15 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class TerrariumActivity extends AppCompatActivity {
+    Button other_users_button, edit_terrarium_button;
+    EditText terrarium_temperature, terrarium_humidity, terrarium_uv;
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO: buscar valores de temp, hum e uv ao terrario
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terrarium);
 
@@ -31,8 +35,8 @@ public class TerrariumActivity extends AppCompatActivity {
             }
         });
 
-        Button editTerrarium = findViewById(R.id.edit_terrarium_button);
-        editTerrarium.setOnClickListener(new View.OnClickListener() {
+        edit_terrarium_button = findViewById(R.id.edit_terrarium_button);
+        edit_terrarium_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(TerrariumActivity.this, EditTerrariumActivity.class);
@@ -41,6 +45,15 @@ public class TerrariumActivity extends AppCompatActivity {
             }
         });
 
+        other_users_button = findViewById(R.id.other_users_button);
+        other_users_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TerrariumActivity.this, EditUsersActivity.class);
+                i.putExtra("terrarium_name", terrariumName);
+                startActivity(i);
+            }
+        });
 
     }
 }
