@@ -8,7 +8,6 @@
     android:background="@color/colorBackground"
     tools:context=".TerrariumActivity">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_terrarium"
         android:layout_width="match_parent"
@@ -20,162 +19,229 @@
         app:titleTextColor="@color/colorAppTitle"
         />
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollViewProfile"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:id="@+id/statistics_block"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
         android:layout_below="@+id/toolbar_terrarium"
-        android:background="@drawable/box_background"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        >
-        <Button
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/ic_settings_darkblue_24dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/edit_terrarium_button"
-            />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/temperature_block"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:id="@+id/text_current_temperature"
-                android:text="Current temperature: "
-                android:textSize="20dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:id="@+id/terrarium_temperature"
-                android:text="2 "
-                android:textSize="20dp"
-                android:layout_toRightOf="@+id/text_current_temperature"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/humidity_block"
-            android:layout_below="@+id/temperature_block"
-            android:layout_marginLeft="10dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:id="@+id/text_current_humidity"
-                android:text="Current humidity: "
-                android:textSize="20dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:id="@+id/terrarium_humidity"
-                android:text="2 "
-                android:textSize="20dp"
-                android:layout_toRightOf="@+id/text_current_humidity"
-                />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/uv_block"
-            android:layout_below="@+id/humidity_block"
-            android:layout_marginLeft="10dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:id="@+id/text_current_uv"
-                android:text="Current UV radiation: "
-                android:textSize="20dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:id="@+id/terrarium_uv"
-                android:text="2 "
-                android:textSize="20dp"
-                android:layout_toRightOf="@+id/text_current_uv"
-                />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/statistics_block"
-        android:paddingTop="20dp"
-        android:gravity="center"
-        android:id="@+id/box_temp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/users_block"
-            android:layout_marginLeft="10dp"
-            >
-
-            <TextView
-                android:id="@+id/owner_text"
-                android:layout_width="180dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="center"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:id="@+id/statistics_block"
+                android:layout_below="@+id/toolbar_terrarium"
                 android:background="@drawable/box_background"
-                android:text="Owner:"
-                android:textSize="20dp"
-                />
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                >
+                <Button
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_settings_darkblue_24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/edit_terrarium_button"
+                    />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:id="@+id/owner_name"
-                android:text="Giovanna"
-                android:textSize="20dp"
-                android:layout_toRightOf="@+id/owner_text"
-                />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/temperature_block"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    >
 
-        </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:id="@+id/text_current_temperature"
+                        android:text="Current temperature: "
+                        android:textSize="20dp"
+                        />
 
-        <Button
-            android:id="@+id/max_temp_add_terrarium"
-            android:layout_width="180dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center"
-            android:drawablePadding="10dp"
-            android:background="@drawable/box_background"
-            android:padding="10dp"
-            android:text="Other users"
-            android:textSize="20dp"
-            android:textAlignment="center"
-            />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:id="@+id/terrarium_temperature"
+                        android:text="2 "
+                        android:textSize="20dp"
+                        android:layout_toRightOf="@+id/text_current_temperature"
+                        />
+                </RelativeLayout>
 
-    </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/humidity_block"
+                    android:layout_below="@+id/temperature_block"
+                    android:layout_marginLeft="10dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:id="@+id/text_current_humidity"
+                        android:text="Current humidity: "
+                        android:textSize="20dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:id="@+id/terrarium_humidity"
+                        android:text="2 "
+                        android:textSize="20dp"
+                        android:layout_toRightOf="@+id/text_current_humidity"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/uv_block"
+                    android:layout_below="@+id/humidity_block"
+                    android:layout_marginLeft="10dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:id="@+id/text_current_uv"
+                        android:text="Current UV radiation: "
+                        android:textSize="20dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:id="@+id/terrarium_uv"
+                        android:text="2 "
+                        android:textSize="20dp"
+                        android:layout_toRightOf="@+id/text_current_uv"
+                        />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/statistics_block"
+                android:gravity="center"
+                android:id="@+id/box_temp"
+                android:paddingTop="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="180dp"
+                    android:layout_height="70dp"
+                    android:id="@+id/users_block"
+                    android:background="@drawable/box_background"
+                    >
+
+                    <TextView
+                        android:id="@+id/owner_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Owner: "
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        />
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/owner_name"
+                        android:text="Giovanna Lopez"
+                        android:padding="10dp"
+                        android:textSize="20dp"
+                        android:layout_below="@+id/owner_text"
+                        />
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/max_temp_add_terrarium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+
+                    android:background="@drawable/light_stroke_dark_background"
+                    android:text="Other users"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:padding="10dp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:id="@+id/graphic1"
+                android:background="@drawable/box_background"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="graphic 1"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:id="@+id/graphic2"
+                android:background="@drawable/box_background"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="graphic 2"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:id="@+id/graphic3"
+                android:background="@drawable/box_background"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="graphic 3"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

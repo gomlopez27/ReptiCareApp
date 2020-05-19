@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +19,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -52,12 +49,25 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         //recyclerView with adapter
         recyclerView = findViewById(R.id.list_my_terrariums);
         mList = new ArrayList();
-        getTerrariums();
+
+        TerrariumItem item1 = new TerrariumItem("Terrarium 1");
+        TerrariumItem item2 = new TerrariumItem("Terrarium 2");
+        TerrariumItem item3 = new TerrariumItem("Terrarium 3");
+        TerrariumItem item4 = new TerrariumItem("Terrarium 4");
+        TerrariumItem item5 = new TerrariumItem("Terrarium 5");
+
+        mList.add(item1);
+        mList.add(item2);
+        mList.add(item3);
+        mList.add(item4);
+        mList.add(item5);
+
+        // getTerrariums();
         // TODO : remove this delay
-        for(int i = 0 ;  i < 500000000 ; i++){
+       /* for(int i = 0 ;  i < 500000000 ; i++){
             ;
         }
-        Log.i("it", (String.valueOf(mList.size())));
+        Log.i("it", (String.valueOf(mList.size())));*/
 
 
         adapter = new ListTerrariumsAdapter(getApplicationContext(), mList);
