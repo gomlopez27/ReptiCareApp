@@ -25,29 +25,15 @@ tools:context=".EditAccountActivity">
         app:layout_scrollFlags="scroll|enterAlways"/>
 </com.google.android.material.appbar.AppBarLayout>
 
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/profile_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/ic_launcher_background"
-        app:civ_border="false"
-        app:civ_border_width="3dp"
-        app:civ_shadow="true"
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:id="@+id/profile_image_edit"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/app_bar_edit_acc"
-        ></com.mikhaellopez.circularimageview.CircularImageView>
-
-    <Button
-        android:id="@+id/button_change_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_image"
-        android:layout_centerHorizontal="true"
-        android:text="Upload image"
-        android:textColor="@color/white"
-        android:background="@drawable/light_stroke_dark_background"
-        android:padding="10dp"
+        android:layout_marginTop="30dp"
         />
+
 
     <EditText
         android:id="@+id/change_email"
@@ -63,7 +49,7 @@ tools:context=".EditAccountActivity">
         android:drawablePadding="10dp"
         android:background="@drawable/edit_text_background"
         android:padding="10dp"
-        android:layout_below="@+id/button_change_image"
+        android:layout_below="@+id/profile_image_edit"
         />
 
 

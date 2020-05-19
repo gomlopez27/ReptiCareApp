@@ -1,7 +1,5 @@
 package com.example.repticare;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,8 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button register_button;
     EditText mUsername, mEmail, mPassword, mPasswordConfirm;
     String url;
+    String sex;
 
 
     @Override
@@ -53,6 +56,19 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptRegister();
+            }
+        });
+
+        RadioGroup radioGender = findViewById(R.id.radio_group);
+
+        radioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = (RadioButton) group.findViewById(checkedId);
+                sex = radioButton.getText().toString().toLowerCase();
+                if(sex.equalsIgnoreCase("other")){
+                    sex = "o";
+                }
             }
         });
     }
@@ -131,6 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
                 user.put("username", username);
                 user.put("email", email);
                 user.put("password", password);
+                user.put("sex", sex);
 
             } catch (JSONException e) {
                 e.printStackTrace();

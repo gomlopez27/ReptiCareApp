@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,6 +30,19 @@ public class EditAccountActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_edit_acc);
         setSupportActionBar(toolbar);
 
+        String sex = getIntent().getExtras().getString("sex");
+
+        ImageView profileImage = findViewById(R.id.profile_image_edit);
+
+        if(sex.equalsIgnoreCase("F")){
+            profileImage.setImageResource(R.drawable.female);
+        }
+        else if(sex.equalsIgnoreCase("M")){
+            profileImage.setImageResource(R.drawable.male);
+        }
+        else
+            profileImage.setImageResource(R.drawable.gender_neutral);
+
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,20 +54,6 @@ public class EditAccountActivity extends AppCompatActivity {
         });
 
 
-        //TODO fazer upload de imagens
-        profileImage = findViewById(R.id.profile_image);
-        editProfileImage = findViewById(R.id.button_change_image);
-
-
-        //faz o user escolher uma foto da galeria
-        editProfileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, Gallery_Pick);
-            }
-        });
 
         inputEmail = findViewById(R.id.change_email);
         saveChangeButton = findViewById(R.id.edit_acc_save_changes);

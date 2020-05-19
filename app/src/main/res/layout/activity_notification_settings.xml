@@ -24,16 +24,16 @@
             android:background="@color/white"
             android:theme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_collapseMode="pin"
-            app:title="Notifications"
+            app:title="Notification Settings"
             app:titleTextColor="@color/colorAppTitle"
-            android:title="Notifications"/>
+            />
 
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/issues_notifications"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Receive Notifications about issues    "
+            android:text="Receive notifications about issues    "
             android:layout_gravity="center"
             android:layout_margin="50px"
             ></androidx.appcompat.widget.SwitchCompat>

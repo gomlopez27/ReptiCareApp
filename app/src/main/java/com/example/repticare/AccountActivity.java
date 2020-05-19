@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccountActivity extends AppCompatActivity {
-
+    String sex = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,19 @@ public class AccountActivity extends AppCompatActivity {
 
         TextView totalNrOfTerr = findViewById(R.id.total_nr_terrariums_acc);
         TextView nrUnresolvedIssues = findViewById(R.id.nr_unresolved_issues_acc);
+        TextView username = findViewById(R.id.username_account);
+        TextView email = findViewById(R.id.email_account);
+        ImageView profileImage = findViewById(R.id.profile_image);
+
+        if(sex.equalsIgnoreCase("F")){
+            profileImage.setImageResource(R.drawable.female);
+        }
+        else if(sex.equalsIgnoreCase("M")){
+            profileImage.setImageResource(R.drawable.male);
+        }
+        else
+            profileImage.setImageResource(R.drawable.gender_neutral);
+
 
         Button editAccButton  = findViewById(R.id.edit_acc_button);
         Button changePwdButton  = findViewById(R.id.change_pwd_button);
@@ -34,6 +48,7 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(AccountActivity.this, EditAccountActivity.class);
+                i.putExtra("sex", sex);
                 startActivity(i);
             }
         });
