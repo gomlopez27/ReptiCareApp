@@ -44,7 +44,7 @@ public class ListIssuesActivity extends AppCompatActivity {
         mList.add(item4);
         mList.add(item5);
 
-        adapter = new ListIssuesAdapter(getApplicationContext(), mList);
+        adapter = new ListIssuesAdapter(ListIssuesActivity.this, mList);
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
         recyclerView.setAdapter(adapter);
        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));

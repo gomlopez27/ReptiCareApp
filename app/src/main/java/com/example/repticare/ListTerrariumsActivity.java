@@ -3,6 +3,7 @@ package com.example.repticare;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +11,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +31,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import Adapters.ListTerrariumsAdapter;
@@ -37,9 +43,11 @@ public class ListTerrariumsActivity extends AppCompatActivity {
     private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
+    Boolean found;
     RecyclerView recyclerView;
-    ArrayList mList;
+    List mList;
     ListTerrariumsAdapter adapter;
+    TextView nrOfTerrariums_tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +58,7 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.list_my_terrariums);
         mList = new ArrayList();
 
-        TerrariumItem item1 = new TerrariumItem("Terrarium 1");
+      /*  TerrariumItem item1 = new TerrariumItem("Terrarium 1");
         TerrariumItem item2 = new TerrariumItem("Terrarium 2");
         TerrariumItem item3 = new TerrariumItem("Terrarium 3");
         TerrariumItem item4 = new TerrariumItem("Terrarium 4");
@@ -61,21 +69,14 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         mList.add(item3);
         mList.add(item4);
         mList.add(item5);
-
-        // getTerrariums();
-        // TODO : remove this delay
-       /* for(int i = 0 ;  i < 500000000 ; i++){
-            ;
-        }
-        Log.i("it", (String.valueOf(mList.size())));*/
-
-
-        adapter = new ListTerrariumsAdapter(getApplicationContext(), mList);
+        */
+        getTerrariums();
+        adapter = new ListTerrariumsAdapter(ListTerrariumsActivity.this, mList);
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
 
-        TextView nrOfTerrariums_tv = findViewById(R.id.nr_of_curr_monitored);
+        nrOfTerrariums_tv = findViewById(R.id.nr_of_curr_monitored);
         int listSize = mList.size();
         nrOfTerrariums_tv.setText(Integer.toString(listSize));
 
@@ -128,6 +129,8 @@ public class ListTerrariumsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         mList.addAll(parseTerrariums(response));
+                        adapter.notifyDataSetChanged();
+                        nrOfTerrariums_tv.setText(Integer.toString(mList.size()));
                         Log.i("it", (String.valueOf(mList.size()) + " After Response"));
                     }
                 },
