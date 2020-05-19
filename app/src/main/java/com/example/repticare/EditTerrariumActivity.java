@@ -21,6 +21,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Items.TerrariumItem;
+
 public class EditTerrariumActivity extends AppCompatActivity {
     Button button_delete_terrarium, button_confirm_changes;
     EditText mName, mMinTemp, mMaxTemp, mMinHum, mMaxHum, mMinUv, mMaxUv;
@@ -29,17 +31,15 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //TODO: preencher campos com info do terrario
-
+        final TerrariumItem t = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_terrarium);
 
-        String terrariumName = getIntent().getExtras().getString("terrarium_name");
         toolbar = findViewById(R.id.toolbar_edit_terrarium);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Edit " + terrariumName);
+        getSupportActionBar().setTitle("Edit " + t.getName());
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +69,15 @@ public class EditTerrariumActivity extends AppCompatActivity {
         mMaxHum = findViewById(R.id.max_hum_edit_terrarium);
         mMinUv = findViewById(R.id.min_uv_edit_terrarium);
         mMaxUv = findViewById(R.id.max_uv_edit_terrarium);
+
+        mName.setText(t.getName());
+        mMinTemp.setText(Double.toString(t.getMin_temp()));
+        mMaxTemp.setText(Double.toString(t.getMax_temp()));
+        mMinHum.setText(Double.toString(t.getMin_humidity()));
+        mMaxHum.setText(Double.toString(t.getMax_humidity()));
+        mMinUv.setText(Double.toString(t.getMin_uv()));
+        mMaxUv.setText(Double.toString(t.getMax_uv()));
+
 
         button_confirm_changes.setOnClickListener(new View.OnClickListener() {
             @Override

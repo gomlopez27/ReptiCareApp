@@ -170,10 +170,17 @@ public class ListTerrariumsActivity extends AppCompatActivity {
     private ArrayList<TerrariumItem> parseTerrariums(JSONArray response){
         try {
             JSONArray items = response;
+            Log.i("it",response.toString());
             ArrayList res = new ArrayList<TerrariumItem>();
             for (int i = 0 ; i < items.length(); i++){
                 JSONObject item = items.getJSONObject(i);
-                TerrariumItem terrariumItem = new TerrariumItem(item.getString("name"));
+                JSONArray users = item.getJSONArray("other_users");
+                ArrayList<String> other_users =  new ArrayList<String>();
+                for( int j = 0 ; j < users.length(); j++){
+                    other_users.add(users.getString(j));
+                }
+
+                TerrariumItem terrariumItem = new TerrariumItem(item.getString("name"),item.getDouble("min_temp"),item.getDouble("max_temp"),item.getDouble("min_humidity"),item.getDouble("max_humidity"),item.getDouble("min_uv"),item.getDouble("max_uv"),item.getDouble("current_temp"),item.getDouble("current_humidity"),item.getDouble("current_uv"),other_users);
                 res.add(terrariumItem);
             }
 

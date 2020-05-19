@@ -39,9 +39,7 @@ public class ListTerrariumsAdapter extends RecyclerView.Adapter<ListTerrariumsAd
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(mContext, TerrariumActivity.class);
-                i.putExtra("Name", mData.get(viewHolder.getAdapterPosition()).getName());
-
-                //TODO push extra info
+                i.putExtra("Terrarium",mData.get(viewHolder.getAdapterPosition()));
 
                 mContext.startActivity(i);
             }
