@@ -58,12 +58,24 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         TerrariumItem item3 = new TerrariumItem("Terrarium 3");
         TerrariumItem item4 = new TerrariumItem("Terrarium 4");
         TerrariumItem item5 = new TerrariumItem("Terrarium 5");
+        TerrariumItem item6 = new TerrariumItem("Terrarium 5");
+        TerrariumItem item7 = new TerrariumItem("Terrarium 5");
+        TerrariumItem item8 = new TerrariumItem("Terrarium 5");
+        TerrariumItem item9 = new TerrariumItem("Terrarium 5");
+        TerrariumItem item10 = new TerrariumItem("Terrarium 5");
+        TerrariumItem item11 = new TerrariumItem("Terrarium 5");
 
         mList.add(item1);
         mList.add(item2);
         mList.add(item3);
         mList.add(item4);
         mList.add(item5);
+        mList.add(item6);
+        mList.add(item7);
+        mList.add(item8);
+        mList.add(item9);
+        mList.add(item10);
+        mList.add(item11);
 
         getTerrariums();
         adapter = new ListTerrariumsAdapter(ListTerrariumsActivity.this, mList);

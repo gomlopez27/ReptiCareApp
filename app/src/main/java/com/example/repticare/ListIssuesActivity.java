@@ -32,11 +32,11 @@ public class ListIssuesActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.list_my_issues);
         mList = new ArrayList<IssueItem>();
 
-        IssueItem item1 = new IssueItem("Issue 1");
-        IssueItem item2 = new IssueItem("Issue 2");
-        IssueItem item3 = new IssueItem("Issue 3");
-        IssueItem item4 = new IssueItem("Issue 4");
-        IssueItem item5 = new IssueItem("Issue 5");
+        IssueItem item1 = new IssueItem("Issue 1", false);
+        IssueItem item2 = new IssueItem("Issue 2", false);
+        IssueItem item3 = new IssueItem("Issue 3", false);
+        IssueItem item4 = new IssueItem("Issue 4", true);
+        IssueItem item5 = new IssueItem("Issue 5", true);
 
         mList.add(item1);
         mList.add(item2);

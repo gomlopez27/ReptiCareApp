@@ -6,6 +6,8 @@
     <color name="colorAppTitle">#19646A</color>
     <color name="colorBackground">#E1F6EE</color>
     <color name="white">#FFFFFF</color>
+    <color name="grey">#878D8E</color>
+    <color name="darkGrey">#333232</color>
 
 
 </resources>

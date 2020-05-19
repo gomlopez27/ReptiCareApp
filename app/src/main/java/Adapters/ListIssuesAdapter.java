@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import Items.IssueItem;
 public class ListIssuesAdapter extends RecyclerView.Adapter<ListIssuesAdapter.MyViewHolder> {
     Context mContext;
     List<IssueItem> mData;
+    Boolean isResolved = false;
 
 
     public ListIssuesAdapter(Context mContext, List<IssueItem> mData) {
@@ -52,6 +54,14 @@ public class ListIssuesAdapter extends RecyclerView.Adapter<ListIssuesAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.issue_name.setText(mData.get(position).getName());
+
+        if(mData.get(position).getResolved()){
+            holder.issue_image.setImageResource(R.drawable.ic_check_24dp);
+        }
+        else
+            holder.issue_image.setImageResource(R.drawable.warning_sign);
+
+
     }
 
     @Override
@@ -62,11 +72,13 @@ public class ListIssuesAdapter extends RecyclerView.Adapter<ListIssuesAdapter.My
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView issue_name;
         RelativeLayout issue_container;
+        ImageView issue_image;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             issue_name = itemView.findViewById(R.id.title_issue);
             issue_container = itemView.findViewById(R.id.container_issue);
+            issue_image = itemView.findViewById(R.id.image_issue);
         }
     }
 }

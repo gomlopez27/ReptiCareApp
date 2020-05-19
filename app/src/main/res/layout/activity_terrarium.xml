@@ -38,7 +38,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollViewProfile"
+        android:id="@+id/nestedScrollViewTerrarium"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
