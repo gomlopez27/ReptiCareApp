@@ -65,21 +65,24 @@
                     />
 
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="500dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/username_account"
                         android:paddingTop="10dp"
                         android:gravity="center"
                         android:layout_marginTop="20dp"
+                        android:weightSum="100"
+                        android:orientation="horizontal"
                         >
 
                         <RelativeLayout
-                            android:layout_width="150dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/box1"
                             android:background="@drawable/light_thick_stroke_dark_background"
                             android:layout_marginRight="15dp"
+                            android:layout_weight="50"
                             >
                             <TextView
                                 android:layout_width="150dp"
@@ -91,6 +94,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/colorBackground"
                                 android:paddingTop="5dp"
+                                android:layout_centerHorizontal="true"
                                 />
                             <TextView
                                 android:layout_width="150dp"
@@ -102,16 +106,18 @@
                                 android:textColor="@color/white"
                                 android:layout_below="@+id/total_terrariums_acc"
                                 android:paddingBottom="5dp"
+                                android:layout_centerHorizontal="true"
+
                                 />
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:layout_width="150dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/box2"
-                            android:layout_toRightOf="@+id/box1"
                             android:background="@drawable/light_thick_stroke_dark_background"
                             android:layout_marginLeft="15dp"
+                            android:layout_weight="50"
                             >
 
                             <TextView
@@ -124,6 +130,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/colorBackground"
                                 android:paddingTop="5dp"
+                                android:layout_centerHorizontal="true"
                                 />
 
                             <TextView
@@ -135,11 +142,13 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/white"
                                 android:layout_below="@+id/unresolved_issues_acc"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:layout_centerHorizontal="true"
+                                />
 
                         </RelativeLayout>
 
-                    </RelativeLayout>
+                    </LinearLayout>
 
                 </RelativeLayout>
 
