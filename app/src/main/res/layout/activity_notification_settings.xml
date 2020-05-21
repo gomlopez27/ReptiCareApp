@@ -30,22 +30,58 @@
             />
 
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/issues_notifications"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Receive notifications about issues    "
-            android:layout_gravity="center"
-            android:layout_margin="50px"
-            ></androidx.appcompat.widget.SwitchCompat>
+            android:id="@+id/first_text"
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:weightSum="100"
+            >
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="95"
+                android:text="Receive notifications about issues"
+                android:textSize="16dp"
+                />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/food_calendar_notifications"
-            android:layout_width="wrap_content"
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/issues_notifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="5"
+                ></androidx.appcompat.widget.SwitchCompat>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Receive notification about food calendar    "
-            android:layout_gravity="center"
-            android:layout_margin="50px"
-            ></androidx.appcompat.widget.SwitchCompat>
+            android:padding="20dp"
+            android:weightSum="100"
+            >
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Receive notification about food calendar"
+                android:textSize="16dp"
+                android:layout_weight="95"
+                />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/food_calendar_notifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight="5"
+                ></androidx.appcompat.widget.SwitchCompat>
+
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

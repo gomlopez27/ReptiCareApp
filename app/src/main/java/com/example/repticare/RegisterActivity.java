@@ -116,8 +116,8 @@ public class RegisterActivity extends AppCompatActivity {
             mUsername.setError("É necessário colocar um username.");
             focusView = mUsername;
             cancel = true;
-        } else if (username.length() < 4) {
-            mUsername.setError("O username tem de ter pelo menos 4 caracteres.");
+        } else if (username.length() < 4 && username.length() > 15) {
+            mUsername.setError("O username tem de ter entre 4 e 15 caracteres.");
             focusView = mUsername;
             cancel = true;
         }
