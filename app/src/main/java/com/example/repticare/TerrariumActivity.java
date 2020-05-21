@@ -55,6 +55,7 @@ public class TerrariumActivity extends AppCompatActivity {
 
         if(!current_user.equalsIgnoreCase(t.getOwner())){
             edit_terrarium_button.setVisibility(View.INVISIBLE);
+            other_users_button.setVisibility(View.INVISIBLE);
         }
         edit_terrarium_button.setOnClickListener(new View.OnClickListener() {
             @Override
