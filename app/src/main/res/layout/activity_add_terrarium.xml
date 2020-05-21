@@ -35,8 +35,9 @@
         android:orientation="vertical"
         android:layout_marginBottom="10dp"
         android:layout_below="@+id/toolbar_add_terrarium"
-        android:gravity="center"
-        >
+        android:gravity="center|top"
+        android:layout_marginTop="20dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +45,7 @@
             android:id="@+id/terrarium_image"
             android:layout_below="@id/toolbar_add_terrarium"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"/>
+            />
 
         <RelativeLayout
             android:layout_width="wrap_content"

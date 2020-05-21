@@ -1,41 +1,31 @@
 package com.example.repticare;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    Button button_login;
+    Button button_login, register_here;
     EditText mUsername, mPassword;
-    TextView register_here;
     String url;
     private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
@@ -50,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         button_login = findViewById(R.id.login_button);
         mUsername = findViewById(R.id.username);
         mPassword = findViewById(R.id.password);
-        register_here = findViewById(R.id.register_here);
+        register_here = findViewById(R.id.register_here_button);
 
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
