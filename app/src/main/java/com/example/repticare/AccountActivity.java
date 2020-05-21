@@ -131,17 +131,6 @@ public class AccountActivity extends AppCompatActivity {
                 .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         attemptLogout();
-/*
-                        //TODO
-                        SharedPreferences settings = getSharedPreferences("AUTHENTICATION", 0);
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.clear();
-                        editor.commit();
-
-                        Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();*/
-
                     }
 
 
@@ -151,8 +140,6 @@ public class AccountActivity extends AppCompatActivity {
                         // if this button is clicked, just close
                         // the dialog box and do nothing
                         dialog.cancel();
-
-
                     }
                 });
 
@@ -173,6 +160,12 @@ public class AccountActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
+
+                        SharedPreferences settings = getSharedPreferences("Auth", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.clear();
+                        editor.commit();
+
                         Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
