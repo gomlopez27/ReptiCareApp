@@ -218,8 +218,8 @@ public class AddTerrariumActivity extends AppCompatActivity {
                 terrarium.put("name", name);
                 terrarium.put("min_temp", minTemp);
                 terrarium.put("max_temp", maxTemp);
-                terrarium.put("min_hum", minHum);
-                terrarium.put("max_hum", maxHum);
+                terrarium.put("min_humidity", minHum);
+                terrarium.put("max_humidity", maxHum);
                 terrarium.put("min_uv", minUv);
                 terrarium.put("max_uv", maxUv);
                 terrarium.put("other_users", otherUsers);

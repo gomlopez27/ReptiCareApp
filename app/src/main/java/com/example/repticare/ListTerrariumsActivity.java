@@ -192,7 +192,7 @@ public class ListTerrariumsActivity extends AppCompatActivity {
                     other_users.add(users.getString(j));
                 }
 
-                TerrariumItem terrariumItem = new TerrariumItem(item.getString("name"),item.getDouble("min_temp"),item.getDouble("max_temp"),item.getDouble("min_humidity"),item.getDouble("max_humidity"),item.getDouble("min_uv"),item.getDouble("max_uv"),item.getDouble("current_temp"),item.getDouble("current_humidity"),item.getDouble("current_uv"),other_users);
+                TerrariumItem terrariumItem = new TerrariumItem(item.getInt("id"),item.getString("name"),item.getDouble("min_temp"),item.getDouble("max_temp"),item.getDouble("min_humidity"),item.getDouble("max_humidity"),item.getDouble("min_uv"),item.getDouble("max_uv"),item.getDouble("current_temp"),item.getDouble("current_humidity"),item.getDouble("current_uv"),other_users);
                 res.add(terrariumItem);
             }
 

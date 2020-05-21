@@ -13,13 +13,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import Items.TerrariumItem;
 
@@ -28,6 +34,10 @@ public class EditTerrariumActivity extends AppCompatActivity {
     EditText mName, mMinTemp, mMaxTemp, mMinHum, mMaxHum, mMinUv, mMaxUv;
     String url;
     Toolbar toolbar;
+
+    private static final String SET_COOKIE_KEY = "Set-Cookie";
+    private static final String COOKIE_KEY = "Cookie";
+    private static final String SESSION_COOKIE = "sessionid";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +65,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
         button_delete_terrarium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptDeleteTerrarium();
+                attemptDeleteTerrarium(t);
             }
         });
 
@@ -82,38 +92,26 @@ public class EditTerrariumActivity extends AppCompatActivity {
         button_confirm_changes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptEditTerrarium();
+                attemptEditTerrarium(t);
             }
         });
     }
 
-    private void attemptDeleteTerrarium() {
-
+    private void attemptDeleteTerrarium(TerrariumItem t) {
         String name = mName.getText().toString();
 
         //pedido REST DELETE TERRARIUM
 
-        url = getString(R.string.SERVER_URL_GI) + "deleteTerrarium/";
+        url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/update/" + t.getId();
 
-        JSONObject terrarium = new JSONObject();
-        try {
-            terrarium.put("name", name);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.e("kk", terrarium.toString());
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url, terrarium, new Response.Listener<JSONObject>() {
+
+        StringRequest  jsonObjectRequest = new StringRequest
+                (Request.Method.DELETE, url, new Response.Listener<String>() {
 
                     @Override
-                    public void onResponse(JSONObject response) {
-                        //textView.setText("Response: " + response.toString());
-                        SharedPreferences settings = getSharedPreferences("AUTHENTICATION", 0);
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putString("logged", "true");
-                        editor.commit();
+                    public void onResponse(String response) {
 
-                        Intent intent = new Intent(EditTerrariumActivity.this, TerrariumActivity.class);
+                        Intent intent = new Intent(EditTerrariumActivity.this, ListTerrariumsActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -124,14 +122,23 @@ public class EditTerrariumActivity extends AppCompatActivity {
                         Log.e("kk",error.toString());
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String>  params = new HashMap<String, String>();
+                        addSessionCookie(params);
+                        return params;
+                    }
+
+                };
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
 
     }
 
-    private void attemptEditTerrarium() {
+    private void attemptEditTerrarium(TerrariumItem t) {
+        final TerrariumItem terrariumItem = t;
         // Reset errors.
         mName.setError(null);
         mMinTemp.setError(null);
@@ -167,7 +174,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
             cancel = true;
         }
         else {
-            float minTempF = Float.parseFloat(mMinTemp.getText().toString());
+            double minTempF = Double.parseDouble(mMinTemp.getText().toString());
 
             // Check for a valid min temp, if the user entered one.
             if (minTempF < 5 || minTempF > 40) {
@@ -184,7 +191,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
             cancel = true;
         }
         else {
-            float maxTempF = Float.parseFloat(mMaxTemp.getText().toString());
+            double maxTempF = Double.parseDouble(mMaxTemp.getText().toString());
 
             // Check for a valid max temp, if the user entered one.
             if (maxTempF < 5 || maxTempF > 40) {
@@ -201,7 +208,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
             cancel = true;
         }
         else {
-            int minHumI = Integer.parseInt(mMinHum.getText().toString());
+            double minHumI = Double.parseDouble(mMinHum.getText().toString());
 
             // Check for a valid min hum, if the user entered one.
             if (minHumI < 25 || minHumI > 85) {
@@ -218,7 +225,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
             cancel = true;
         }
         else {
-            int maxHumI = Integer.parseInt(mMaxHum.getText().toString());
+            double maxHumI = Double.parseDouble(mMaxHum.getText().toString());
 
             // Check for a valid max hum, if the user entered one.
             if (maxHumI < 25 || maxHumI > 85) {
@@ -235,7 +242,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
             cancel = true;
         }
         else {
-            int minUvI = Integer.parseInt(mMinUv.getText().toString());
+            double minUvI = Double.parseDouble(mMinUv.getText().toString());
 
             // Check for a valid min uv, if the user entered one.
             if (minUvI < 200 || minUvI > 370) {
@@ -252,10 +259,10 @@ public class EditTerrariumActivity extends AppCompatActivity {
             cancel = true;
         }
         else {
-            int maxUvI = Integer.parseInt(mMaxUv.getText().toString());
+            double maxUvI = Double.parseDouble(mMaxUv.getText().toString());
 
             // Check for a valid max uv, if the user entered one.
-            if (maxUvI < 25 || maxUvI > 85) {
+            if (maxUvI < 200 || maxUvI > 370) {
                 mMaxUv.setError("A radiação UV tem de estar entre 200 e 370nm.");
                 focusView = mMaxUv;
                 cancel = true;
@@ -270,35 +277,44 @@ public class EditTerrariumActivity extends AppCompatActivity {
         } else {
             //pedido REST EDIT TERRARIUM
 
-            url = getString(R.string.SERVER_URL_GI) + "editTerrarium/";
+            url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/update/" + t.getId();
 
             JSONObject terrarium = new JSONObject();
+           String other_users = "";
+           List<String> users  = t.getOtherusers();
+            for(int j = 0;  j < users.size() ; j++){
+                if(j < users.size() - 1)
+                    other_users+= users.get(j) + ",";
+                else
+                    other_users+= users.get(j);
+            }
+
             try {
+                terrarium.put("id",t.getId());
                 terrarium.put("name", name);
-                terrarium.put("minTemp", minTemp);
-                terrarium.put("maxTemp", maxTemp);
-                terrarium.put("minHum", minHum);
-                terrarium.put("maxHum", maxHum);
-                terrarium.put("minUv", minUv);
-                terrarium.put("maxUv", maxUv);
-                //user.put("otherUsers", otherUsers);
+                terrarium.put("min_temp", minTemp);
+                terrarium.put("max_temp", maxTemp);
+                terrarium.put("min_humidity", minHum);
+                terrarium.put("max_humidity", maxHum);
+                terrarium.put("min_uv", minUv);
+                terrarium.put("max_uv", maxUv);
+                terrarium.put("current_temp", t.getCurrent_temp());
+                terrarium.put("current_humidity", t.getCurrent_humidity());
+                terrarium.put("current_uv", t.getCurrent_uv());
+                terrarium.put("other_users",other_users);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             Log.e("kk", terrarium.toString());
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                    (Request.Method.POST, url, terrarium, new Response.Listener<JSONObject>() {
+                    (Request.Method.PUT, url, terrarium, new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject response) {
-                            //textView.setText("Response: " + response.toString());
-                            SharedPreferences settings = getSharedPreferences("AUTHENTICATION", 0);
-                            SharedPreferences.Editor editor = settings.edit();
-                            editor.putString("logged", "true");
-                            editor.commit();
-
+                            Log.i("resp", response.toString());
                             Intent intent = new Intent(EditTerrariumActivity.this, TerrariumActivity.class);
+                            intent.putExtra("Terrarium",terrariumItem);
                             startActivity(intent);
                             finish();
                         }
@@ -309,10 +325,39 @@ public class EditTerrariumActivity extends AppCompatActivity {
                             Log.e("kk",error.toString());
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String>  params = new HashMap<String, String>();
+                            addSessionCookie(params);
+                            return params;
+                        }
+
+                    };
 
             // Access the RequestQueue through your singleton class.
             MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        }
+    }
+
+
+    /**
+     * Adds session cookie to headers if exists.
+     * @param headers
+     */
+    private final void addSessionCookie(Map<String, String> headers) {
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String sessionId = settings.getString(SESSION_COOKIE, "");
+        if (sessionId.length() > 0) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(SESSION_COOKIE);
+            builder.append("=");
+            builder.append(sessionId);
+            if (headers.containsKey(COOKIE_KEY)) {
+                builder.append("; ");
+                builder.append(headers.get(COOKIE_KEY));
+            }
+            headers.put(COOKIE_KEY, builder.toString());
         }
     }
 }

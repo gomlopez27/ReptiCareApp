@@ -15,6 +15,7 @@ public class TerrariumItem implements Serializable {
     Double current_humidity;
     Double current_uv;
     List<String> otherusers;
+    int id;
 
 
     public TerrariumItem(){}
@@ -23,7 +24,7 @@ public class TerrariumItem implements Serializable {
         this.name = name;
     }
 
-    public TerrariumItem(String name, Double min_temp, Double max_temp, Double min_humidity, Double max_humidity, Double min_uv, Double max_uv, Double current_temp, Double current_humidity, Double current_uv, List<String> otherusers) {
+    public TerrariumItem(int id ,String name, Double min_temp, Double max_temp, Double min_humidity, Double max_humidity, Double min_uv, Double max_uv, Double current_temp, Double current_humidity, Double current_uv, List<String> otherusers) {
         this.name = name;
         this.min_temp = min_temp;
         this.max_temp = max_temp;
@@ -35,6 +36,7 @@ public class TerrariumItem implements Serializable {
         this.current_humidity = current_humidity;
         this.current_uv = current_uv;
         this.otherusers = otherusers;
+        this.id = id;
     }
 
     public Double getMin_temp() {
@@ -125,5 +127,9 @@ public class TerrariumItem implements Serializable {
         this.name = name;
     }
 
+    public int getId(){return id;}
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }
