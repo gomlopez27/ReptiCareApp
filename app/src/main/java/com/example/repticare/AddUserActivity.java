@@ -31,6 +31,7 @@ public class AddUserActivity extends AppCompatActivity {
     Toolbar toolbar;
     EditText username_et;
     Button addOtherUserButton;
+    TerrariumItem myTerrarium;
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
 
@@ -40,6 +41,7 @@ public class AddUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_user);
 
         final TerrariumItem terrarium = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
+        myTerrarium = terrarium;
 
 
         toolbar = findViewById(R.id.toolbar_add_other_user);
@@ -52,7 +54,10 @@ public class AddUserActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AddUserActivity.this, EditUsersActivity.class);
                 intent.putExtra("Terrarium",terrarium);
+                setResult(RESULT_OK);
                 startActivity(intent);
+                finish();
+
             }
         });
 
@@ -65,6 +70,15 @@ public class AddUserActivity extends AppCompatActivity {
                 attemptAddOtherUser(terrarium,username_et.getText().toString());
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddUserActivity.this, EditUsersActivity.class);
+        intent.putExtra("Terrarium",myTerrarium);
+        setResult(RESULT_OK);
+        startActivity(intent);
+        finish();
     }
 
     private void attemptAddOtherUser(final TerrariumItem t, String username){
