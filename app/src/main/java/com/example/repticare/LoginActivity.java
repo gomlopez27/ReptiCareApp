@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         mUsername.setError(null);
         mPassword.setError(null);
 
-        String username = mUsername.getText().toString();
+        final String username = mUsername.getText().toString();
         String password = mPassword.getText().toString();
 
         boolean cancel = false;
@@ -107,6 +107,10 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             //textView.setText("Response: " + response.toString());
+                            SharedPreferences settings = getSharedPreferences("Auth", 0);
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putString("user_logged" , username);
+                            editor.commit();
 
                             Intent intent = new Intent(LoginActivity.this, ListTerrariumsActivity.class);
                             startActivity(intent);

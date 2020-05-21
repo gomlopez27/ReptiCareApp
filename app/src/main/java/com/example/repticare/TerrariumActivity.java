@@ -1,11 +1,10 @@
 package com.example.repticare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +14,7 @@ import Items.TerrariumItem;
 
 public class TerrariumActivity extends AppCompatActivity {
     Button other_users_button, edit_terrarium_button;
-    TextView terrarium_temperature, terrarium_humidity, terrarium_uv,terrarium_owner;
+    TextView terrarium_temperature, terrarium_humidity, terrarium_uv, terrarium_owner;
     Toolbar toolbar;
 
     @Override
@@ -49,12 +48,19 @@ public class TerrariumActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String current_user = settings.getString("user_logged", "");
+
         edit_terrarium_button = findViewById(R.id.edit_terrarium_button);
+
+        if(!current_user.equalsIgnoreCase(t.getOwner())){
+            edit_terrarium_button.setVisibility(View.INVISIBLE);
+        }
         edit_terrarium_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(TerrariumActivity.this, EditTerrariumActivity.class);
-                i.putExtra("Terrarium",t);
+                i.putExtra("Terrarium", t);
                 startActivity(i);
             }
         });
@@ -64,11 +70,10 @@ public class TerrariumActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(TerrariumActivity.this, EditUsersActivity.class);
-                i.putExtra("Terrarium",t);
+                i.putExtra("Terrarium", t);
                 startActivity(i);
             }
         });
-
     }
 
 }
