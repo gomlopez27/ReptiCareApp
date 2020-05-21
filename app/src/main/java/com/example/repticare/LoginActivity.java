@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Cannot Log in with given credentials", Toast.LENGTH_SHORT).show();
                         }
                     }) {
                     @Override
