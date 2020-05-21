@@ -29,11 +29,11 @@ public class EditUsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_users);
 
-        final TerrariumItem t = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
+        final TerrariumItem terrarium = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
 
         toolbar = findViewById(R.id.toolbar_edit_other_users);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(t.getName() + ": Other Users");
+        getSupportActionBar().setTitle(terrarium.getName() + ": Other Users");
 
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -60,14 +60,14 @@ public class EditUsersActivity extends AppCompatActivity {
         mList.add(item4);
         mList.add(item5);
 */
-        List<String> other_users = t.getOtherusers();
+        List<String> other_users = terrarium.getOtherusers();
 
         for(String user:other_users){
             mList.add(new OtherUserItem(user));
         }
 
 
-        adapter = new ListOtherUsersAdapter(EditUsersActivity.this, mList);
+        adapter = new ListOtherUsersAdapter(EditUsersActivity.this, mList, terrarium.getName());
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
@@ -77,9 +77,10 @@ public class EditUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent1 = new Intent(EditUsersActivity.this, AddUserActivity.class);
-                intent1.putExtra("Terrarium", t);
+                intent1.putExtra("Terrarium", terrarium);
                 startActivity(intent1);
             }
         });
     }
+
 }

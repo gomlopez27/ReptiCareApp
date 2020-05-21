@@ -202,12 +202,20 @@
                 android:layout_alignParentLeft="true"
                 android:inputType="textPersonName"
                 android:layout_below="@+id/box_uv"
-                android:layout_marginBottom="20dp"
                 android:hint="Other Users"
                 android:layout_gravity="center"
                 android:drawablePadding="10dp"
                 android:background="@drawable/edit_text_background"
                 android:padding="10dp"
+
+                />
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/add_terrarium_other_users"
+                android:text="Separate usernames using commas, like so: user1,user2,user3"
+                android:layout_marginLeft="10dp"
+                android:textColor="#D51919"
                 />
 
 

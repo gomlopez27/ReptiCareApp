@@ -15,7 +15,7 @@
         android:background="@color/white"
         android:theme="@style/ThemeOverlay.AppCompat.Light"
         app:layout_collapseMode="pin"
-        app:title="Account"
+        app:title="My Account"
         app:titleTextColor="@color/colorAppTitle"
         />
 

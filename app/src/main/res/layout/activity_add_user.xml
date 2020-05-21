@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/text_info"
         android:gravity="center"
-        android:text="To add a new user to this terrarium, write the user's name in the box:"
+        android:text="To add a new user to this terrarium, write their username in the box:"
         android:textSize="20dp"
         android:padding="10dp"
         android:layout_marginTop="20dp"
