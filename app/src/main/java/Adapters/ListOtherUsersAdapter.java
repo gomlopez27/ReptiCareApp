@@ -34,20 +34,21 @@ import java.util.List;
 import java.util.Map;
 
 import Items.OtherUserItem;
+import Items.TerrariumItem;
 
 public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAdapter.MyViewHolder> {
     Context mContext;
     List<OtherUserItem> mData;
-    String terrariumId;
-    String username;
+    TerrariumItem terrarium;
+    OtherUserItem user;
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
 
 
-    public ListOtherUsersAdapter(Context mContext, List<OtherUserItem> mData, String terrariumId) {
+    public ListOtherUsersAdapter(Context mContext, List<OtherUserItem> mData, TerrariumItem terrarium) {
         this.mContext = mContext;
         this.mData = mData;
-        this.terrariumId = terrariumId;
+        this.terrarium = terrarium;
     }
 
     @NonNull
@@ -70,8 +71,8 @@ public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAd
                         .setCancelable(false)
                         .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                username = mData.get(viewHolder.getAdapterPosition()).getUsername();
-                                removerUserFromTerrarium(username, terrariumId);
+                                user = mData.get(viewHolder.getAdapterPosition());
+                                removerUserFromTerrarium(user, terrarium);
                             }
                         })
                         .setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -110,26 +111,46 @@ public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAd
         }
     }
 
-    private void removerUserFromTerrarium(String userToRemove, String terrariumId) {
-        String url = mContext.getString(R.string.SERVER_URL_ANDRE) + "terrariums/removeUser"; //TODO: mudar URL para o correto
-        final String terrId = terrariumId;
+    private void removerUserFromTerrarium(final OtherUserItem user, TerrariumItem t) {
+        final TerrariumItem terra = t;
+
+        String url = mContext.getString(R.string.SERVER_URL_ANDRE) + "terrariums/update/" + t.getId();
 
         JSONObject terrarium = new JSONObject();
+        String other_users = "";
+        List<String> users  = t.getOtherusers();
+        users.remove(user.getUsername());
+        t.setOtherusers(users);
+        for(int j = 0;  j < users.size() ; j++){
+            if(j < users.size() - 1)
+                other_users+= users.get(j) + ",";
+            else
+                other_users+= users.get(j);
+        }
+
         try {
-            terrarium.put("user_to_remove", userToRemove);
-            terrarium.put("terrarium_id", terrId);
+            terrarium.put("id",t.getId());
+            terrarium.put("name", t.getName());
+            terrarium.put("min_temp", t.getMin_temp());
+            terrarium.put("max_temp", t.getMax_temp());
+            terrarium.put("min_humidity", t.getMin_humidity());
+            terrarium.put("max_humidity", t.getMax_humidity());
+            terrarium.put("min_uv", t.getMin_uv());
+            terrarium.put("max_uv", t.getMax_uv());
+            terrarium.put("current_temp", t.getCurrent_temp());
+            terrarium.put("current_humidity", t.getCurrent_humidity());
+            terrarium.put("current_uv", t.getCurrent_uv());
+            terrarium.put("other_users",other_users);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url, terrarium, new Response.Listener<JSONObject>() {
+                (Request.Method.PUT, url, terrarium, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Intent intent = new Intent(mContext, EditUsersActivity.class);
-                        intent.putExtra("terrarium_id", terrId);
-                        mContext.startActivity(intent);
-
+                        mData.remove(user);
+                        notifyDataSetChanged();
                     }
                 }, new Response.ErrorListener() {
 

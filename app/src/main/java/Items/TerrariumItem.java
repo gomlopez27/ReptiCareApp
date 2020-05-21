@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class TerrariumItem implements Serializable {
-    String name;
+    String name,owner;
     Double min_temp;
     Double max_temp;
     Double min_humidity;
@@ -24,7 +24,8 @@ public class TerrariumItem implements Serializable {
         this.name = name;
     }
 
-    public TerrariumItem(int id ,String name, Double min_temp, Double max_temp, Double min_humidity, Double max_humidity, Double min_uv, Double max_uv, Double current_temp, Double current_humidity, Double current_uv, List<String> otherusers) {
+    public TerrariumItem(int id ,String owner,String name, Double min_temp, Double max_temp, Double min_humidity, Double max_humidity, Double min_uv, Double max_uv, Double current_temp, Double current_humidity, Double current_uv, List<String> otherusers) {
+        this.owner = owner;
         this.name = name;
         this.min_temp = min_temp;
         this.max_temp = max_temp;
@@ -132,4 +133,7 @@ public class TerrariumItem implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getOwner(){return owner;}
+    public void setOwner(String owner){this.owner = owner;}
 }

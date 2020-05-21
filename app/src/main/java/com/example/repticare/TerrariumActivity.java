@@ -15,7 +15,7 @@ import Items.TerrariumItem;
 
 public class TerrariumActivity extends AppCompatActivity {
     Button other_users_button, edit_terrarium_button;
-    TextView terrarium_temperature, terrarium_humidity, terrarium_uv;
+    TextView terrarium_temperature, terrarium_humidity, terrarium_uv,terrarium_owner;
     Toolbar toolbar;
 
     @Override
@@ -32,8 +32,9 @@ public class TerrariumActivity extends AppCompatActivity {
         terrarium_temperature = findViewById(R.id.terrarium_temperature);
         terrarium_humidity = findViewById(R.id.terrarium_humidity);
         terrarium_uv = findViewById(R.id.terrarium_uv);
+        terrarium_owner = findViewById(R.id.owner_name);
 
-
+        terrarium_owner.setText(t.getOwner());
         terrarium_temperature.setText(Double.toString(t.getCurrent_temp()));
         terrarium_humidity.setText(Double.toString(t.getCurrent_humidity()));
         terrarium_uv.setText(Double.toString(t.getCurrent_uv()));

@@ -22,7 +22,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import Items.TerrariumItem;
 
 public class AddUserActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -36,18 +39,19 @@ public class AddUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
 
-        final String terrariumName = getIntent().getExtras().getString("terrarium_name");
-        //TODO apaanhar o ID do terrarium
+        final TerrariumItem terrarium = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
+
 
         toolbar = findViewById(R.id.toolbar_add_other_user);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(terrariumName + ": Add User");
+        getSupportActionBar().setTitle(terrarium.getName() + ": Add User");
 
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddUserActivity.this, EditUsersActivity.class);
+                intent.putExtra("Terrarium",terrarium);
                 startActivity(intent);
             }
         });
@@ -58,29 +62,51 @@ public class AddUserActivity extends AppCompatActivity {
         addOtherUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptAddOtherUser();
+                attemptAddOtherUser(terrarium,username_et.getText().toString());
             }
         });
     }
 
-    private void attemptAddOtherUser(){
-        String url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/addOtherUser/";
+    private void attemptAddOtherUser(final TerrariumItem t, String username){
+        String url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/update/" + t.getId();
 
-        JSONObject otherUser = new JSONObject();
+        JSONObject terrarium = new JSONObject();
+        String other_users = "";
+        List<String> users  = t.getOtherusers();
+        users.add(username);
+        t.setOtherusers(users);
+        for(int j = 0;  j < users.size() ; j++){
+            if(j < users.size() - 1)
+                other_users+= users.get(j) + ",";
+            else
+                other_users+= users.get(j);
+        }
+
         try {
-            otherUser.put("name", "");
+            terrarium.put("id",t.getId());
+            terrarium.put("name", t.getName());
+            terrarium.put("min_temp", t.getMin_temp());
+            terrarium.put("max_temp", t.getMax_temp());
+            terrarium.put("min_humidity", t.getMin_humidity());
+            terrarium.put("max_humidity", t.getMax_humidity());
+            terrarium.put("min_uv", t.getMin_uv());
+            terrarium.put("max_uv", t.getMax_uv());
+            terrarium.put("current_temp", t.getCurrent_temp());
+            terrarium.put("current_humidity", t.getCurrent_humidity());
+            terrarium.put("current_uv", t.getCurrent_uv());
+            terrarium.put("other_users",other_users);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url, otherUser, new Response.Listener<JSONObject>() {
+                (Request.Method.PUT, url, terrarium, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Intent intent = new Intent(AddUserActivity.this, ListTerrariumsActivity.class);
-                        startActivity(intent);
-                        finish();
+                        Toast.makeText(getApplicationContext(), "User Added succesfully", Toast.LENGTH_SHORT).show();
+                        username_et.setText("");
+
                     }
                 }, new Response.ErrorListener() {
 

@@ -63,11 +63,11 @@ public class EditUsersActivity extends AppCompatActivity {
         List<String> other_users = terrarium.getOtherusers();
 
         for(String user:other_users){
-            mList.add(new OtherUserItem(user));
+            if(!user.equalsIgnoreCase(terrarium.getOwner()))
+                mList.add(new OtherUserItem(user));
         }
 
-
-        adapter = new ListOtherUsersAdapter(EditUsersActivity.this, mList, terrarium.getName());
+        adapter = new ListOtherUsersAdapter(EditUsersActivity.this, mList, terrarium);
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
