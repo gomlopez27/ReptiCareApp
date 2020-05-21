@@ -1,6 +1,7 @@
 package com.example.repticare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,11 +22,17 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ChangePasswordActivity extends AppCompatActivity {
     Toolbar toolbar;
     Button confirm_button;
     EditText mCurrPassword, nNewPassword, mPasswordConfirm;
     String url;
+    private static final String SET_COOKIE_KEY = "Set-Cookie";
+    private static final String COOKIE_KEY = "Cookie";
+    private static final String SESSION_COOKIE = "sessionid";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +65,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void attemptChangePassword() {
-        //TODO fix method
-
         // Reset errors.
         mCurrPassword.setError(null);
         nNewPassword.setError(null);
@@ -109,26 +115,30 @@ public class ChangePasswordActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             //pedido REST CHANGE PASSWORD
-
-            url = getString(R.string.SERVER_URL_ANDRE) + "user/register/";
+            SharedPreferences settings = getSharedPreferences("Auth", 0);
+            String current_user = settings.getString("user_logged", "");
+            String current_email = settings.getString("user_email", "");
+            Integer current_user_id = settings.getInt("user_id", 0);
+            url = getString(R.string.SERVER_URL_ANDRE) + "user/change/" + current_user_id;
 
             JSONObject passwordChange = new JSONObject();
             try {
-                passwordChange.put("current_password", currentPassword);
-                passwordChange.put("new_password", newPassword);
+                passwordChange.put("email", current_email);
+                passwordChange.put("username", current_user);
+                passwordChange.put("password", newPassword);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e("kk", passwordChange.toString());
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                    (Request.Method.POST, url, passwordChange, new Response.Listener<JSONObject>() {
+                    (Request.Method.PUT, url, passwordChange, new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject response) {
                             //textView.setText("Response: " + response.toString());
                             Intent intent = new Intent(ChangePasswordActivity.this, AccountActivity.class);
                             startActivity(intent);
+                            finish();
                         }
                     }, new Response.ErrorListener() {
 
@@ -137,10 +147,38 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             Log.e("kk",error.toString());
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String>  params = new HashMap<String, String>();
+                    addSessionCookie(params);
+                    return params;
+                }
+
+            };
 
             // Access the RequestQueue through your singleton class.
             MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        }
+    }
+
+    /**
+     * Adds session cookie to headers if exists.
+     * @param headers
+     */
+    private final void addSessionCookie(Map<String, String> headers) {
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String sessionId = settings.getString(SESSION_COOKIE, "");
+        if (sessionId.length() > 0) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(SESSION_COOKIE);
+            builder.append("=");
+            builder.append(sessionId);
+            if (headers.containsKey(COOKIE_KEY)) {
+                builder.append("; ");
+                builder.append(headers.get(COOKIE_KEY));
+            }
+            headers.put(COOKIE_KEY, builder.toString());
         }
     }
 }

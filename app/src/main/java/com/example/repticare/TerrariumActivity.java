@@ -52,6 +52,7 @@ public class TerrariumActivity extends AppCompatActivity {
         String current_user = settings.getString("user_logged", "");
 
         edit_terrarium_button = findViewById(R.id.edit_terrarium_button);
+        other_users_button = findViewById(R.id.other_users_button);
 
         if(!current_user.equalsIgnoreCase(t.getOwner())){
             edit_terrarium_button.setVisibility(View.INVISIBLE);
@@ -66,7 +67,6 @@ public class TerrariumActivity extends AppCompatActivity {
             }
         });
 
-        other_users_button = findViewById(R.id.other_users_button);
         other_users_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
