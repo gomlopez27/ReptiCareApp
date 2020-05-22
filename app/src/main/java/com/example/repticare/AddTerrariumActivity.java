@@ -240,8 +240,19 @@ public class AddTerrariumActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("AddTerra",error.getMessage());
-                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            NetworkResponse response = error.networkResponse;
+                            JSONObject my_error = null;
+                            String errors = "";
+                            if (response != null && response.data != null) {
+                                try {
+                                    my_error = new JSONObject(new String(response.data));
+                                    errors = my_error.getString("message");
+                                    Log.i("log error", my_error.getString("message"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            Toast.makeText(getApplicationContext(), errors, Toast.LENGTH_SHORT).show();
                         }
                     }) {
                     @Override

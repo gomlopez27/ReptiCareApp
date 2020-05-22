@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -81,14 +82,13 @@ public class AddUserActivity extends AppCompatActivity {
         finish();
     }
 
-    private void attemptAddOtherUser(final TerrariumItem t, String username){
+    private void attemptAddOtherUser(final TerrariumItem t,final String username){
         String url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/update/" + t.getId();
 
         JSONObject terrarium = new JSONObject();
         String other_users = "";
-        List<String> users  = t.getOtherusers();
+       final List<String> users  = t.getOtherusers();
         users.add(username);
-        t.setOtherusers(users);
         for(int j = 0;  j < users.size() ; j++){
             if(j < users.size() - 1)
                 other_users+= users.get(j) + ",";
@@ -120,16 +120,31 @@ public class AddUserActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Toast.makeText(getApplicationContext(), "User Added succesfully", Toast.LENGTH_SHORT).show();
                         username_et.setText("");
+                        t.setOtherusers(users);
 
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("AddUser",error.getMessage());
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        NetworkResponse response = error.networkResponse;
+                        JSONObject my_error = null;
+                        String errors = "";
+                        if (response != null && response.data != null) {
+                            try {
+                                my_error = new JSONObject(new String(response.data));
+                                errors = my_error.getString("message");
+                                Log.i("log error", my_error.getString("message"));
+                                users.remove(username);
+                                t.setOtherusers(users);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        Toast.makeText(getApplicationContext(), errors, Toast.LENGTH_SHORT).show();
                     }
-                }) {
+                    }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();

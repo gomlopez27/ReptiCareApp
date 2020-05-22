@@ -291,6 +291,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
             try {
                 terrarium.put("id",t.getId());
+                terrarium.put("creator_admin",t.getOwner());
                 terrarium.put("name", name);
                 terrarium.put("min_temp", minTemp);
                 terrarium.put("max_temp", maxTemp);
