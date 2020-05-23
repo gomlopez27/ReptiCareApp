@@ -54,7 +54,6 @@ public class EditUsersActivity extends AppCompatActivity {
         OtherUserItem item3 = new OtherUserItem("OtherUser 3");
         OtherUserItem item4 = new OtherUserItem("OtherUser 4");
         OtherUserItem item5 = new OtherUserItem("OtherUser 5");
-
         mList.add(item1);
         mList.add(item2);
         mList.add(item3);
