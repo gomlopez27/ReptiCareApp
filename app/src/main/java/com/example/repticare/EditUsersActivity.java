@@ -41,6 +41,7 @@ public class EditUsersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(EditUsersActivity.this, TerrariumActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
