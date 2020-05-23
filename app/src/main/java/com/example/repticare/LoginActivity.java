@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -21,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
@@ -107,10 +109,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             //textView.setText("Response: " + response.toString());
-                            SharedPreferences settings = getSharedPreferences("Auth", 0);
-                            SharedPreferences.Editor editor = settings.edit();
-                            editor.putString("user_logged" , username);
-                            editor.commit();
+
+                            fill_cache();
 
                             Intent intent = new Intent(LoginActivity.this, ListTerrariumsActivity.class);
                             startActivity(intent);
@@ -176,6 +176,47 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+    private void fill_cache(){
+        url = getString(R.string.SERVER_URL_ANDRE) + "user/";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("user",response.toString());
+                        SharedPreferences settings = getSharedPreferences("Auth", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        try {
+                            editor.putString("user_logged" , response.getString("username"));
+                            editor.putString("user_email" , response.getString("email"));
+                            editor.putInt("user_id" , response.getInt("id"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        editor.commit();
+
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "user/error", Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        addSessionCookie(params);
+                        return params;
+                    }
+                };
+
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+
+    }
 
 
 

@@ -151,62 +151,15 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void attemptLogout() {
-        String url = getString(R.string.SERVER_URL_ANDRE) + "logout";
 
-        JSONObject empty = new JSONObject();
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url, empty, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        SharedPreferences settings = getSharedPreferences("Auth", 0);
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.clear();
-                        editor.commit();
-
-                        Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  params = new HashMap<String, String>();
-                addSessionCookie(params);
-                return params;
-            }
-        };
-
-        // Access the RequestQueue through your singleton class.
-        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
-    }
-
-
-    /**
-     * Adds session cookie to headers if exists.
-     * @param headers
-     */
-    private final void addSessionCookie(Map<String, String> headers) {
         SharedPreferences settings = getSharedPreferences("Auth", 0);
-        String sessionId = settings.getString(SESSION_COOKIE, "");
-        if (sessionId.length() > 0) {
-            StringBuilder builder = new StringBuilder();
-            builder.append(SESSION_COOKIE);
-            builder.append("=");
-            builder.append(sessionId);
-            if (headers.containsKey(COOKIE_KEY)) {
-                builder.append("; ");
-                builder.append(headers.get(COOKIE_KEY));
-            }
-            headers.put(COOKIE_KEY, builder.toString());
-        }
+        SharedPreferences.Editor editor = settings.edit();
+        editor.clear();
+        editor.commit();
+
+        Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 }
