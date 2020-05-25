@@ -50,48 +50,10 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_terrariums);
 
         // Notifications
-
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String interest = settings.getString("user_logged", "");
         PushNotifications.start(getApplicationContext(), "ac2c54bd-7122-4618-ae8f-7d1def4df1d3");
-        PushNotifications.addDeviceInterest("hello");
-
-        /*
-        PusherOptions options = new PusherOptions();
-        options.setCluster("eu");
-
-        Pusher pusher = new Pusher("c2a740d8d0e4ef24337d", options);
-
-        pusher.connect(new ConnectionEventListener() {
-            @Override
-            public void onConnectionStateChange(ConnectionStateChange change) {
-                Log.i("Pusher", "State changed from " + change.getPreviousState() +
-                        " to " + change.getCurrentState());
-            }
-
-            @Override
-            public void onError(String message, String code, Exception e) {
-                Log.i("Pusher", "There was a problem connecting! " +
-                        "\ncode: " + code +
-                        "\nmessage: " + message +
-                        "\nException: " + e
-                );
-            }
-        }, ConnectionState.ALL);
-
-        Channel channel = pusher.subscribe("my-channel");
-
-        channel.bind("my-event", new SubscriptionEventListener() {
-            @Override
-            public void onEvent(PusherEvent event) {
-                Log.i("Pusher", "Received event with data: " + event.toString());
-            }
-        });
-
-
-
-        */
-
-
-
+        PushNotifications.addDeviceInterest(interest);
 
         // RecyclerView with adapter
         recyclerView = findViewById(R.id.list_my_terrariums);

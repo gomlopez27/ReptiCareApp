@@ -1,8 +1,5 @@
 package com.example.repticare;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,21 +23,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
-    private static final int INTERVAL_ONE_MINUTE = 60*1000;
-    private AlarmManager alarmMgr;
-    private PendingIntent alarmIntent;
-    SharedPreferences notificationsPrefs;
-    SharedPreferences.Editor editorNotificationsPrefs;
-    boolean hasSetup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        notificationsPrefs = getSharedPreferences("NOTIFICATIONS", 0);
-
-        hasSetup = notificationsPrefs.getBoolean("hasSetup", false);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -70,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(JSONObject response) {
                                     Intent intent = new Intent(getApplicationContext(), ListTerrariumsActivity.class);
-                                    //if(!hasSetup)
-                                       // setupNotifications();
                                     startActivity(intent);
                                     finish();
                                 }
@@ -101,25 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    private void setupNotifications(){
-
-        int notificationId = notificationsPrefs.getInt("notificationID", 0);
-        SharedPreferences.Editor editorNotificationsPrefs = notificationsPrefs.edit();
-
-        editorNotificationsPrefs.putBoolean("hasSetup", true);
-
-        alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        intent.putExtra("issueTitle", "Issue 1"); //TODO: ir buscar
-        intent.putExtra("issueDescription", "bla bla bla bla");//TODO: ir buscar
-
-        alarmIntent = PendingIntent.getBroadcast(this, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, INTERVAL_ONE_MINUTE, alarmIntent);
-
-    }
 
     /**
      * Adds session cookie to headers if exists.
