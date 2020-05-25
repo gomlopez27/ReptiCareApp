@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "987873507939",
+    "firebase_url": "https://repticare-f8601.firebaseio.com",
+    "project_id": "repticare-f8601",
+    "storage_bucket": "repticare-f8601.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987873507939:android:f7d7dad5ccad99de7dd656",
+        "android_client_info": {
+          "package_name": "com.example.repticare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987873507939-uicsj5rma0k5tovvhk0nf2apunvmejqk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.repticare",
+            "certificate_hash": "dbd4fb4d665bd55982124222251fc333ac762f8d"
+          }
+        },
+        {
+          "client_id": "987873507939-i3kqcv10b0i9gnaav8soliah8grbv1jj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA41aY98u9hbzQQpmswAOqihP2KSt3NQSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987873507939-i3kqcv10b0i9gnaav8soliah8grbv1jj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -41,7 +41,7 @@ public class EditUsersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(EditUsersActivity.this, TerrariumActivity.class);
                 startActivity(intent);
-                finish();
+                finish(); //TODO ver se isto resolve o facto de rebentar quando se apagar um user e volta-se para tras
             }
         });
 
