@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.pusher.pushnotifications.PushNotifications;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,35 +49,52 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_terrariums);
 
+        // Notifications
 
-        //recyclerView with adapter
+        PushNotifications.start(getApplicationContext(), "ac2c54bd-7122-4618-ae8f-7d1def4df1d3");
+        PushNotifications.addDeviceInterest("hello");
+
+        /*
+        PusherOptions options = new PusherOptions();
+        options.setCluster("eu");
+
+        Pusher pusher = new Pusher("c2a740d8d0e4ef24337d", options);
+
+        pusher.connect(new ConnectionEventListener() {
+            @Override
+            public void onConnectionStateChange(ConnectionStateChange change) {
+                Log.i("Pusher", "State changed from " + change.getPreviousState() +
+                        " to " + change.getCurrentState());
+            }
+
+            @Override
+            public void onError(String message, String code, Exception e) {
+                Log.i("Pusher", "There was a problem connecting! " +
+                        "\ncode: " + code +
+                        "\nmessage: " + message +
+                        "\nException: " + e
+                );
+            }
+        }, ConnectionState.ALL);
+
+        Channel channel = pusher.subscribe("my-channel");
+
+        channel.bind("my-event", new SubscriptionEventListener() {
+            @Override
+            public void onEvent(PusherEvent event) {
+                Log.i("Pusher", "Received event with data: " + event.toString());
+            }
+        });
+
+
+
+        */
+
+
+
+
+        // RecyclerView with adapter
         recyclerView = findViewById(R.id.list_my_terrariums);
-        mList = new ArrayList();
-
-        TerrariumItem item1 = new TerrariumItem("Terrarium 1");
-        TerrariumItem item2 = new TerrariumItem("Terrarium 2");
-        TerrariumItem item3 = new TerrariumItem("Terrarium 3");
-        TerrariumItem item4 = new TerrariumItem("Terrarium 4");
-        TerrariumItem item5 = new TerrariumItem("Terrarium 5");
-        TerrariumItem item6 = new TerrariumItem("Terrarium 5");
-        TerrariumItem item7 = new TerrariumItem("Terrarium 5");
-        TerrariumItem item8 = new TerrariumItem("Terrarium 5");
-        TerrariumItem item9 = new TerrariumItem("Terrarium 5");
-        TerrariumItem item10 = new TerrariumItem("Terrarium 5");
-        TerrariumItem item11 = new TerrariumItem("Terrarium 5");
-
-        mList.add(item1);
-        mList.add(item2);
-        mList.add(item3);
-        mList.add(item4);
-        mList.add(item5);
-        mList.add(item6);
-        mList.add(item7);
-        mList.add(item8);
-        mList.add(item9);
-        mList.add(item10);
-        mList.add(item11);
-
         getTerrariums();
         adapter = new ListTerrariumsAdapter(ListTerrariumsActivity.this, mList);
         //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
