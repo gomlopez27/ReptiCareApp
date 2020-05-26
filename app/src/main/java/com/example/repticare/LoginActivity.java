@@ -192,6 +192,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("user_logged" , response.getString("username"));
                             editor.putString("user_email" , response.getString("email"));
                             editor.putInt("user_id" , response.getInt("id"));
+                            editor.putString("user_sex",response.getString("sex"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
