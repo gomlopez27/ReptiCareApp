@@ -216,6 +216,7 @@
                 android:background="@drawable/box_background"
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
+                android:padding="10dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -230,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/temp_graph"
                     android:layout_below="@+id/temp_graph_title"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="10dp"/>
 
 
             </RelativeLayout>
@@ -242,6 +243,7 @@
                 android:background="@drawable/box_background"
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
+                android:padding="10dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -268,6 +270,7 @@
                 android:background="@drawable/box_background"
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
+                android:padding="10dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -293,6 +296,7 @@
                 android:background="@drawable/box_background"
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
+                android:padding="10dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
