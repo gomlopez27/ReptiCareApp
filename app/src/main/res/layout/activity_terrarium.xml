@@ -231,7 +231,6 @@
                     android:id="@+id/temp_graph"
                     android:layout_below="@+id/temp_graph_title"
                     android:layout_margin="15dp"
-                    android:padding="5dp"
                     />
 
 

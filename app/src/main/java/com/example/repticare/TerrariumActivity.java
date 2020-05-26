@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -113,6 +114,7 @@ public class TerrariumActivity extends AppCompatActivity {
 
     private void drawGraphs(GraphView graph, String attribute){
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        graph.getGridLabelRenderer().setPadding(32); // should allow for 3 digits to fit on screen
         int allReadings;
         if(readingList == null) {
             allReadings = 0;
