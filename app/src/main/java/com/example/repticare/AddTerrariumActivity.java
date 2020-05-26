@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -245,7 +244,6 @@ public class AddTerrariumActivity extends AppCompatActivity {
                                 try {
                                     my_error = new JSONObject(new String(response.data));
                                     errors = my_error.getString("message");
-                                    Log.i("log error", my_error.getString("message"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

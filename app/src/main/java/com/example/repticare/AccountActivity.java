@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +34,7 @@ public class AccountActivity extends AppCompatActivity {
     ImageView profileImage;
     TextView totalNrOfTerr, nrUnresolvedIssues, username;
     Button editAccButton, changePwdButton, notificationsButton, logoutButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,7 +182,6 @@ public class AccountActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.e("resp", error.toString());
                             }
                         })  {
             @Override
@@ -206,7 +205,6 @@ public class AccountActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.e("resp", error.toString());
                             }
                         })  {
             @Override

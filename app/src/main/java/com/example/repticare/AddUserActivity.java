@@ -133,7 +133,6 @@ public class AddUserActivity extends AppCompatActivity {
                             try {
                                 my_error = new JSONObject(new String(response.data));
                                 errors = my_error.getString("message");
-                                Log.i("log error", my_error.getString("message"));
                                 users.remove(username);
                                 t.setOtherusers(users);
 
@@ -150,7 +149,6 @@ public class AddUserActivity extends AppCompatActivity {
                 addSessionCookie(params);
                 return params;
             }
-
         };
 
         // Access the RequestQueue through your singleton class.

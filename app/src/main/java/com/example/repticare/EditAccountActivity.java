@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +18,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.mikhaellopez.circularimageview.CircularImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,29 +26,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditAccountActivity extends AppCompatActivity {
-    Toolbar toolbar;
-    CircularImageView profileImage;
-    final static int Gallery_Pick = 1;
-    Button editProfileImage;
-    EditText inputEmail;
-    Button saveChangeButton;
-    private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
+    EditText inputEmail;
+    Button saveChangeButton;
+    ImageView profileImage;
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
 
-        toolbar = findViewById(R.id.toolbar_edit_acc);
-        setSupportActionBar(toolbar);
+
+        profileImage = findViewById(R.id.profile_image_edit);
+        inputEmail = findViewById(R.id.change_email);
+        saveChangeButton = findViewById(R.id.edit_acc_save_changes);
 
         SharedPreferences settings = getSharedPreferences("Auth", 0);
         String sex = settings.getString("user_sex", "");
-
-        ImageView profileImage = findViewById(R.id.profile_image_edit);
-
         if(sex.equalsIgnoreCase("F")){
             profileImage.setImageResource(R.drawable.female);
         }
@@ -59,6 +54,17 @@ public class EditAccountActivity extends AppCompatActivity {
         }
         else
             profileImage.setImageResource(R.drawable.gender_neutral);
+
+
+        saveChangeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptEditAccount();
+            }
+        });
+
+        toolbar = findViewById(R.id.toolbar_edit_acc);
+        setSupportActionBar(toolbar);
 
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -70,28 +76,14 @@ public class EditAccountActivity extends AppCompatActivity {
             }
         });
 
-
-
-        inputEmail = findViewById(R.id.change_email);
-        saveChangeButton = findViewById(R.id.edit_acc_save_changes);
-        saveChangeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptEditAccount();
-            }
-        });
-
-
     }
 
     private void attemptEditAccount() {
-        //TODO fix method
 
         // Reset errors.
         inputEmail.setError(null);
 
         String newEmail = inputEmail.getText().toString();
-
 
         boolean cancel = false;
         View focusView = null;
@@ -109,14 +101,13 @@ public class EditAccountActivity extends AppCompatActivity {
 
 
         if (cancel) {
-            // There was an error; don't attempt register and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
             //pedido REST SAVE EDIT ACCOUNT
             SharedPreferences settings = getSharedPreferences("Auth", 0);
             String current_user = settings.getString("user_logged", "");
             Integer current_user_id = settings.getInt("user_id", 0);
+
             String url = getString(R.string.server_url) + "user/get/" + current_user_id;
 
 
@@ -128,7 +119,7 @@ public class EditAccountActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e("user",user.toString());
+
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.PUT, url, user, new Response.Listener<JSONObject>() {
 
@@ -142,7 +133,6 @@ public class EditAccountActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("AddTerra",error.getMessage());
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }) {
