@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -42,6 +42,7 @@ public class TerrariumActivity extends AppCompatActivity {
     Toolbar toolbar;
     GraphView tempGraph, humGraph, uvGraph, activityGraph;
     List<TerrariumReadingItem> readingList;
+    RelativeLayout box_with_other_users, box_without_other_users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +89,14 @@ public class TerrariumActivity extends AppCompatActivity {
         edit_terrarium_button = findViewById(R.id.edit_terrarium_button);
         other_users_button = findViewById(R.id.other_users_button);
 
+        box_with_other_users = findViewById(R.id.box_with_other_users);
+        box_without_other_users = findViewById(R.id.box_without_other_users);
+
         if(!current_user.equalsIgnoreCase(t.getOwner())){
             edit_terrarium_button.setVisibility(View.INVISIBLE);
-            other_users_button.setVisibility(View.INVISIBLE);
+            //other_users_button.setVisibility(View.INVISIBLE);
+            box_with_other_users.setVisibility(View.GONE);
+            box_without_other_users.setVisibility(View.VISIBLE);
         }
         edit_terrarium_button.setOnClickListener(new View.OnClickListener() {
             @Override
