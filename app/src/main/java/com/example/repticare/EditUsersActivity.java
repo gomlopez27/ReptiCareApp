@@ -1,5 +1,6 @@
 package com.example.repticare;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -80,6 +81,7 @@ public class EditUsersActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(EditUsersActivity.this, AddUserActivity.class);
                 intent1.putExtra("Terrarium", terrarium);
                 startActivity(intent1);
+                EditUsersActivity.this.finish();
             }
         });
     }
@@ -90,7 +92,7 @@ public class EditUsersActivity extends AppCompatActivity {
         intent.putExtra("Terrarium", terrarium);
         setResult(RESULT_OK);
         startActivity(intent);
-        finish();
+        EditUsersActivity.this.finish();
     }
 
 }
