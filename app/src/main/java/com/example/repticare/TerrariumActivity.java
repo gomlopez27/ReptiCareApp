@@ -143,6 +143,9 @@ public class TerrariumActivity extends AppCompatActivity {
                     dpa[i] = new DataPoint(i, readingList.get(readingIndex++).getCurrUV());
                     break;
                 case "a":
+                    graph.getViewport().setMinY(0);
+                    graph.getViewport().setMaxY(1.5);
+                    graph.getViewport().setYAxisBoundsManual(true);
                     int act = 0;
                     if(readingList.get(readingIndex++).getActivity()) {
                         act = 1;
@@ -156,6 +159,7 @@ public class TerrariumActivity extends AppCompatActivity {
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpa);
         graph.addSeries(series);
+
     }
 
     private void getReadings(int terrarium_id) {
