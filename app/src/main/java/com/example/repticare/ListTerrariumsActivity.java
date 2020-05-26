@@ -82,7 +82,6 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.list_my_terrariums);
         getTerrariums();
         adapter = new ListTerrariumsAdapter(ListTerrariumsActivity.this, mList);
-        //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 

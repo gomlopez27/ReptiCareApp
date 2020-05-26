@@ -30,25 +30,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AccountActivity extends AppCompatActivity {
-    String sex = "";
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
     TextView totalNrOfTerr;
     TextView nrUnresolvedIssues;
+    String sex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-         totalNrOfTerr = findViewById(R.id.total_nr_terrariums_acc);
-         nrUnresolvedIssues = findViewById(R.id.nr_unresolved_issues_acc);
+        totalNrOfTerr = findViewById(R.id.total_nr_terrariums_acc);
+        nrUnresolvedIssues = findViewById(R.id.nr_unresolved_issues_acc);
         TextView username = findViewById(R.id.username_account);
         TextView email = findViewById(R.id.email_account);
         ImageView profileImage = findViewById(R.id.profile_image);
         fillCache();
         SharedPreferences settings = getSharedPreferences("Auth", 0);
-         sex = settings.getString("user_sex", "");
+        sex = settings.getString("user_sex", "");
 
         if(sex.equalsIgnoreCase("F")){
             profileImage.setImageResource(R.drawable.female);

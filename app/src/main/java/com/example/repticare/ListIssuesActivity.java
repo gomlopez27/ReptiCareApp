@@ -52,12 +52,10 @@ public class ListIssuesActivity extends AppCompatActivity {
         getIssues();
 
         adapter = new ListIssuesAdapter(ListIssuesActivity.this, mList);
-        //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
         recyclerView.setAdapter(adapter);
-       recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
         nrOfIssues_tv = findViewById(R.id.nr_of_curr_unresolved_issues);
-        int listSize = mList.size();
         nrOfIssues_tv.setText(Integer.toString(0));
 
 
@@ -150,7 +148,6 @@ public class ListIssuesActivity extends AppCompatActivity {
 
         };
 
-
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest2);
@@ -188,8 +185,6 @@ public class ListIssuesActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
 
         return null;
     }
