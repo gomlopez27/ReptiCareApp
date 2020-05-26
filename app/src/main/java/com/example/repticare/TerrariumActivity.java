@@ -168,7 +168,11 @@ public class TerrariumActivity extends AppCompatActivity {
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
-                                readingList.addAll(parseTerrariumReadings(response));
+                                if(parseTerrariumReadings(response) == null) {
+                                    readingList = null;
+                                } else {
+                                    readingList.addAll(parseTerrariumReadings(response));
+                                }
                             }
                         },
                         new Response.ErrorListener() {
