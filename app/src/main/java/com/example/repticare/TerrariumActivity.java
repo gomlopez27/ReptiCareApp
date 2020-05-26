@@ -106,6 +106,7 @@ public class TerrariumActivity extends AppCompatActivity {
                 Intent i = new Intent(TerrariumActivity.this, EditUsersActivity.class);
                 i.putExtra("Terrarium", t);
                 startActivity(i);
+                finish();
             }
         });
     }
