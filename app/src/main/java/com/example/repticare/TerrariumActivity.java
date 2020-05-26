@@ -67,7 +67,7 @@ public class TerrariumActivity extends AppCompatActivity {
         drawGraphs(humGraph, "h");
         drawGraphs(uvGraph, "u");
         drawGraphs(activityGraph, "a");
-        
+
         terrarium_owner.setText(t.getOwner());
         terrarium_temperature.setText(Double.toString(t.getCurrent_temp()));
         terrarium_humidity.setText(Double.toString(t.getCurrent_humidity()));
@@ -114,7 +114,12 @@ public class TerrariumActivity extends AppCompatActivity {
 
     private void drawGraphs(GraphView graph, String attribute){
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
-        int allReadings = readingList.size();
+        int allReadings;
+        if(readingList == null) {
+            allReadings = 0;
+        } else {
+            allReadings = readingList.size();
+        }
         int readingIndex;
 
         // Get number of available readings
