@@ -62,7 +62,7 @@ public class NotificationSettingsActivity extends AppCompatActivity {
                     PushNotifications.removeDeviceInterest(interest);
                 }
 
-                Log.e("food" , "Boolean value = " + b);
+                Log.e("issue" , "Boolean value = " + b);
             }
         });
 
