@@ -14,6 +14,7 @@ import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -166,8 +167,26 @@ public class RegisterActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("kk",error.toString());
-                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            NetworkResponse response = error.networkResponse;
+                            JSONObject my_error = null;
+                            String errors = "";
+                            if (response != null && response.data != null) {
+                                try {
+                                    my_error = new JSONObject(new String(response.data));
+                                    Log.i("log error",my_error.toString());
+                                    if(my_error.has("username")) {
+                                        errors = errors + my_error.getString("username").split("\"")[1];
+                                        if (my_error.has("email"))
+                                            errors = errors + " \n A" + my_error.getString("email").split("\"")[1];
+                                    }
+                                    if (my_error.has("email"))
+                                        errors = errors + my_error.getString("email").split("\"")[1];
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            Toast.makeText(getApplicationContext(), errors, Toast.LENGTH_SHORT).show();
                         }
                     });
 
