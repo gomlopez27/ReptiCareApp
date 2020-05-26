@@ -251,7 +251,6 @@
                     android:text="Humidity in the last 24 hours"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/hum_graph_title"
-
                     />
 
                 <com.jjoe64.graphview.GraphView
