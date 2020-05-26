@@ -40,10 +40,7 @@ public class ListIssuesAdapter extends RecyclerView.Adapter<ListIssuesAdapter.My
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(mContext, IssueActivity.class);
-                i.putExtra("Name", mData.get(viewHolder.getAdapterPosition()).getName());
-
-                //TODO push extra info
-
+                i.putExtra("Issue", mData.get(viewHolder.getAdapterPosition()));
                 mContext.startActivity(i);
 
             }
