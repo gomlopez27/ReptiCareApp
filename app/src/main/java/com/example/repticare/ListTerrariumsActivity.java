@@ -49,11 +49,20 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_terrariums);
         mList = new ArrayList();
-        // Notifications
+
+        // Issue Notifications
+        SharedPreferences notification_settings = getSharedPreferences("NOTIFICATIONS", 0);
+        Boolean notify = notification_settings.getBoolean("isIssueNotificationOn", false);
         SharedPreferences settings = getSharedPreferences("Auth", 0);
         String interest = settings.getString("user_logged", "admin");
         PushNotifications.start(getApplicationContext(), "ac2c54bd-7122-4618-ae8f-7d1def4df1d3");
-        PushNotifications.addDeviceInterest(interest);
+
+        if(notify) {
+            PushNotifications.addDeviceInterest(interest);
+        } else {
+            PushNotifications.removeDeviceInterest(interest);
+        }
+
 
         // RecyclerView with adapter
         recyclerView = findViewById(R.id.list_my_terrariums);
