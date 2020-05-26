@@ -40,8 +40,9 @@ public class EditUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EditUsersActivity.this, TerrariumActivity.class);
+                intent.putExtra("Terrarium", terrarium);
                 startActivity(intent);
-                finish(); //TODO ver se isto resolve o facto de rebentar quando se apagar um user e volta-se para tras
+                finish();
             }
         });
 
@@ -68,7 +69,6 @@ public class EditUsersActivity extends AppCompatActivity {
         }
 
         adapter = new ListOtherUsersAdapter(EditUsersActivity.this, mList, terrarium);
-        //recyclerView.addItemDecoration(new HorizontalItemsDecoration(10));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
