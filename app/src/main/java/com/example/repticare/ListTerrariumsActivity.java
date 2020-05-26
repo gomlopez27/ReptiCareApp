@@ -42,6 +42,7 @@ public class ListTerrariumsActivity extends AppCompatActivity {
     List mList;
     ListTerrariumsAdapter adapter;
     TextView nrOfTerrariums_tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

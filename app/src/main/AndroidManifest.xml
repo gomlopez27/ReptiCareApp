@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".GraphsTestActivity"></activity>
         <activity android:name=".NotificationsActivity" />
         <activity android:name=".AddUserActivity" />
         <activity android:name=".EditUsersActivity" />

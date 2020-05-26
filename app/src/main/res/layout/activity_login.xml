@@ -20,7 +20,8 @@
             android:layout_width="240dp"
             android:layout_height="240dp"
             android:src="@drawable/aadda"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:id="@+id/image_logo"/>
 
         <EditText
             android:id="@+id/username"
