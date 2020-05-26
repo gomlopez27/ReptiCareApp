@@ -130,7 +130,6 @@ public class TerrariumActivity extends AppCompatActivity {
 
         String url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/"; //TODO: ENDPOINT
 
-
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (Request.Method.GET, url,null,
                         new Response.Listener<JSONArray>() {
