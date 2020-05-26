@@ -257,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/hum_graph"
                     android:layout_below="@+id/hum_graph_title"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="10dp"/>
 
             </RelativeLayout>
 
@@ -282,7 +282,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/uv_graph"
                     android:layout_below="@+id/uv_graph_title"
-                    android:layout_margin="5dp"
+                    android:layout_margin="10dp"
                     />
             </RelativeLayout>
 
@@ -307,7 +307,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/activity_graph"
                     android:layout_below="@+id/activity_graph_title"
-                    android:layout_margin="5dp"
+                    android:layout_margin="10dp"
                     />
             </RelativeLayout>
 
