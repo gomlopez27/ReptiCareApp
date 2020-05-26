@@ -23,13 +23,14 @@ public class EditUsersActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List mList;
     ListOtherUsersAdapter adapter;
+    TerrariumItem terrarium;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_users);
 
-        final TerrariumItem terrarium = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
+        terrarium = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
 
         toolbar = findViewById(R.id.toolbar_edit_other_users);
         setSupportActionBar(toolbar);
@@ -81,6 +82,15 @@ public class EditUsersActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(EditUsersActivity.this, TerrariumActivity.class);
+        intent.putExtra("Terrarium", terrarium);
+        setResult(RESULT_OK);
+        startActivity(intent);
+        finish();
     }
 
 }
