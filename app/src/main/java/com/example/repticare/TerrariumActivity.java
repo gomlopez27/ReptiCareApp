@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -63,10 +64,7 @@ public class TerrariumActivity extends AppCompatActivity {
         uvGraph = findViewById(R.id.uv_graph);
         activityGraph = findViewById(R.id.activity_graph);
 
-        drawGraphs(tempGraph, "t");
-        drawGraphs(humGraph, "h");
-        drawGraphs(uvGraph, "u");
-        drawGraphs(activityGraph, "a");
+
 
         terrarium_owner.setText(t.getOwner());
         terrarium_temperature.setText(Double.toString(t.getCurrent_temp()));
@@ -171,7 +169,13 @@ public class TerrariumActivity extends AppCompatActivity {
                                 if(parseTerrariumReadings(response) == null) {
                                     readingList = null;
                                 } else {
+                                    readingList = new LinkedList<TerrariumReadingItem>();
                                     readingList.addAll(parseTerrariumReadings(response));
+
+                                    drawGraphs(tempGraph, "t");
+                                    drawGraphs(humGraph, "h");
+                                    drawGraphs(uvGraph, "u");
+                                    drawGraphs(activityGraph, "a");
                                 }
                             }
                         },
