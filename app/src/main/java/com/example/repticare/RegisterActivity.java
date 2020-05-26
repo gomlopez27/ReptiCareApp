@@ -140,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             //pedido REST REGISTER
 
-            url = getString(R.string.SERVER_URL_ANDRE) + "user/register/";
+            url = getString(R.string.server_url) + "user/register/";
 
             JSONObject user = new JSONObject();
             try {

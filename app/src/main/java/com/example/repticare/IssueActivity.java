@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,7 +73,7 @@ public class IssueActivity extends AppCompatActivity {
 
         final IssueItem issueItem = (IssueItem) getIntent().getExtras().getSerializable("Issue");
 
-        url = getString(R.string.SERVER_URL_ANDRE) + "issues/" + issueItem.getId();
+        url = getString(R.string.server_url) + "issues/" + issueItem.getId();
 
         JSONObject issue = new JSONObject();
         try {

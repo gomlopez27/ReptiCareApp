@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -22,14 +21,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.JsonArray;
 import com.pusher.pushnotifications.PushNotifications;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -179,7 +174,7 @@ public class AccountActivity extends AppCompatActivity {
 
 
     private void fillCache(){
-      String  url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/";
+      String  url = getString(R.string.server_url) + "terrariums/";
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (Request.Method.GET, url,null,
@@ -204,7 +199,7 @@ public class AccountActivity extends AppCompatActivity {
 
         };
 
-        String  url2 = getString(R.string.SERVER_URL_ANDRE) + "issues/unresolved/";
+        String  url2 = getString(R.string.server_url) + "issues/unresolved/";
         JsonArrayRequest jsonObjectRequest2 = new JsonArrayRequest
                 (Request.Method.GET, url2,null,
                         new Response.Listener<JSONArray>() {

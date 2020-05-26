@@ -130,7 +130,7 @@ public class ListTerrariumsActivity extends AppCompatActivity {
     private void getTerrariums() {
         final ArrayList res = new ArrayList<TerrariumItem>();
 
-        String url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/";
+        String url = getString(R.string.server_url) + "terrariums/";
 
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest

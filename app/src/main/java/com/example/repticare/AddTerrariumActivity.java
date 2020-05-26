@@ -211,7 +211,7 @@ public class AddTerrariumActivity extends AppCompatActivity {
         } else {
             //pedido REST ADD TERRARIUM
 
-            url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/register/";
+            url = getString(R.string.server_url) + "terrariums/register/";
 
             JSONObject terrarium = new JSONObject();
             try {

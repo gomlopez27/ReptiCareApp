@@ -83,7 +83,7 @@ public class AddUserActivity extends AppCompatActivity {
     }
 
     private void attemptAddOtherUser(final TerrariumItem t,final String username){
-        String url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/update/" + t.getId();
+        String url = getString(R.string.server_url) + "terrariums/update/" + t.getId();
 
         JSONObject terrarium = new JSONObject();
         String other_users = "";

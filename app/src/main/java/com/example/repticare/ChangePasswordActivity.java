@@ -119,7 +119,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             String current_user = settings.getString("user_logged", "");
             String current_email = settings.getString("user_email", "");
             Integer current_user_id = settings.getInt("user_id", 0);
-            url = getString(R.string.SERVER_URL_ANDRE) + "user/change/" + current_user_id;
+            url = getString(R.string.server_url) + "user/change/" + current_user_id;
 
             JSONObject passwordChange = new JSONObject();
             try {

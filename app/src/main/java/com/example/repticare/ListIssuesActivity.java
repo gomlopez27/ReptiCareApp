@@ -19,7 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -95,8 +94,8 @@ public class ListIssuesActivity extends AppCompatActivity {
     private void getIssues(){
         final ArrayList res = new ArrayList<TerrariumItem>();
 
-        String url1 = getString(R.string.SERVER_URL_ANDRE) + "issues/unresolved/";
-        String url2 = getString(R.string.SERVER_URL_ANDRE) + "issues/resolved/";
+        String url1 = getString(R.string.server_url) + "issues/unresolved/";
+        String url2 = getString(R.string.server_url) + "issues/resolved/";
 
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest

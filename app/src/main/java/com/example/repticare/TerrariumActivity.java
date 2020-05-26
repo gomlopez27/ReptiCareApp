@@ -163,7 +163,7 @@ public class TerrariumActivity extends AppCompatActivity {
     }
 
     private void getReadings(int terrarium_id) {
-        String url = getString(R.string.SERVER_URL_ANDRE) + "readings/get/" + terrarium_id;
+        String url = getString(R.string.server_url) + "readings/get/" + terrarium_id;
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (Request.Method.GET, url,null,

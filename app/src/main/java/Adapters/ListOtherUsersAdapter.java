@@ -2,7 +2,6 @@ package Adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.repticare.EditUsersActivity;
 import com.example.repticare.MySingleton;
 import com.example.repticare.R;
 
@@ -114,7 +112,7 @@ public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAd
     private void removerUserFromTerrarium(final OtherUserItem user, TerrariumItem t) {
         final TerrariumItem terra = t;
 
-        String url = mContext.getString(R.string.SERVER_URL_ANDRE) + "terrariums/update/" + t.getId();
+        String url = mContext.getString(R.string.server_url) + "terrariums/update/" + t.getId();
 
         JSONObject terrarium = new JSONObject();
         String other_users = "";

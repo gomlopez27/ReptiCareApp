@@ -117,7 +117,7 @@ public class EditAccountActivity extends AppCompatActivity {
             SharedPreferences settings = getSharedPreferences("Auth", 0);
             String current_user = settings.getString("user_logged", "");
             Integer current_user_id = settings.getInt("user_id", 0);
-            String url = getString(R.string.SERVER_URL_ANDRE) + "user/get/" + current_user_id;
+            String url = getString(R.string.server_url) + "user/get/" + current_user_id;
 
 
             JSONObject user = new JSONObject();

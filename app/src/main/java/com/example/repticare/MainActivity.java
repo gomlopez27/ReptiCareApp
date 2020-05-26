@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 } else {
 
-                    String url = getString(R.string.SERVER_URL_ANDRE) + "user/";
+                    String url = getString(R.string.server_url) + "user/";
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                             (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){

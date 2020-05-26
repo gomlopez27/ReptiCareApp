@@ -102,7 +102,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
         //pedido REST DELETE TERRARIUM
 
-        url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/update/" + t.getId();
+        url = getString(R.string.server_url) + "terrariums/update/" + t.getId();
 
 
         StringRequest  jsonObjectRequest = new StringRequest
@@ -277,7 +277,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
         } else {
             //pedido REST EDIT TERRARIUM
 
-            url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/update/" + t.getId();
+            url = getString(R.string.server_url) + "terrariums/update/" + t.getId();
 
             JSONObject terrarium = new JSONObject();
            String other_users = "";
