@@ -26,30 +26,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChangePasswordActivity extends AppCompatActivity {
-    Toolbar toolbar;
-    Button confirm_button;
-    EditText mCurrPassword, nNewPassword, mPasswordConfirm;
-    String url;
-    private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
+    Button confirm_button;
+    EditText mCurrPassword, nNewPassword, mPasswordConfirm;
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
-        toolbar = findViewById(R.id.toolbar_change_password);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         confirm_button = findViewById(R.id.confirm_change_password_button);
         mCurrPassword = findViewById(R.id.current_password_change);
@@ -62,6 +50,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 attemptChangePassword();
             }
         });
+
+        toolbar = findViewById(R.id.toolbar_change_password);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void attemptChangePassword() {
@@ -70,7 +70,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         nNewPassword.setError(null);
         mPasswordConfirm.setError(null);
 
-        // Store values at the time of the login attempt
         String currentPassword = mCurrPassword.getText().toString();
         String newPassword = nNewPassword.getText().toString();
         String passwordConfirm = mPasswordConfirm.getText().toString();
@@ -83,8 +82,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
             mCurrPassword.setError("É necessario colocar a password atual.");
             focusView = mCurrPassword;
             cancel = true;
-        } else if(false) {
-            //VERIFICAR SE PASS É IGUAL à DO SERVIDOR
         }
 
         // NEW PASSWORD CHECK
@@ -110,8 +107,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
 
         if (cancel) {
-            // There was an error; don't attempt register and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
             //pedido REST CHANGE PASSWORD
@@ -119,7 +114,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
             String current_user = settings.getString("user_logged", "");
             String current_email = settings.getString("user_email", "");
             Integer current_user_id = settings.getInt("user_id", 0);
-            url = getString(R.string.server_url) + "user/change/" + current_user_id;
+
+            String url = getString(R.string.server_url) + "user/change/" + current_user_id;
 
             JSONObject passwordChange = new JSONObject();
             try {
@@ -135,7 +131,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(JSONObject response) {
-                            //textView.setText("Response: " + response.toString());
                             Intent intent = new Intent(ChangePasswordActivity.this, AccountActivity.class);
                             startActivity(intent);
                             finish();
