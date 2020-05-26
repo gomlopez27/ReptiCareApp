@@ -46,7 +46,8 @@ public class EditAccountActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_edit_acc);
         setSupportActionBar(toolbar);
 
-        String sex = getIntent().getExtras().getString("sex");
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String sex = settings.getString("user_sex", "");
 
         ImageView profileImage = findViewById(R.id.profile_image_edit);
 
