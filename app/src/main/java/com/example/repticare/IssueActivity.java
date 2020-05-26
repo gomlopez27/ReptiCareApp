@@ -40,7 +40,7 @@ public class IssueActivity extends AppCompatActivity {
         setContentView(R.layout.activity_issue);
 
         issueItem = (IssueItem) getIntent().getExtras().getSerializable("Issue");
-        
+
         button_resolve_issue = findViewById(R.id.button_resolve_issue);
         text_issue_description = findViewById(R.id.text_issue_description);
         text_issue_description.setText(issueItem.getDesc());
