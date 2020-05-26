@@ -3,7 +3,6 @@ package com.example.repticare;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,20 +26,32 @@ import java.util.Map;
 import Items.IssueItem;
 
 public class IssueActivity extends AppCompatActivity {
-    Button button_resolve_issue;
-    TextView text_issue_description;
-    String url;
-    Toolbar toolbar;
-    private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
+    Button button_resolve_issue;
+    TextView text_issue_description;
+    Toolbar toolbar;
+    IssueItem issueItem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issue);
 
-        final IssueItem issueItem = (IssueItem) getIntent().getExtras().getSerializable("Issue");
+        issueItem = (IssueItem) getIntent().getExtras().getSerializable("Issue");
+        
+        button_resolve_issue = findViewById(R.id.button_resolve_issue);
+        text_issue_description = findViewById(R.id.text_issue_description);
+        text_issue_description.setText(issueItem.getDesc());
+
+        button_resolve_issue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptResolveIssue();
+            }
+        });
+
         toolbar = findViewById(R.id.toolbar_issue);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(issueItem.getName());
@@ -54,26 +65,12 @@ public class IssueActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        text_issue_description = findViewById(R.id.text_issue_description);
-        text_issue_description.setText(issueItem.getDesc());
-
-        button_resolve_issue = findViewById(R.id.button_resolve_issue);
-        button_resolve_issue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptResolveIssue();
-            }
-        });
     }
 
     private void attemptResolveIssue() {
 
         //pedido RESOLVE ISSUE
-
-        final IssueItem issueItem = (IssueItem) getIntent().getExtras().getSerializable("Issue");
-
-        url = getString(R.string.server_url) + "issues/" + issueItem.getId();
+        String url = getString(R.string.server_url) + "issues/" + issueItem.getId();
 
         JSONObject issue = new JSONObject();
         try {
@@ -84,7 +81,7 @@ public class IssueActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e("kk", issue.toString());
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.PATCH, url, issue, new Response.Listener<JSONObject>() {
 
@@ -97,7 +94,6 @@ public class IssueActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("kk", error.toString());
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
@@ -115,6 +111,10 @@ public class IssueActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Adds session cookie to headers if exists.
+     * @param headers
+     */
     private final void addSessionCookie(Map<String, String> headers) {
         SharedPreferences settings = getSharedPreferences("Auth", 0);
         String sessionId = settings.getString(SESSION_COOKIE, "");

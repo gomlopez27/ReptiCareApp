@@ -38,7 +38,6 @@ public class AddTerrariumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_terrarium);
 
-
         button_add_terrarium = findViewById(R.id.button_add_terrarium);
         mName = findViewById(R.id.name_add_terrarium);
         mMinTemp = findViewById(R.id.min_temp_add_terrarium);

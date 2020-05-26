@@ -39,7 +39,6 @@ public class EditAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
 
-
         profileImage = findViewById(R.id.profile_image_edit);
         inputEmail = findViewById(R.id.change_email);
         saveChangeButton = findViewById(R.id.edit_acc_save_changes);
