@@ -34,8 +34,16 @@ public class NotificationSettingsActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences notification_settings = getSharedPreferences("NOTIFICATIONS", 0);
+
+
         SwitchCompat issuesNotifications = findViewById(R.id.issues_notifications);
+        Boolean notifyIssues = notification_settings.getBoolean("isIssueNotificationOn", false);
+        issuesNotifications.setChecked(notifyIssues);
+
         SwitchCompat foodNotifications = findViewById(R.id.food_calendar_notifications);
+        Boolean notifyFood = notification_settings.getBoolean("isFoodNotificationOn", false);
+        issuesNotifications.setChecked(notifyFood);
 
 
         issuesNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -53,6 +61,8 @@ public class NotificationSettingsActivity extends AppCompatActivity {
                 } else {
                     PushNotifications.removeDeviceInterest(interest);
                 }
+
+                Log.e("food" , "Boolean value = " + b);
             }
         });
 
@@ -60,6 +70,13 @@ public class NotificationSettingsActivity extends AppCompatActivity {
         foodNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferences notification_settings = getSharedPreferences("NOTIFICATIONS", 0);
+                SharedPreferences.Editor notification_editor = notification_settings.edit();
+                notification_editor.putBoolean("isFoodNotificationOn", b);
+                notification_editor.commit();
+
+                //TODO: Food notifications
+
                 Log.e("food" , "Boolean value = " + b);
             }
         });
