@@ -48,10 +48,10 @@ public class ListTerrariumsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_terrariums);
-
+        mList = new ArrayList();
         // Notifications
         SharedPreferences settings = getSharedPreferences("Auth", 0);
-        String interest = settings.getString("user_logged", "");
+        String interest = settings.getString("user_logged", "admin");
         PushNotifications.start(getApplicationContext(), "ac2c54bd-7122-4618-ae8f-7d1def4df1d3");
         PushNotifications.addDeviceInterest(interest);
 
