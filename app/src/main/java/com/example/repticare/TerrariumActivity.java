@@ -38,9 +38,8 @@ public class TerrariumActivity extends AppCompatActivity {
     Button other_users_button, edit_terrarium_button;
     TextView terrarium_temperature, terrarium_humidity, terrarium_uv, terrarium_owner;
     Toolbar toolbar;
-    GraphView tempGraph,humGraph,uvGraph;
-    List mList;
-    int hour;
+    GraphView tempGraph, humGraph, uvGraph, activityGraph;
+    List<TerrariumReadingItem> readingList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +47,7 @@ public class TerrariumActivity extends AppCompatActivity {
         setContentView(R.layout.activity_terrarium);
 
         final TerrariumItem t = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
+        getReadings(t.getId());
 
         toolbar = findViewById(R.id.toolbar_terrarium);
         setSupportActionBar(toolbar);
@@ -61,11 +61,13 @@ public class TerrariumActivity extends AppCompatActivity {
         tempGraph = findViewById(R.id.temp_graph);
         humGraph = findViewById(R.id.hum_graph);
         uvGraph = findViewById(R.id.uv_graph);
+        activityGraph = findViewById(R.id.activity_graph);
 
-        drawGraphs(tempGraph);
-        drawGraphs(humGraph);
-        drawGraphs(uvGraph);
-
+        drawGraphs(tempGraph, "t");
+        drawGraphs(humGraph, "h");
+        drawGraphs(uvGraph, "u");
+        drawGraphs(activityGraph, "a");
+        
         terrarium_owner.setText(t.getOwner());
         terrarium_temperature.setText(Double.toString(t.getCurrent_temp()));
         terrarium_humidity.setText(Double.toString(t.getCurrent_humidity()));
@@ -108,35 +110,60 @@ public class TerrariumActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 
-    private void drawGraphs(GraphView graph){
+    private void drawGraphs(GraphView graph, String attribute){
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        int allReadings = readingList.size();
+        int readingIndex;
 
-
-        DataPoint[] dpa = new DataPoint[24];
-
-        for(int i = 0; i < 24; i++){
-            dpa[i] = new DataPoint(i, i+10);
+        // Get number of available readings
+        int size = 24;
+        if(allReadings < size) {
+            size = allReadings;
+            readingIndex = 0;
+        } else {
+            readingIndex = allReadings - 24;
         }
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dpa);
+        DataPoint[] dpa = new DataPoint[size];
+
+        for(int i = 0; i < size; i++) {
+            switch (attribute) {
+                case "t":
+                    dpa[i] = new DataPoint(i, readingList.get(readingIndex++).getCurrTemp());
+                    break;
+                case "h":
+                    dpa[i] = new DataPoint(i, readingList.get(readingIndex++).getCurrHum());
+                    break;
+                case "u":
+                    dpa[i] = new DataPoint(i, readingList.get(readingIndex++).getCurrUV());
+                    break;
+                case "a":
+                    int act = 0;
+                    if(readingList.get(readingIndex++).getActivity()) {
+                        act = 1;
+                    }
+                    dpa[i] = new DataPoint(i, act);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpa);
         graph.addSeries(series);
     }
 
-    private void getReadings(){
-         ArrayList res = new ArrayList<>();
-
-        String url = getString(R.string.SERVER_URL_ANDRE) + "terrariums/"; //TODO: ENDPOINT
+    private void getReadings(int terrarium_id) {
+        String url = getString(R.string.SERVER_URL_ANDRE) + "readings/get/" + terrarium_id;
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (Request.Method.GET, url,null,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
-                                mList.addAll(parseTerrariumReadings(response));
-
+                                readingList.addAll(parseTerrariumReadings(response));
                             }
                         },
                         new Response.ErrorListener() {
@@ -153,8 +180,6 @@ public class TerrariumActivity extends AppCompatActivity {
             }
 
         };
-
-
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
@@ -168,12 +193,15 @@ public class TerrariumActivity extends AppCompatActivity {
                 JSONObject item = items.getJSONObject(i);
 
                 TerrariumReadingItem readingItem = new TerrariumReadingItem(
-                        item.getInt("id"),item.getInt("terrarium_id"),
-                        item.getDouble("current_temp"),item.getDouble("current_humidity"),
-                        item.getDouble("current_uv"),item.getBoolean("activity"), item.getString("created_at"));
+                        item.getInt("id"),
+                        item.getInt("terrarium_id"),
+                        item.getDouble("current_temp"),
+                        item.getDouble("current_humidity"),
+                        item.getDouble("current_uv"),
+                        item.getBoolean("activity"),
+                        item.getString("created_at"));
                 res.add(readingItem);
             }
-
             return res;
 
         } catch (JSONException e) {

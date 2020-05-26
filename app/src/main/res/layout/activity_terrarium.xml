@@ -286,6 +286,31 @@
                     />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/graphic4"
+                android:background="@drawable/box_background"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Activity in the last 24 hours"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/activity_graph_title"
+                    />
+
+                <com.jjoe64.graphview.GraphView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/activity_graph"
+                    android:layout_below="@+id/activity_graph_title"
+                    android:layout_margin="5dp"
+                    />
+            </RelativeLayout>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
