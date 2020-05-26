@@ -25,6 +25,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.JsonArray;
+import com.pusher.pushnotifications.PushNotifications;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -163,6 +164,9 @@ public class AccountActivity extends AppCompatActivity {
     private void attemptLogout() {
 
         SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String interest = settings.getString("user_logged", "");
+
+        PushNotifications.removeDeviceInterest(interest);
         SharedPreferences.Editor editor = settings.edit();
         editor.clear();
         editor.commit();

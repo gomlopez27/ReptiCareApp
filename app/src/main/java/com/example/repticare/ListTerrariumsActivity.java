@@ -54,7 +54,13 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         SharedPreferences notification_settings = getSharedPreferences("NOTIFICATIONS", 0);
         Boolean notify = notification_settings.getBoolean("isIssueNotificationOn", false);
         SharedPreferences settings = getSharedPreferences("Auth", 0);
-        String interest = settings.getString("user_logged", "admin");
+        String interest = settings.getString("user_logged", "");
+        if(  getIntent().getExtras() != null)
+            interest =getIntent().getExtras().getString("user_logged");
+
+
+
+        Log.i("user_logged", interest);
         PushNotifications.start(getApplicationContext(), "ac2c54bd-7122-4618-ae8f-7d1def4df1d3");
 
         if(notify) {

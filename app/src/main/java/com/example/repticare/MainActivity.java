@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
                     editor.clear();
                     editor.commit();
 
-                    //Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    Intent intent = new Intent(getApplicationContext(), ListTerrariumsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    //Intent intent = new Intent(getApplicationContext(), ListTerrariumsActivity.class);
 
                     startActivity(intent);
                     finish();

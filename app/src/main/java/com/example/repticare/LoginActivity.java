@@ -113,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                             fill_cache();
 
                             Intent intent = new Intent(LoginActivity.this, ListTerrariumsActivity.class);
+                            intent.putExtra("user_logged", username);
                             startActivity(intent);
                             finish();
                         }
