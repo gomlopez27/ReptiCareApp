@@ -44,12 +44,11 @@ public class AccountActivity extends AppCompatActivity {
         totalNrOfTerr = findViewById(R.id.total_nr_terrariums_acc);
         nrUnresolvedIssues = findViewById(R.id.nr_unresolved_issues_acc);
         TextView username = findViewById(R.id.username_account);
-        TextView email = findViewById(R.id.email_account);
         ImageView profileImage = findViewById(R.id.profile_image);
         fillCache();
         SharedPreferences settings = getSharedPreferences("Auth", 0);
         sex = settings.getString("user_sex", "");
-
+        username.setText(settings.getString("user_logged","username"));
         if(sex.equalsIgnoreCase("F")){
             profileImage.setImageResource(R.drawable.female);
         }
