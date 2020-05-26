@@ -211,7 +211,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="200dp"
                 android:id="@+id/graphic1"
                 android:background="@drawable/box_background"
                 android:layout_margin="10dp"
@@ -220,14 +220,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="graphic 1"
-                    android:layout_centerInParent="true"
+                    android:text="Temperature in the last 24 hours"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/temp_graph_title"
                     />
+
+                <com.jjoe64.graphview.GraphView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/temp_graph"
+                    android:layout_below="@+id/temp_graph_title"
+                    android:layout_margin="5dp"/>
+
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="200dp"
                 android:id="@+id/graphic2"
                 android:background="@drawable/box_background"
                 android:layout_margin="10dp"
@@ -236,14 +246,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="graphic 2"
-                    android:layout_centerInParent="true"
+                    android:text="Humidity in the last 24 hours"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/hum_graph_title"
+
                     />
+
+                <com.jjoe64.graphview.GraphView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hum_graph"
+                    android:layout_below="@+id/hum_graph_title"
+                    android:layout_margin="5dp"/>
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="200dp"
                 android:id="@+id/graphic3"
                 android:background="@drawable/box_background"
                 android:layout_margin="10dp"
@@ -252,8 +272,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="graphic 3"
-                    android:layout_centerInParent="true"
+                    android:text="UV radiation in the last 24 hours"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/uv_graph_title"
+                    />
+
+                <com.jjoe64.graphview.GraphView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/uv_graph"
+                    android:layout_below="@+id/uv_graph_title"
+                    android:layout_margin="5dp"
                     />
             </RelativeLayout>
 

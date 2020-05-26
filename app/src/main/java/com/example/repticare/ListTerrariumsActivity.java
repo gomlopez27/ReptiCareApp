@@ -63,6 +63,14 @@ public class ListTerrariumsActivity extends AppCompatActivity {
             PushNotifications.removeDeviceInterest(interest);
         }
 
+       /* RelativeLayout rl = findViewById(R.id.nr_of_terrariums_box);
+        rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(ListTerrariumsActivity.this, GraphTestActivity.class);
+                startActivity(intent1);
+            }
+        });*/
 
         // RecyclerView with adapter
         recyclerView = findViewById(R.id.list_my_terrariums);
@@ -190,9 +198,6 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
         return null;
     }
 }
