@@ -59,7 +59,8 @@ public class ListIssuesActivity extends AppCompatActivity {
 
         nrOfIssues_tv = findViewById(R.id.nr_of_curr_unresolved_issues);
         int listSize = mList.size();
-        nrOfIssues_tv.setText(Integer.toString(listSize));
+        nrOfIssues_tv.setText(Integer.toString(0));
+
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_issues);
@@ -94,8 +95,8 @@ public class ListIssuesActivity extends AppCompatActivity {
     private void getIssues(){
         final ArrayList res = new ArrayList<TerrariumItem>();
 
-        String url1 = getString(R.string.SERVER_URL_ANDRE) + "issues/resolved/";
-        String url2 = getString(R.string.SERVER_URL_ANDRE) + "issues/unresolved/";
+        String url1 = getString(R.string.SERVER_URL_ANDRE) + "issues/unresolved/";
+        String url2 = getString(R.string.SERVER_URL_ANDRE) + "issues/resolved/";
 
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
@@ -104,10 +105,9 @@ public class ListIssuesActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONArray response) {
                                 ArrayList aux = parseIssues((response));
+                                nrOfIssues_tv.setText(Integer.toString(aux.size()));
                                 mList.addAll(aux);
                                 adapter.notifyDataSetChanged();
-                                nrOfIssues_tv.setText(Integer.toString(aux.size()));
-                                Log.i("it", (String.valueOf(mList.size()) + " After Response"));
                             }
                         },
                         new Response.ErrorListener() {
@@ -134,7 +134,6 @@ public class ListIssuesActivity extends AppCompatActivity {
                             public void onResponse(JSONArray response) {
                                 mList.addAll(parseIssues(response));
                                 adapter.notifyDataSetChanged();
-                                Log.i("it", (String.valueOf(mList.size()) + " After Response"));
                             }
                         },
                         new Response.ErrorListener() {
