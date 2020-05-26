@@ -32,9 +32,9 @@ import java.util.Map;
 public class AccountActivity extends AppCompatActivity {
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
-    TextView totalNrOfTerr;
-    TextView nrUnresolvedIssues;
-    String sex;
+    ImageView profileImage;
+    TextView totalNrOfTerr, nrUnresolvedIssues, username;
+    Button editAccButton, changePwdButton, notificationsButton, logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +43,19 @@ public class AccountActivity extends AppCompatActivity {
 
         totalNrOfTerr = findViewById(R.id.total_nr_terrariums_acc);
         nrUnresolvedIssues = findViewById(R.id.nr_unresolved_issues_acc);
-        TextView username = findViewById(R.id.username_account);
-        ImageView profileImage = findViewById(R.id.profile_image);
-        fillCache();
+        username = findViewById(R.id.username_account);
+        profileImage = findViewById(R.id.profile_image);
+        editAccButton  = findViewById(R.id.edit_acc_button);
+        changePwdButton  = findViewById(R.id.change_pwd_button);
+        notificationsButton  = findViewById(R.id.notifications_button);
+        logoutButton  = findViewById(R.id.logout_button);
+
+        updateMetrics();
+
         SharedPreferences settings = getSharedPreferences("Auth", 0);
-        sex = settings.getString("user_sex", "");
         username.setText(settings.getString("user_logged","username"));
+
+        String sex = settings.getString("user_sex", "");
         if(sex.equalsIgnoreCase("F")){
             profileImage.setImageResource(R.drawable.female);
         }
@@ -58,11 +65,6 @@ public class AccountActivity extends AppCompatActivity {
         else
             profileImage.setImageResource(R.drawable.gender_neutral);
 
-
-        Button editAccButton  = findViewById(R.id.edit_acc_button);
-        Button changePwdButton  = findViewById(R.id.change_pwd_button);
-        Button notificationsButton  = findViewById(R.id.notifications_button);
-        Button logoutButton  = findViewById(R.id.logout_button);
 
         editAccButton.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -126,10 +128,8 @@ public class AccountActivity extends AppCompatActivity {
     private void confirmLogout(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        // set title
         alertDialogBuilder.setTitle("Are you sure you want to logout?");
 
-        // set dialog message
         alertDialogBuilder
                 .setMessage("Click yes if you are sure.")
                 .setCancelable(false)
@@ -148,10 +148,7 @@ public class AccountActivity extends AppCompatActivity {
                     }
                 });
 
-        // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
         alertDialog.show();
     }
 
@@ -171,8 +168,7 @@ public class AccountActivity extends AppCompatActivity {
 
     }
 
-
-    private void fillCache(){
+    private void updateMetrics(){
       String  url = getString(R.string.server_url) + "terrariums/";
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest

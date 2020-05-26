@@ -27,30 +27,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddTerrariumActivity extends AppCompatActivity {
-    Button button_add_terrarium;
-    EditText mName, mMinTemp, mMaxTemp, mMinHum, mMaxHum, mMinUv, mMaxUv, mOtherUsers;
-    String url;
-    Toolbar toolbar;
-    private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
+    Button button_add_terrarium;
+    EditText mName, mMinTemp, mMaxTemp, mMinHum, mMaxHum, mMinUv, mMaxUv, mOtherUsers;
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_terrarium);
 
-        toolbar = findViewById(R.id.toolbar_add_terrarium);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ListTerrariumsActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         button_add_terrarium = findViewById(R.id.button_add_terrarium);
         mName = findViewById(R.id.name_add_terrarium);
@@ -66,6 +54,18 @@ public class AddTerrariumActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptAddTerrarium();
+            }
+        });
+
+        toolbar = findViewById(R.id.toolbar_add_terrarium);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ListTerrariumsActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -205,13 +205,11 @@ public class AddTerrariumActivity extends AppCompatActivity {
 
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
             //pedido REST ADD TERRARIUM
 
-            url = getString(R.string.server_url) + "terrariums/register/";
+            String url = getString(R.string.server_url) + "terrariums/register/";
 
             JSONObject terrarium = new JSONObject();
             try {

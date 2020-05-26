@@ -29,21 +29,30 @@ import java.util.Map;
 import Items.TerrariumItem;
 
 public class AddUserActivity extends AppCompatActivity {
-    Toolbar toolbar;
-    EditText username_et;
-    Button addOtherUserButton;
-    TerrariumItem myTerrarium;
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
+    EditText username_et;
+    Button addOtherUserButton;
+    TerrariumItem terrarium;
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
 
-        final TerrariumItem terrarium = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
-        myTerrarium = terrarium;
+        terrarium = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
 
+        username_et = findViewById(R.id.username_to_add);
+        addOtherUserButton = findViewById(R.id.add_user_button);
+
+        addOtherUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptAddOtherUser(terrarium, username_et.getText().toString());
+            }
+        });
 
         toolbar = findViewById(R.id.toolbar_add_other_user);
         setSupportActionBar(toolbar);
@@ -54,21 +63,11 @@ public class AddUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddUserActivity.this, EditUsersActivity.class);
-                intent.putExtra("Terrarium",terrarium);
+                intent.putExtra("Terrarium", terrarium);
                 setResult(RESULT_OK);
                 startActivity(intent);
                 finish();
 
-            }
-        });
-
-        username_et = findViewById(R.id.username_to_add);
-        addOtherUserButton = findViewById(R.id.add_user_button);
-
-        addOtherUserButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                attemptAddOtherUser(terrarium,username_et.getText().toString());
             }
         });
     }
@@ -76,7 +75,7 @@ public class AddUserActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AddUserActivity.this, EditUsersActivity.class);
-        intent.putExtra("Terrarium",myTerrarium);
+        intent.putExtra("Terrarium", terrarium);
         setResult(RESULT_OK);
         startActivity(intent);
         finish();
@@ -118,7 +117,7 @@ public class AddUserActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(getApplicationContext(), "User Added succesfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "User added succesfully!", Toast.LENGTH_SHORT).show();
                         username_et.setText("");
                         t.setOtherusers(users);
 
