@@ -51,8 +51,8 @@ public class AddTerrariumActivity extends AppCompatActivity {
         button_add_terrarium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                button_add_terrarium.setEnabled(false);
                 attemptAddTerrarium();
+                button_add_terrarium.setEnabled(false);
             }
         });
 
