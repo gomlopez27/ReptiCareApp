@@ -51,6 +51,7 @@ public class AddTerrariumActivity extends AppCompatActivity {
         button_add_terrarium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                button_add_terrarium.setEnabled(false);
                 attemptAddTerrarium();
             }
         });
@@ -228,6 +229,7 @@ public class AddTerrariumActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(JSONObject response) {
+                            button_add_terrarium.setEnabled(true);
                             Intent intent = new Intent(AddTerrariumActivity.this, ListTerrariumsActivity.class);
                             startActivity(intent);
                             finish();
@@ -236,6 +238,7 @@ public class AddTerrariumActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            button_add_terrarium.setEnabled(true);
                             NetworkResponse response = error.networkResponse;
                             JSONObject my_error = null;
                             String errors = "";
