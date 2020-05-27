@@ -58,10 +58,6 @@ public class TerrariumActivity extends AppCompatActivity {
         terrarium_uv = findViewById(R.id.terrarium_uv);
         terrarium_owner = findViewById(R.id.owner_name);
         terrarium_owner2 = findViewById(R.id.owner_name2);
-        temp_graph_number = findViewById(R.id.temp_graph_number);
-        hum_graph_number = findViewById(R.id.hum_graph_number);
-        uv_graph_number = findViewById(R.id.uv_graph_number);
-        activity_graph_number = findViewById(R.id.activity_graph_number);
 
         edit_terrarium_button = findViewById(R.id.edit_terrarium_button);
         other_users_button = findViewById(R.id.other_users_button);
@@ -204,6 +200,10 @@ public class TerrariumActivity extends AppCompatActivity {
                                     humGraph = findViewById(R.id.hum_graph);
                                     uvGraph = findViewById(R.id.uv_graph);
                                     activityGraph = findViewById(R.id.activity_graph);
+                                    temp_graph_number = findViewById(R.id.temp_graph_number);
+                                    hum_graph_number = findViewById(R.id.hum_graph_number);
+                                    uv_graph_number = findViewById(R.id.uv_graph_number);
+                                    activity_graph_number = findViewById(R.id.activity_graph_number);
 
                                     drawGraphs(tempGraph, "t", temp_graph_number);
                                     drawGraphs(humGraph, "h", hum_graph_number);
