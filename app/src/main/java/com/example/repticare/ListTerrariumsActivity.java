@@ -69,7 +69,6 @@ public class ListTerrariumsActivity extends AppCompatActivity {
             }
         });
 
-
         // Issue Notifications
         SharedPreferences settings = getSharedPreferences("Auth", 0);
         String interest = settings.getString("user_logged", "");
@@ -86,7 +85,6 @@ public class ListTerrariumsActivity extends AppCompatActivity {
         } else {
             PushNotifications.removeDeviceInterest(interest);
         }
-
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_terrarium);
         Menu menu = bottomNavigationView.getMenu();
@@ -142,31 +140,8 @@ public class ListTerrariumsActivity extends AppCompatActivity {
 
                 };
 
-        // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
-
-
-    /**
-     * Adds session cookie to headers if exists.
-     * @param headers
-     */
-    private final void addSessionCookie(Map<String, String> headers) {
-        SharedPreferences settings = getSharedPreferences("Auth", 0);
-        String sessionId = settings.getString(SESSION_COOKIE, "");
-        if (sessionId.length() > 0) {
-            StringBuilder builder = new StringBuilder();
-            builder.append(SESSION_COOKIE);
-            builder.append("=");
-            builder.append(sessionId);
-            if (headers.containsKey(COOKIE_KEY)) {
-                builder.append("; ");
-                builder.append(headers.get(COOKIE_KEY));
-            }
-            headers.put(COOKIE_KEY, builder.toString());
-        }
-    }
-
 
     private ArrayList<TerrariumItem> parseTerrariums(JSONArray response){
         try {
@@ -195,11 +170,32 @@ public class ListTerrariumsActivity extends AppCompatActivity {
                         other_users);
                 res.add(terrariumItem);
             }
-         return res;
+            return res;
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    /**
+     * Adds session cookie to headers if exists.
+     * @param headers
+     */
+    private final void addSessionCookie(Map<String, String> headers) {
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String sessionId = settings.getString(SESSION_COOKIE, "");
+        if (sessionId.length() > 0) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(SESSION_COOKIE);
+            builder.append("=");
+            builder.append(sessionId);
+            if (headers.containsKey(COOKIE_KEY)) {
+                builder.append("; ");
+                builder.append(headers.get(COOKIE_KEY));
+            }
+            headers.put(COOKIE_KEY, builder.toString());
+        }
+    }
+
 }

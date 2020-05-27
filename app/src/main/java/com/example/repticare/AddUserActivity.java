@@ -3,7 +3,6 @@ package com.example.repticare;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +50,7 @@ public class AddUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 attemptAddOtherUser(terrarium, username_et.getText().toString());
+                addOtherUserButton.setEnabled(false);
             }
         });
 
@@ -86,7 +86,7 @@ public class AddUserActivity extends AppCompatActivity {
 
         JSONObject terrarium = new JSONObject();
         String other_users = "";
-       final List<String> users  = t.getOtherusers();
+        final List<String> users  = t.getOtherusers();
         users.add(username);
         for(int j = 0;  j < users.size() ; j++){
             if(j < users.size() - 1)
@@ -112,11 +112,13 @@ public class AddUserActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.PUT, url, terrarium, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
+                        addOtherUserButton.setEnabled(true);
                         Toast.makeText(getApplicationContext(), "User added succesfully!", Toast.LENGTH_SHORT).show();
                         username_et.setText("");
                         t.setOtherusers(users);
@@ -126,6 +128,7 @@ public class AddUserActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        addOtherUserButton.setEnabled(true);
                         NetworkResponse response = error.networkResponse;
                         JSONObject my_error = null;
                         String errors = "";
@@ -151,7 +154,6 @@ public class AddUserActivity extends AppCompatActivity {
             }
         };
 
-        // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 
@@ -174,4 +176,5 @@ public class AddUserActivity extends AppCompatActivity {
             headers.put(COOKIE_KEY, builder.toString());
         }
     }
+
 }

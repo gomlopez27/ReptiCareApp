@@ -37,7 +37,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
-
         confirm_button = findViewById(R.id.confirm_change_password_button);
         mCurrPassword = findViewById(R.id.current_password_change);
         nNewPassword = findViewById(R.id.new_password_change);
@@ -47,6 +46,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptChangePassword();
+                confirm_button.setEnabled(false);
             }
         });
 
@@ -64,7 +64,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void attemptChangePassword() {
-        // Reset errors.
         mCurrPassword.setError(null);
         nNewPassword.setError(null);
         mPasswordConfirm.setError(null);
@@ -108,7 +107,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            //pedido REST CHANGE PASSWORD
             SharedPreferences settings = getSharedPreferences("Auth", 0);
             String current_user = settings.getString("user_logged", "");
             String current_email = settings.getString("user_email", "");
@@ -130,6 +128,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(JSONObject response) {
+                            confirm_button.setEnabled(true);
                             Intent intent = new Intent(ChangePasswordActivity.this, AccountActivity.class);
                             startActivity(intent);
                             finish();
@@ -138,6 +137,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            confirm_button.setEnabled(true);
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }){
@@ -150,7 +150,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             };
 
-            // Access the RequestQueue through your singleton class.
             MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         }
     }
@@ -174,4 +173,5 @@ public class ChangePasswordActivity extends AppCompatActivity {
             headers.put(COOKIE_KEY, builder.toString());
         }
     }
+
 }

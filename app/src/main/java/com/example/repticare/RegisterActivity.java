@@ -76,7 +76,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void attemptRegister() {
-        // Reset errors.
         mUsername.setError(null);
         mEmail.setError(null);
         mPassword.setError(null);
@@ -136,7 +135,6 @@ public class RegisterActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            //pedido REST REGISTER
             String url = getString(R.string.server_url) + "user/register/";
 
             JSONObject user = new JSONObject();
@@ -186,7 +184,6 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
 
-            // Access the RequestQueue through your singleton class.
             MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         }
     }

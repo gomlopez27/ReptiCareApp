@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,48 +29,21 @@ import java.util.Map;
 import Items.TerrariumItem;
 
 public class EditTerrariumActivity extends AppCompatActivity {
-    Button button_delete_terrarium, button_confirm_changes;
-    EditText mName, mMinTemp, mMaxTemp, mMinHum, mMaxHum, mMinUv, mMaxUv;
-    String url;
-    Toolbar toolbar;
-
-    private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
+    Button button_delete_terrarium, button_confirm_changes;
+    EditText mName, mMinTemp, mMaxTemp, mMinHum, mMaxHum, mMinUv, mMaxUv;
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final TerrariumItem t = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_terrarium);
 
-        toolbar = findViewById(R.id.toolbar_edit_terrarium);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Edit " + t.getName());
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(EditTerrariumActivity.this, TerrariumActivity.class);
-                intent.putExtra("Terrarium",t);
-                startActivity(intent);
-                finish();
-            }
-        });
+        final TerrariumItem t = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
 
         button_delete_terrarium = findViewById(R.id.button_delete_terrarium);
-
-        button_delete_terrarium.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptDeleteTerrarium(t);
-                button_delete_terrarium.setEnabled(false);
-            }
-        });
-
-
         button_confirm_changes = findViewById(R.id.button_confirm_changes);
 
         mName = findViewById(R.id.name_edit_terrarium);
@@ -91,6 +63,14 @@ public class EditTerrariumActivity extends AppCompatActivity {
         mMaxUv.setText(Double.toString(t.getMax_uv()));
 
 
+        button_delete_terrarium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptDeleteTerrarium(t);
+                button_delete_terrarium.setEnabled(false);
+            }
+        });
+
         button_confirm_changes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,24 +78,36 @@ public class EditTerrariumActivity extends AppCompatActivity {
                 button_confirm_changes.setEnabled(false);
             }
         });
+
+        toolbar = findViewById(R.id.toolbar_edit_terrarium);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Edit " + t.getName());
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditTerrariumActivity.this, TerrariumActivity.class);
+                intent.putExtra("Terrarium", t);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     @Override
     public void onBackPressed() {
         final TerrariumItem t = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
         Intent intent = new Intent(EditTerrariumActivity.this, TerrariumActivity.class);
-        intent.putExtra("Terrarium",t);
+        intent.putExtra("Terrarium", t);
         startActivity(intent);
         finish();
     }
 
     private void attemptDeleteTerrarium(TerrariumItem t) {
-        String name = mName.getText().toString();
-
-        //pedido REST DELETE TERRARIUM
-
-        url = getString(R.string.server_url) + "terrariums/update/" + t.getId();
-
+        String url = getString(R.string.server_url) + "terrariums/update/" + t.getId();
 
         StringRequest  jsonObjectRequest = new StringRequest
                 (Request.Method.DELETE, url, new Response.Listener<String>() {
@@ -144,14 +136,10 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
                 };
 
-        // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
-
     }
 
-    private void attemptEditTerrarium(TerrariumItem t) {
-        final TerrariumItem terrariumItem = t;
-        // Reset errors.
+    private void attemptEditTerrarium(final TerrariumItem t) {
         mName.setError(null);
         mMinTemp.setError(null);
         mMaxTemp.setError(null);
@@ -167,7 +155,6 @@ public class EditTerrariumActivity extends AppCompatActivity {
         String maxHum = mMaxHum.getText().toString();
         String minUv = mMinUv.getText().toString();
         String maxUv = mMaxUv.getText().toString();
-
 
         boolean cancel = false;
         View focusView = null;
@@ -283,13 +270,9 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
-            //pedido REST EDIT TERRARIUM
-
-            url = getString(R.string.server_url) + "terrariums/update/" + t.getId();
+            String url = getString(R.string.server_url) + "terrariums/update/" + t.getId();
 
            JSONObject terrarium = new JSONObject();
            String other_users = "";
@@ -302,8 +285,8 @@ public class EditTerrariumActivity extends AppCompatActivity {
             }
 
             try {
-                terrarium.put("id",t.getId());
-                terrarium.put("creator_admin",t.getOwner());
+                terrarium.put("id", t.getId());
+                terrarium.put("creator_admin", t.getOwner());
                 terrarium.put("name", name);
                 terrarium.put("min_temp", minTemp);
                 terrarium.put("max_temp", maxTemp);
@@ -314,12 +297,12 @@ public class EditTerrariumActivity extends AppCompatActivity {
                 terrarium.put("current_temp", t.getCurrent_temp());
                 terrarium.put("current_humidity", t.getCurrent_humidity());
                 terrarium.put("current_uv", t.getCurrent_uv());
-                terrarium.put("other_users",other_users);
+                terrarium.put("other_users", other_users);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e("kk", terrarium.toString());
+
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.PUT, url, terrarium, new Response.Listener<JSONObject>() {
 
@@ -327,7 +310,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             button_confirm_changes.setEnabled(true);
                             Intent intent = new Intent(EditTerrariumActivity.this, TerrariumActivity.class);
-                            intent.putExtra("Terrarium",terrariumItem);
+                            intent.putExtra("Terrarium", t);
                             startActivity(intent);
                             finish();
                         }
@@ -348,7 +331,6 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
                     };
 
-            // Access the RequestQueue through your singleton class.
             MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         }
     }
@@ -373,4 +355,5 @@ public class EditTerrariumActivity extends AppCompatActivity {
             headers.put(COOKIE_KEY, builder.toString());
         }
     }
+
 }

@@ -70,7 +70,6 @@ public class AddTerrariumActivity extends AppCompatActivity {
     }
 
     private void attemptAddTerrarium() {
-        // Reset errors.
         mName.setError(null);
         mMinTemp.setError(null);
         mMaxTemp.setError(null);
@@ -88,7 +87,6 @@ public class AddTerrariumActivity extends AppCompatActivity {
         String minUv = mMinUv.getText().toString();
         String maxUv = mMaxUv.getText().toString();
         String otherUsers = mOtherUsers.getText().toString();
-
 
         boolean cancel = false;
         View focusView = null;
@@ -206,8 +204,6 @@ public class AddTerrariumActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            //pedido REST ADD TERRARIUM
-
             String url = getString(R.string.server_url) + "terrariums/register/";
 
             JSONObject terrarium = new JSONObject();
@@ -262,7 +258,6 @@ public class AddTerrariumActivity extends AppCompatActivity {
 
                 };
 
-            // Access the RequestQueue through your singleton class.
             MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         }
     }
@@ -286,4 +281,5 @@ public class AddTerrariumActivity extends AppCompatActivity {
             headers.put(COOKIE_KEY, builder.toString());
         }
     }
+
 }

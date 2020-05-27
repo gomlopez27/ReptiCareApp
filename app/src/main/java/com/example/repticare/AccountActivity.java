@@ -153,7 +153,6 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void attemptLogout() {
-
         SharedPreferences settings = getSharedPreferences("Auth", 0);
         String interest = settings.getString("user_logged", "");
 
@@ -165,7 +164,6 @@ public class AccountActivity extends AppCompatActivity {
         Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
-
     }
 
     private void updateMetrics(){
@@ -239,4 +237,5 @@ public class AccountActivity extends AppCompatActivity {
             headers.put(COOKIE_KEY, builder.toString());
         }
     }
+
 }

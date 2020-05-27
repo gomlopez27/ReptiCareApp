@@ -60,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
-        // Reset errors.
         mUsername.setError(null);
         mPassword.setError(null);
 
@@ -87,8 +86,6 @@ public class LoginActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-          //pedido REST LOGIN
-
             String url = getString(R.string.server_url) + "login/";
 
             JSONObject user = new JSONObject();
@@ -130,9 +127,46 @@ public class LoginActivity extends AppCompatActivity {
 
             };
 
-            // Access the RequestQueue through your singleton class.
             MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         }
+    }
+
+    private void fill_cache(){
+        String url = getString(R.string.server_url) + "user/";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        SharedPreferences settings = getSharedPreferences("Auth", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        try {
+                            editor.putString("user_logged" , response.getString("username"));
+                            editor.putString("user_email" , response.getString("email"));
+                            editor.putInt("user_id" , response.getInt("id"));
+                            editor.putString("user_sex",response.getString("sex"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        editor.commit();
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "user/error", Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                addSessionCookie(params);
+                return params;
+            }
+        };
+
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 
     private final void checkSessionCookie(Map<String, String> headers) {
@@ -171,41 +205,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void fill_cache(){
-        String url = getString(R.string.server_url) + "user/";
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        SharedPreferences settings = getSharedPreferences("Auth", 0);
-                        SharedPreferences.Editor editor = settings.edit();
-                        try {
-                            editor.putString("user_logged" , response.getString("username"));
-                            editor.putString("user_email" , response.getString("email"));
-                            editor.putInt("user_id" , response.getInt("id"));
-                            editor.putString("user_sex",response.getString("sex"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        editor.commit();
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "user/error", Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        addSessionCookie(params);
-                        return params;
-                    }
-                };
-
-        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
-    }
 }

@@ -136,29 +136,8 @@ public class ListIssuesActivity extends AppCompatActivity {
             }
         };
 
-        // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest2);
-    }
-
-    /**
-     * Adds session cookie to headers if exists.
-     * @param headers
-     */
-    private final void addSessionCookie(Map<String, String> headers) {
-        SharedPreferences settings = getSharedPreferences("Auth", 0);
-        String sessionId = settings.getString(SESSION_COOKIE, "");
-        if (sessionId.length() > 0) {
-            StringBuilder builder = new StringBuilder();
-            builder.append(SESSION_COOKIE);
-            builder.append("=");
-            builder.append(sessionId);
-            if (headers.containsKey(COOKIE_KEY)) {
-                builder.append("; ");
-                builder.append(headers.get(COOKIE_KEY));
-            }
-            headers.put(COOKIE_KEY, builder.toString());
-        }
     }
 
     private ArrayList<IssueItem> parseIssues(JSONArray response){
@@ -179,6 +158,26 @@ public class ListIssuesActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Adds session cookie to headers if exists.
+     * @param headers
+     */
+    private final void addSessionCookie(Map<String, String> headers) {
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String sessionId = settings.getString(SESSION_COOKIE, "");
+        if (sessionId.length() > 0) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(SESSION_COOKIE);
+            builder.append("=");
+            builder.append(sessionId);
+            if (headers.containsKey(COOKIE_KEY)) {
+                builder.append("; ");
+                builder.append(headers.get(COOKIE_KEY));
+            }
+            headers.put(COOKIE_KEY, builder.toString());
+        }
     }
 
 }

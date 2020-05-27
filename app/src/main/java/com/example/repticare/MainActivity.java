@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-
                     String url = getString(R.string.server_url) + "user/";
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest

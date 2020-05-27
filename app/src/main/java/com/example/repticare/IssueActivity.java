@@ -49,6 +49,7 @@ public class IssueActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptResolveIssue();
+                button_resolve_issue.setEnabled(false);
             }
         });
 
@@ -68,8 +69,6 @@ public class IssueActivity extends AppCompatActivity {
     }
 
     private void attemptResolveIssue() {
-
-        //pedido RESOLVE ISSUE
         String url = getString(R.string.server_url) + "issues/" + issueItem.getId();
 
         JSONObject issue = new JSONObject();
@@ -87,6 +86,7 @@ public class IssueActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
+                        button_resolve_issue.setEnabled(true);
                         Intent intent = new Intent(IssueActivity.this, ListIssuesActivity.class);
                         startActivity(intent);
                     }
@@ -94,6 +94,7 @@ public class IssueActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        button_resolve_issue.setEnabled(true);
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
@@ -105,9 +106,7 @@ public class IssueActivity extends AppCompatActivity {
             }
         };
 
-        // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
-
     }
 
 
@@ -130,4 +129,5 @@ public class IssueActivity extends AppCompatActivity {
             headers.put(COOKIE_KEY, builder.toString());
         }
     }
+
 }

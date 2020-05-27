@@ -59,6 +59,7 @@ public class EditAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptEditAccount();
+                saveChangeButton.setEnabled(false);
             }
         });
 
@@ -78,8 +79,6 @@ public class EditAccountActivity extends AppCompatActivity {
     }
 
     private void attemptEditAccount() {
-
-        // Reset errors.
         inputEmail.setError(null);
 
         String newEmail = inputEmail.getText().toString();
@@ -102,7 +101,6 @@ public class EditAccountActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            //pedido REST SAVE EDIT ACCOUNT
             SharedPreferences settings = getSharedPreferences("Auth", 0);
             String current_user = settings.getString("user_logged", "");
             Integer current_user_id = settings.getInt("user_id", 0);
@@ -124,6 +122,7 @@ public class EditAccountActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(JSONObject response) {
+                            saveChangeButton.setEnabled(true);
                             Intent intent = new Intent(EditAccountActivity.this, AccountActivity.class);
                             startActivity(intent);
                             finish();
@@ -132,6 +131,7 @@ public class EditAccountActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            saveChangeButton.setEnabled(true);
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }) {
@@ -144,7 +144,6 @@ public class EditAccountActivity extends AppCompatActivity {
 
             };
 
-            // Access the RequestQueue through your singleton class.
             MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         }
     }
@@ -181,4 +180,5 @@ public class EditAccountActivity extends AppCompatActivity {
             headers.put(COOKIE_KEY, builder.toString());
         }
     }
+
 }

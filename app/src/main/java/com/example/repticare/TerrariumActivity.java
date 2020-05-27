@@ -43,6 +43,7 @@ public class TerrariumActivity extends AppCompatActivity {
     Toolbar toolbar;
     List<TerrariumReadingItem> readingList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +118,7 @@ public class TerrariumActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(TerrariumActivity.this, ListTerrariumsActivity.class);
@@ -218,7 +220,6 @@ public class TerrariumActivity extends AppCompatActivity {
 
         };
 
-        // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 
@@ -266,4 +267,5 @@ public class TerrariumActivity extends AppCompatActivity {
             headers.put(COOKIE_KEY, builder.toString());
         }
     }
+
 }
