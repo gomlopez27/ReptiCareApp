@@ -93,7 +93,6 @@
                 android:text="Max temp (ºC)"
                 android:textColor="@color/colorAppTitle"
                 android:layout_marginLeft="195dp"
-
                 />
 
             <EditText
@@ -182,11 +181,19 @@
             android:id="@+id/box_uv"
             >
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_minUV"
+                android:text="Min uv (nm)"
+                android:textColor="@color/colorAppTitle"
+                android:layout_marginLeft="10dp"
+                />
+
             <EditText
                 android:id="@+id/min_uv_edit_terrarium"
                 android:layout_width="165dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:inputType="number"
                 android:layout_marginBottom="20dp"
                 android:layout_alignParentLeft="true"
@@ -195,6 +202,17 @@
                 android:drawablePadding="10dp"
                 android:background="@drawable/edit_text_background"
                 android:padding="10dp"
+                android:layout_below="@+id/tv_minUV"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_maxUV"
+                android:text="Max UV (nm)"
+                android:textColor="@color/colorAppTitle"
+                android:layout_marginLeft="195dp"
                 />
 
             <EditText
@@ -210,6 +228,7 @@
                 android:drawablePadding="10dp"
                 android:background="@drawable/edit_text_background"
                 android:padding="10dp"
+                android:layout_below="@+id/tv_maxUV"
                 />
 
         </RelativeLayout>

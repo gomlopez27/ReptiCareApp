@@ -54,6 +54,15 @@
             android:layout_below="@+id/terrarium_image"
             android:id="@+id/boxes"
             >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_terrariumName"
+                android:text="Terrarium name"
+                android:textColor="@color/colorAppTitle"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="30dp"
+                />
 
             <EditText
                 android:id="@+id/name_add_terrarium"
@@ -67,46 +76,62 @@
                 android:drawablePadding="10dp"
                 android:background="@drawable/edit_text_background"
                 android:padding="10dp"
-                android:layout_marginTop="30dp"
+                android:layout_below="@+id/tv_terrariumName"
                 />
 
             <RelativeLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/name_add_terrarium"
-                android:paddingTop="10dp"
+                android:marginTop="10dp"
                 android:gravity="center"
                 android:id="@+id/box_temp"
+                android:layout_marginBottom="20dp"
                 >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_minTemp"
+                    android:text="Min temp (ºC)"
+                    android:textColor="@color/colorAppTitle"
+                    android:layout_marginLeft="10dp"
+                    />
 
                 <EditText
                     android:id="@+id/min_temp_add_terrarium"
                     android:layout_width="165dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:layout_alignParentLeft="true"
                     android:inputType="number"
-                    android:layout_marginBottom="20dp"
                     android:hint="Min Temp"
                     android:layout_gravity="left"
                     android:drawablePadding="10dp"
                     android:background="@drawable/edit_text_background"
                     android:padding="10dp"
+                    android:layout_below="@+id/tv_minTemp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_maxTemp"
+                    android:text="Max temp (ºC)"
+                    android:textColor="@color/colorAppTitle"
+                    android:layout_marginLeft="195dp"
                     />
 
                 <EditText
                     android:id="@+id/max_temp_add_terrarium"
                     android:layout_width="165dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:inputType="number"
-                    android:layout_marginBottom="20dp"
                     android:hint="Max Temp"
                     android:layout_alignParentRight="true"
                     android:layout_gravity="center"
                     android:drawablePadding="10dp"
                     android:background="@drawable/edit_text_background"
                     android:padding="10dp"
+                    android:layout_below="@+id/tv_maxTemp"
                     />
 
             </RelativeLayout>
@@ -115,40 +140,56 @@
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/box_temp"
-                android:paddingTop="10dp"
+                android:marginTop="10dp"
                 android:gravity="center"
                 android:id="@+id/box_hum"
+                android:layout_marginBottom="20dp"
                 >
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_minHum"
+                    android:text="Min hum (%)"
+                    android:textColor="@color/colorAppTitle"
+                    android:layout_marginLeft="10dp"
+                    />
 
                 <EditText
                     android:id="@+id/min_hum_add_terrarium"
                     android:layout_width="165dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:layout_alignParentLeft="true"
                     android:inputType="number"
-                    android:layout_marginBottom="20dp"
                     android:hint="Min Humidity"
                     android:layout_gravity="center"
                     android:drawablePadding="10dp"
                     android:background="@drawable/edit_text_background"
                     android:padding="10dp"
+                    android:layout_below="@+id/tv_minHum"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_maxHum"
+                    android:text="Max hum (%)"
+                    android:textColor="@color/colorAppTitle"
+                    android:layout_marginLeft="195dp"
                     />
 
                 <EditText
                     android:id="@+id/max_hum_add_terrarium"
                     android:layout_width="165dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:layout_alignParentRight="true"
                     android:inputType="number"
-                    android:layout_marginBottom="20dp"
                     android:hint="Max Humidity"
                     android:layout_gravity="center"
                     android:drawablePadding="10dp"
                     android:background="@drawable/edit_text_background"
                     android:padding="10dp"
+                    android:layout_below="@+id/tv_maxHum"
                     />
 
             </RelativeLayout>
@@ -157,66 +198,101 @@
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/box_hum"
-                android:paddingTop="10dp"
                 android:gravity="center"
                 android:id="@+id/box_uv"
+                android:layout_marginBottom="20dp"
                 >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_minUV"
+                    android:text="Min UV (nm)"
+                    android:textColor="@color/colorAppTitle"
+                    android:layout_marginLeft="10dp"
+                    />
 
                 <EditText
                     android:id="@+id/min_uv_add_terrarium"
                     android:layout_width="165dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:inputType="number"
-                    android:layout_marginBottom="20dp"
                     android:layout_alignParentLeft="true"
                     android:hint="Min UV"
                     android:layout_gravity="center"
                     android:drawablePadding="10dp"
                     android:background="@drawable/edit_text_background"
                     android:padding="10dp"
+                    android:layout_below="@+id/tv_minUV"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_maxUV"
+                    android:text="Max UV (nm)"
+                    android:textColor="@color/colorAppTitle"
+                    android:layout_marginLeft="195dp"
                     />
 
                 <EditText
                     android:id="@+id/max_uv_add_terrarium"
                     android:layout_width="165dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:inputType="number"
                     android:layout_alignParentRight="true"
-                    android:layout_marginBottom="20dp"
                     android:hint="Max UV"
                     android:layout_gravity="center"
                     android:drawablePadding="10dp"
                     android:background="@drawable/edit_text_background"
                     android:padding="10dp"
+                    android:layout_below="@+id/tv_maxUV"
                     />
 
             </RelativeLayout>
 
-            <EditText
-                android:id="@+id/add_terrarium_other_users"
+            <RelativeLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_alignParentLeft="true"
-                android:inputType="textPersonName"
                 android:layout_below="@+id/box_uv"
-                android:hint="Other Users"
-                android:layout_gravity="center"
-                android:drawablePadding="10dp"
-                android:background="@drawable/edit_text_background"
-                android:padding="10dp"
+                android:gravity="center"
+                android:id="@+id/box_otherusers"
+                android:layout_marginBottom="20dp"
+                >
 
-                />
-            <TextView
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/add_terrarium_other_users"
-                android:text="Separate usernames using commas, like so: user1,user2,user3"
-                android:layout_marginLeft="10dp"
-                android:textColor="#D51919"
-                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_otherUsers"
+                    android:text="Other Users"
+                    android:textColor="@color/colorAppTitle"
+                    android:layout_marginLeft="10dp"
+                    />
+
+                <EditText
+                    android:id="@+id/add_terrarium_other_users"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_alignParentLeft="true"
+                    android:inputType="textPersonName"
+                    android:hint="Other Users"
+                    android:layout_gravity="center"
+                    android:drawablePadding="10dp"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="10dp"
+                    android:layout_below="@+id/tv_otherUsers"
+                    />
+
+                <TextView
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/add_terrarium_other_users"
+                    android:text="Separate usernames using commas, like so: user1,user2,user3"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#D51919"
+                    />
+
+            </RelativeLayout>
 
 
         </RelativeLayout>
