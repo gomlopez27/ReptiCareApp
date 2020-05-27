@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.pusher.pushnotifications.PushNotifications;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -129,9 +130,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             confirm_button.setEnabled(true);
-                            Intent intent = new Intent(ChangePasswordActivity.this, AccountActivity.class);
+                            SharedPreferences settings = getSharedPreferences("Auth", 0);
+                            String interest = settings.getString("user_logged", "");
+
+                            PushNotifications.removeDeviceInterest(interest);
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.clear();
+                            editor.commit();
+
+                            Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
+
                         }
                     }, new Response.ErrorListener() {
 
