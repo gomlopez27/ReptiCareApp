@@ -20,17 +20,12 @@ public class NotificationSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_settings);
 
-        // Set notification switches to their previous state or to false, by default
+        // Set notification switch to its previous state or to false, by default
         SharedPreferences notification_settings = getSharedPreferences("NOTIFICATIONS", 0);
         
         SwitchCompat issuesNotifications = findViewById(R.id.issues_notifications);
         Boolean notifyIssues = notification_settings.getBoolean("isIssueNotificationOn", false);
         issuesNotifications.setChecked(notifyIssues);
-
-        SwitchCompat foodNotifications = findViewById(R.id.food_calendar_notifications);
-        Boolean notifyFood = notification_settings.getBoolean("isFoodNotificationOn", false);
-        foodNotifications.setChecked(notifyFood);
-
 
         issuesNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -47,19 +42,6 @@ public class NotificationSettingsActivity extends AppCompatActivity {
                 } else {
                     PushNotifications.removeDeviceInterest(interest);
                 }
-            }
-        });
-
-
-        foodNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                SharedPreferences notification_settings = getSharedPreferences("NOTIFICATIONS", 0);
-                SharedPreferences.Editor notification_editor = notification_settings.edit();
-                notification_editor.putBoolean("isFoodNotificationOn", b);
-                notification_editor.commit();
-
-                //TODO: Food notifications
             }
         });
 

@@ -58,30 +58,5 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:weightSum="100"
-            >
-            <TextView
-                android:id="@+id/text2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Receive notification about food calendar"
-                android:textSize="16dp"
-                android:layout_weight="95"
-                />
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/food_calendar_notifications"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_weight="5"
-                ></androidx.appcompat.widget.SwitchCompat>
-
-        </LinearLayout>
-
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
