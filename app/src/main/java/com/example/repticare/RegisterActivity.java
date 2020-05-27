@@ -3,7 +3,6 @@ package com.example.repticare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,11 +23,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
-    Toolbar toolbar;
     Button register_button;
     EditText mUsername, mEmail, mPassword, mPasswordConfirm;
-    String url;
+    RadioGroup radioGender;
     String sex;
+    Toolbar toolbar;
 
 
     @Override
@@ -36,22 +35,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        toolbar = findViewById(R.id.toolbar_register);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white));
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
         register_button = findViewById(R.id.register_button);
         mUsername = findViewById(R.id.username_register);
         mEmail = findViewById(R.id.email_register);
         mPassword = findViewById(R.id.password_register);
         mPasswordConfirm = findViewById(R.id.password_confirm_register);
+        radioGender = findViewById(R.id.radio_group);
 
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,8 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
                 attemptRegister();
             }
         });
-
-        RadioGroup radioGender = findViewById(R.id.radio_group);
 
         radioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -72,16 +59,25 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        toolbar = findViewById(R.id.toolbar_register);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white));
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void attemptRegister() {
-
         // Reset errors.
         mUsername.setError(null);
         mEmail.setError(null);
         mPassword.setError(null);
 
-        // Store values at the time of the login attempt
         String username = mUsername.getText().toString();
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
@@ -135,13 +131,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if (cancel) {
-            // There was an error; don't attempt register and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
             //pedido REST REGISTER
-
-            url = getString(R.string.server_url) + "user/register/";
+            String url = getString(R.string.server_url) + "user/register/";
 
             JSONObject user = new JSONObject();
             try {
@@ -153,13 +146,12 @@ public class RegisterActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e("kk", user.toString());
+
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.POST, url, user, new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject response) {
-                            //textView.setText("Response: " + response.toString());
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
@@ -173,7 +165,6 @@ public class RegisterActivity extends AppCompatActivity {
                             if (response != null && response.data != null) {
                                 try {
                                     my_error = new JSONObject(new String(response.data));
-                                    Log.i("log error",my_error.toString());
                                     if(my_error.has("username")) {
                                         errors = errors + my_error.getString("username").split("\"")[1];
                                         if (my_error.has("email"))
@@ -206,4 +197,5 @@ public class RegisterActivity extends AppCompatActivity {
             res = false;
         return res;
     }
+
 }
