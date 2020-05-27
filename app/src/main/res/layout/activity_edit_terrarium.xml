@@ -153,7 +153,6 @@
                 android:text="Max hum (%)"
                 android:textColor="@color/colorAppTitle"
                 android:layout_marginLeft="195dp"
-
                 />
 
             <EditText
