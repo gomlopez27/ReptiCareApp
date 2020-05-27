@@ -66,7 +66,7 @@ public class TerrariumActivity extends AppCompatActivity {
 
         terrarium_owner.setText(t.getOwner());
         terrarium_owner2.setText(t.getOwner());
-        terrarium_temperature.setText(Double.toString(t.getCurrent_temp()) + " º Celcius");
+        terrarium_temperature.setText(Double.toString(t.getCurrent_temp()) + " ºC");
         terrarium_humidity.setText(Double.toString(t.getCurrent_humidity()) + " %");
         terrarium_uv.setText(Double.toString(t.getCurrent_uv()) + " nm");
 

@@ -29,6 +29,16 @@
         android:id="@+id/boxes"
         >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_terrariumName"
+            android:text="Terrarium name"
+            android:textColor="@color/colorAppTitle"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="30dp"
+            />
+
         <EditText
             android:id="@+id/name_edit_terrarium"
             android:layout_width="350dp"
@@ -41,7 +51,7 @@
             android:drawablePadding="10dp"
             android:background="@drawable/edit_text_background"
             android:padding="10dp"
-            android:layout_marginTop="35dp"
+            android:layout_below="@+id/tv_terrariumName"
             />
 
         <RelativeLayout
@@ -52,12 +62,19 @@
             android:gravity="center"
             android:id="@+id/box_temp"
             >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_minTemp"
+                android:text="Min temp (ºC)"
+                android:textColor="@color/colorAppTitle"
+                android:layout_marginLeft="10dp"
+                />
 
             <EditText
                 android:id="@+id/min_temp_edit_terrarium"
                 android:layout_width="165dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:layout_alignParentLeft="true"
                 android:inputType="number"
                 android:layout_marginBottom="20dp"
@@ -66,13 +83,23 @@
                 android:drawablePadding="10dp"
                 android:background="@drawable/edit_text_background"
                 android:padding="10dp"
+                android:layout_below="@+id/tv_minTemp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_maxTemp"
+                android:text="Max temp (ºC)"
+                android:textColor="@color/colorAppTitle"
+                android:layout_marginLeft="195dp"
+
                 />
 
             <EditText
                 android:id="@+id/max_temp_edit_terrarium"
                 android:layout_width="165dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:inputType="number"
                 android:layout_marginBottom="20dp"
                 android:hint="Max Temp"
@@ -81,6 +108,8 @@
                 android:drawablePadding="10dp"
                 android:background="@drawable/edit_text_background"
                 android:padding="10dp"
+                android:layout_below="@+id/tv_minTemp"
+
                 />
 
         </RelativeLayout>
@@ -93,13 +122,19 @@
             android:gravity="center"
             android:id="@+id/box_hum"
             >
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_minHum"
+                android:text="Min hum (%)"
+                android:textColor="@color/colorAppTitle"
+                android:layout_marginLeft="10dp"
+                />
 
             <EditText
                 android:id="@+id/min_hum_edit_terrarium"
                 android:layout_width="165dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:layout_alignParentLeft="true"
                 android:inputType="number"
                 android:layout_marginBottom="20dp"
@@ -108,6 +143,17 @@
                 android:drawablePadding="10dp"
                 android:background="@drawable/edit_text_background"
                 android:padding="10dp"
+                android:layout_below="@+id/tv_minHum"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_maxHum"
+                android:text="Max hum (%)"
+                android:textColor="@color/colorAppTitle"
+                android:layout_marginLeft="195dp"
+
                 />
 
             <EditText
@@ -123,6 +169,7 @@
                 android:drawablePadding="10dp"
                 android:background="@drawable/edit_text_background"
                 android:padding="10dp"
+                android:layout_below="@+id/tv_maxHum"
                 />
 
         </RelativeLayout>

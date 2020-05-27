@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_curr_unresolved_issues"
-                android:text="Currently unresolved issues: "
+                android:text="Number of unresolved issues: "
                 android:textSize="15dp"
                 >
             </TextView>
