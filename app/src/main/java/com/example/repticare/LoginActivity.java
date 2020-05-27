@@ -46,7 +46,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                }
+                button_login.setEnabled(false);
+            }
         });
 
         register_here.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(JSONObject response) {
+                            button_login.setEnabled(true);
                             fill_cache();
                             Intent intent = new Intent(LoginActivity.this, ListTerrariumsActivity.class);
                             intent.putExtra("user_logged", username);
@@ -114,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            button_login.setEnabled(true);
                             Toast.makeText(getApplicationContext(), "Cannot login with given credentials", Toast.LENGTH_SHORT).show();
                         }
                     }) {

@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptRegister();
+                register_button.setEnabled(false);
             }
         });
 
@@ -154,6 +155,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(JSONObject response) {
+                            register_button.setEnabled(true);
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
@@ -161,6 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            register_button.setEnabled(true);
                             NetworkResponse response = error.networkResponse;
                             JSONObject my_error = null;
                             String errors = "";

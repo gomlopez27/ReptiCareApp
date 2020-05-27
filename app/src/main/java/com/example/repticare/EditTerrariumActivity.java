@@ -67,6 +67,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptDeleteTerrarium(t);
+                button_delete_terrarium.setEnabled(false);
             }
         });
 
@@ -94,6 +95,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptEditTerrarium(t);
+                button_confirm_changes.setEnabled(false);
             }
         });
     }
@@ -111,7 +113,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response) {
-
+                        button_delete_terrarium.setEnabled(true);
                         Intent intent = new Intent(EditTerrariumActivity.this, ListTerrariumsActivity.class);
                         startActivity(intent);
                         finish();
@@ -120,7 +122,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("kk",error.toString());
+                        button_delete_terrarium.setEnabled(true);
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
@@ -280,7 +282,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
             url = getString(R.string.server_url) + "terrariums/update/" + t.getId();
 
-            JSONObject terrarium = new JSONObject();
+           JSONObject terrarium = new JSONObject();
            String other_users = "";
            List<String> users  = t.getOtherusers();
             for(int j = 0;  j < users.size() ; j++){
@@ -314,7 +316,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.i("resp", response.toString());
+                            button_confirm_changes.setEnabled(true);
                             Intent intent = new Intent(EditTerrariumActivity.this, TerrariumActivity.class);
                             intent.putExtra("Terrarium",terrariumItem);
                             startActivity(intent);
@@ -324,7 +326,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("kk",error.toString());
+                            button_confirm_changes.setEnabled(true);
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }) {
