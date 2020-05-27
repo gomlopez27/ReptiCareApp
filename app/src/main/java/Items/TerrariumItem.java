@@ -4,27 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 public class TerrariumItem implements Serializable {
-    String name,owner;
-    Double min_temp;
-    Double max_temp;
-    Double min_humidity;
-    Double max_humidity;
-    Double min_uv;
-    Double max_uv;
-    Double current_temp;
-    Double current_humidity;
-    Double current_uv;
-    List<String> otherusers;
     int id;
+    String name, owner;
+    Double min_temp, max_temp, min_humidity, max_humidity, min_uv, max_uv, current_temp, current_humidity, current_uv;
+    List<String> otherusers;
 
 
     public TerrariumItem(){}
 
-    public TerrariumItem(String name){
-        this.name = name;
-    }
-
-    public TerrariumItem(int id ,String owner,String name, Double min_temp, Double max_temp, Double min_humidity, Double max_humidity, Double min_uv, Double max_uv, Double current_temp, Double current_humidity, Double current_uv, List<String> otherusers) {
+    public TerrariumItem(int id, String owner, String name, Double min_temp, Double max_temp, Double min_humidity, Double max_humidity, Double min_uv, Double max_uv, Double current_temp, Double current_humidity, Double current_uv, List<String> otherusers) {
+        this.id = id;
         this.owner = owner;
         this.name = name;
         this.min_temp = min_temp;
@@ -37,11 +26,34 @@ public class TerrariumItem implements Serializable {
         this.current_humidity = current_humidity;
         this.current_uv = current_uv;
         this.otherusers = otherusers;
+    }
+
+    public int getId(){
+        return this.id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
+    public String getOwner(){
+        return this.owner;
+    }
+
+    public void setOwner(String owner){
+        this.owner = owner;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Double getMin_temp() {
-        return min_temp;
+        return this.min_temp;
     }
 
     public void setMin_temp(Double min_temp) {
@@ -49,7 +61,7 @@ public class TerrariumItem implements Serializable {
     }
 
     public Double getMax_temp() {
-        return max_temp;
+        return this.max_temp;
     }
 
     public void setMax_temp(Double max_temp) {
@@ -57,7 +69,7 @@ public class TerrariumItem implements Serializable {
     }
 
     public Double getMin_humidity() {
-        return min_humidity;
+        return this.min_humidity;
     }
 
     public void setMin_humidity(Double min_humidity) {
@@ -65,7 +77,7 @@ public class TerrariumItem implements Serializable {
     }
 
     public Double getMax_humidity() {
-        return max_humidity;
+        return this.max_humidity;
     }
 
     public void setMax_humidity(Double max_humidity) {
@@ -73,7 +85,7 @@ public class TerrariumItem implements Serializable {
     }
 
     public Double getMin_uv() {
-        return min_uv;
+        return this.min_uv;
     }
 
     public void setMin_uv(Double min_uv) {
@@ -81,7 +93,7 @@ public class TerrariumItem implements Serializable {
     }
 
     public Double getMax_uv() {
-        return max_uv;
+        return this.max_uv;
     }
 
     public void setMax_uv(Double max_uv) {
@@ -89,7 +101,7 @@ public class TerrariumItem implements Serializable {
     }
 
     public Double getCurrent_temp() {
-        return current_temp;
+        return this.current_temp;
     }
 
     public void setCurrent_temp(Double current_temp) {
@@ -97,7 +109,7 @@ public class TerrariumItem implements Serializable {
     }
 
     public Double getCurrent_humidity() {
-        return current_humidity;
+        return this.current_humidity;
     }
 
     public void setCurrent_humidity(Double current_humidity) {
@@ -105,7 +117,7 @@ public class TerrariumItem implements Serializable {
     }
 
     public Double getCurrent_uv() {
-        return current_uv;
+        return this.current_uv;
     }
 
     public void setCurrent_uv(Double current_uv) {
@@ -113,27 +125,11 @@ public class TerrariumItem implements Serializable {
     }
 
     public List<String> getOtherusers() {
-        return otherusers;
+        return this.otherusers;
     }
 
     public void setOtherusers(List<String> otherusers) {
         this.otherusers = otherusers;
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId(){return id;}
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getOwner(){return owner;}
-    public void setOwner(String owner){this.owner = owner;}
 }

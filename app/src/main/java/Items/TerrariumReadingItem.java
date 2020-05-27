@@ -3,13 +3,11 @@ package Items;
 import java.io.Serializable;
 
 public class TerrariumReadingItem implements Serializable {
-    int id;
-    int terrariumId;
-    double currTemp;
-    double currHum;
-    double currUV;
+    int id, terrariumId;
+    double currTemp, currHum, currUV;
     Boolean activity;
     String creatingTime;
+
 
     public TerrariumReadingItem(){}
 
@@ -24,7 +22,7 @@ public class TerrariumReadingItem implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -32,7 +30,7 @@ public class TerrariumReadingItem implements Serializable {
     }
 
     public int getTerrariumId() {
-        return terrariumId;
+        return this.terrariumId;
     }
 
     public void setTerrariumId(int terrariumId) {
@@ -40,7 +38,7 @@ public class TerrariumReadingItem implements Serializable {
     }
 
     public double getCurrTemp() {
-        return currTemp;
+        return this.currTemp;
     }
 
     public void setCurrTemp(double currTemp) {
@@ -48,7 +46,7 @@ public class TerrariumReadingItem implements Serializable {
     }
 
     public double getCurrHum() {
-        return currHum;
+        return this.currHum;
     }
 
     public void setCurrHum(double currHum) {
@@ -56,7 +54,7 @@ public class TerrariumReadingItem implements Serializable {
     }
 
     public double getCurrUV() {
-        return currUV;
+        return this.currUV;
     }
 
     public void setCurrUV(double currUV) {
@@ -64,7 +62,7 @@ public class TerrariumReadingItem implements Serializable {
     }
 
     public Boolean getActivity() {
-        return activity;
+        return this.activity;
     }
 
     public void setActivity(Boolean activity) {
@@ -72,10 +70,11 @@ public class TerrariumReadingItem implements Serializable {
     }
 
     public String getCreatingTime() {
-        return creatingTime;
+        return this.creatingTime;
     }
 
     public void setCreatingTime(String creatingTime) {
         this.creatingTime = creatingTime;
     }
+
 }

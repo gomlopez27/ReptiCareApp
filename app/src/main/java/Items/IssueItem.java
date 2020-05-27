@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class IssueItem implements Serializable {
     int id;
-    String name;
-    String desc;
+    String name, desc;
     Boolean isResolved;
+
 
     public IssueItem(){}
 
@@ -18,7 +18,7 @@ public class IssueItem implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -26,18 +26,26 @@ public class IssueItem implements Serializable {
     }
 
     public Boolean getResolved() {
-        return isResolved;
+        return this.isResolved;
     }
 
-    public void setResolved(Boolean isResolved) {
-        this.isResolved = isResolved;
+    public void setResolved(Boolean resolved) {
+        isResolved = resolved;
     }
 
     public String getDesc(){
-        return  desc;
+        return  this.desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public int getId(){
-        return id;
+        return this.id;
+    }
+
+    public int setId(int id){
+        return this.id = id;
     }
 }
