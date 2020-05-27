@@ -22,8 +22,6 @@ import Items.IssueItem;
 public class ListIssuesAdapter extends RecyclerView.Adapter<ListIssuesAdapter.MyViewHolder> {
     Context mContext;
     List<IssueItem> mData;
-    Boolean isResolved = false;
-
 
     public ListIssuesAdapter(Context mContext, List<IssueItem> mData) {
         this.mContext = mContext;
@@ -36,6 +34,7 @@ public class ListIssuesAdapter extends RecyclerView.Adapter<ListIssuesAdapter.My
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.item_my_issues, parent, false);
         final MyViewHolder viewHolder = new MyViewHolder(view);
+
         viewHolder.issue_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,10 +54,9 @@ public class ListIssuesAdapter extends RecyclerView.Adapter<ListIssuesAdapter.My
         if(mData.get(position).getResolved()){
             holder.issue_image.setImageResource(R.drawable.ic_check_24dp);
         }
-        else
+        else {
             holder.issue_image.setImageResource(R.drawable.warning_sign);
-
-
+        }
     }
 
     @Override
@@ -78,4 +76,5 @@ public class ListIssuesAdapter extends RecyclerView.Adapter<ListIssuesAdapter.My
             issue_image = itemView.findViewById(R.id.image_issue);
         }
     }
+
 }

@@ -3,7 +3,6 @@ package Adapters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +34,12 @@ import Items.OtherUserItem;
 import Items.TerrariumItem;
 
 public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAdapter.MyViewHolder> {
+    private static final String COOKIE_KEY = "Cookie";
+    private static final String SESSION_COOKIE = "sessionid";
     Context mContext;
     List<OtherUserItem> mData;
     TerrariumItem terrarium;
     OtherUserItem user;
-    private static final String COOKIE_KEY = "Cookie";
-    private static final String SESSION_COOKIE = "sessionid";
 
 
     public ListOtherUsersAdapter(Context mContext, List<OtherUserItem> mData, TerrariumItem terrarium) {
@@ -61,9 +60,8 @@ public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAd
             public void onClick(View v) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
 
-                // set title
                 alertDialogBuilder.setTitle("Are you sure you want to remove this user from this terrarium?");
-                // set dialog message
+
                 alertDialogBuilder
                         .setMessage("Click yes if you are sure.")
                         .setCancelable(false)
@@ -110,8 +108,6 @@ public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAd
     }
 
     private void removerUserFromTerrarium(final OtherUserItem user, TerrariumItem t) {
-        final TerrariumItem terra = t;
-
         String url = mContext.getString(R.string.server_url) + "terrariums/update/" + t.getId();
 
         JSONObject terrarium = new JSONObject();
@@ -143,6 +139,7 @@ public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAd
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.PUT, url, terrarium, new Response.Listener<JSONObject>() {
                     @Override
@@ -154,7 +151,6 @@ public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAd
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("User not removed",error.getMessage());
                         Toast.makeText(mContext, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
@@ -164,12 +160,10 @@ public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAd
                 addSessionCookie(params);
                 return params;
             }
-
         };
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
-
     }
 
     /**
@@ -191,4 +185,5 @@ public class ListOtherUsersAdapter extends RecyclerView.Adapter<ListOtherUsersAd
             headers.put(COOKIE_KEY, builder.toString());
         }
     }
+
 }

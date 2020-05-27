@@ -45,8 +45,6 @@ public class ListTerrariumsAdapter extends RecyclerView.Adapter<ListTerrariumsAd
             }
         });
 
-
-
         return viewHolder;
     }
 
@@ -110,4 +108,5 @@ public class ListTerrariumsAdapter extends RecyclerView.Adapter<ListTerrariumsAd
 
         }
     }
+
 }
