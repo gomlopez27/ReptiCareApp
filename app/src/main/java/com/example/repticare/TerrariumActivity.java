@@ -149,7 +149,7 @@ public class TerrariumActivity extends AppCompatActivity {
             readingIndex = allReadings - 24;
         }
 
-        number_hours.setText(size);
+        number_hours.setText(Integer.toString(size));
         DataPoint[] dpa = new DataPoint[size];
 
         for(int i = 0; i < size; i++) {
