@@ -38,7 +38,7 @@ public class TerrariumActivity extends AppCompatActivity {
     private static final String SESSION_COOKIE = "sessionid";
     RelativeLayout box_with_other_users, box_without_other_users;
     Button other_users_button, edit_terrarium_button;
-    TextView terrarium_temperature, terrarium_humidity, terrarium_uv, terrarium_owner;
+    TextView terrarium_temperature, terrarium_humidity, terrarium_uv, terrarium_owner, terrarium_owner2;
     GraphView tempGraph, humGraph, uvGraph, activityGraph;
     Toolbar toolbar;
     List<TerrariumReadingItem> readingList;
@@ -55,6 +55,7 @@ public class TerrariumActivity extends AppCompatActivity {
         terrarium_humidity = findViewById(R.id.terrarium_humidity);
         terrarium_uv = findViewById(R.id.terrarium_uv);
         terrarium_owner = findViewById(R.id.owner_name);
+        terrarium_owner2 = findViewById(R.id.owner_name2);
 
         edit_terrarium_button = findViewById(R.id.edit_terrarium_button);
         other_users_button = findViewById(R.id.other_users_button);
@@ -63,6 +64,7 @@ public class TerrariumActivity extends AppCompatActivity {
         box_without_other_users = findViewById(R.id.box_without_other_users);
 
         terrarium_owner.setText(t.getOwner());
+        terrarium_owner2.setText(t.getOwner());
         terrarium_temperature.setText(Double.toString(t.getCurrent_temp()));
         terrarium_humidity.setText(Double.toString(t.getCurrent_humidity()));
         terrarium_uv.setText(Double.toString(t.getCurrent_uv()));

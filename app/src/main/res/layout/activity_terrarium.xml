@@ -267,6 +267,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Temperature in the last 24 hours"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/temp_graph_title"
                     />
@@ -294,6 +297,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Humidity in the last 24 hours"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/hum_graph_title"
                     />
@@ -319,6 +325,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="UV radiation in the last 24 hours"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/uv_graph_title"
                     />
@@ -344,6 +353,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Activity in the last 24 hours"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/activity_graph_title"
                     />
