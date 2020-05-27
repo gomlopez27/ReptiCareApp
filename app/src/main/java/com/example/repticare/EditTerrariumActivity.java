@@ -55,6 +55,7 @@ public class EditTerrariumActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EditTerrariumActivity.this, TerrariumActivity.class);
+                intent.putExtra("Terrarium",t);
                 startActivity(intent);
                 finish();
             }
