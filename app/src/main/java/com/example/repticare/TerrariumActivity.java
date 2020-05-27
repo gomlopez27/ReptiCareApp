@@ -3,7 +3,6 @@ package com.example.repticare;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -37,12 +36,12 @@ import Items.TerrariumReadingItem;
 public class TerrariumActivity extends AppCompatActivity {
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
+    RelativeLayout box_with_other_users, box_without_other_users;
     Button other_users_button, edit_terrarium_button;
     TextView terrarium_temperature, terrarium_humidity, terrarium_uv, terrarium_owner;
-    Toolbar toolbar;
     GraphView tempGraph, humGraph, uvGraph, activityGraph;
+    Toolbar toolbar;
     List<TerrariumReadingItem> readingList;
-    RelativeLayout box_with_other_users, box_without_other_users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,45 +51,25 @@ public class TerrariumActivity extends AppCompatActivity {
         final TerrariumItem t = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
         getReadings(t.getId());
 
-        toolbar = findViewById(R.id.toolbar_terrarium);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(t.getName());
-
         terrarium_temperature = findViewById(R.id.terrarium_temperature);
         terrarium_humidity = findViewById(R.id.terrarium_humidity);
         terrarium_uv = findViewById(R.id.terrarium_uv);
         terrarium_owner = findViewById(R.id.owner_name);
-
-        tempGraph = findViewById(R.id.temp_graph);
-        humGraph = findViewById(R.id.hum_graph);
-        uvGraph = findViewById(R.id.uv_graph);
-        activityGraph = findViewById(R.id.activity_graph);
-
-
-
-        terrarium_owner.setText(t.getOwner());
-        terrarium_temperature.setText(Double.toString(t.getCurrent_temp()));
-        terrarium_humidity.setText(Double.toString(t.getCurrent_humidity()));
-        terrarium_uv.setText(Double.toString(t.getCurrent_uv()));
-
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TerrariumActivity.this, ListTerrariumsActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        SharedPreferences settings = getSharedPreferences("Auth", 0);
-        String current_user = settings.getString("user_logged", "");
 
         edit_terrarium_button = findViewById(R.id.edit_terrarium_button);
         other_users_button = findViewById(R.id.other_users_button);
 
         box_with_other_users = findViewById(R.id.box_with_other_users);
         box_without_other_users = findViewById(R.id.box_without_other_users);
+
+        terrarium_owner.setText(t.getOwner());
+        terrarium_temperature.setText(Double.toString(t.getCurrent_temp()));
+        terrarium_humidity.setText(Double.toString(t.getCurrent_humidity()));
+        terrarium_uv.setText(Double.toString(t.getCurrent_uv()));
+
+
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String current_user = settings.getString("user_logged", "");
 
         if(!current_user.equalsIgnoreCase(t.getOwner())){
             edit_terrarium_button.setVisibility(View.INVISIBLE);
@@ -116,11 +95,27 @@ public class TerrariumActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        toolbar = findViewById(R.id.toolbar_terrarium);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(t.getName());
+
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TerrariumActivity.this, ListTerrariumsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     private void drawGraphs(GraphView graph, String attribute){
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
-        graph.getGridLabelRenderer().setPadding(32); // should allow for 3 digits to fit on screen
+        graph.getGridLabelRenderer().setPadding(32);
+
         int allReadings;
         if(readingList == null) {
             allReadings = 0;
@@ -168,7 +163,6 @@ public class TerrariumActivity extends AppCompatActivity {
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpa);
         graph.addSeries(series);
-
     }
 
     private void getReadings(int terrarium_id) {
@@ -185,6 +179,11 @@ public class TerrariumActivity extends AppCompatActivity {
                                     readingList = new LinkedList<TerrariumReadingItem>();
                                     readingList.addAll(parseTerrariumReadings(response));
 
+                                    tempGraph = findViewById(R.id.temp_graph);
+                                    humGraph = findViewById(R.id.hum_graph);
+                                    uvGraph = findViewById(R.id.uv_graph);
+                                    activityGraph = findViewById(R.id.activity_graph);
+
                                     drawGraphs(tempGraph, "t");
                                     drawGraphs(humGraph, "h");
                                     drawGraphs(uvGraph, "u");
@@ -195,7 +194,6 @@ public class TerrariumActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.e("resp", error.toString());
                             }
                         })  {
             @Override
@@ -206,6 +204,7 @@ public class TerrariumActivity extends AppCompatActivity {
             }
 
         };
+
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
@@ -213,7 +212,6 @@ public class TerrariumActivity extends AppCompatActivity {
     private ArrayList<TerrariumReadingItem> parseTerrariumReadings(JSONArray response){
         try {
             JSONArray items = response;
-            Log.i("it",response.toString());
             ArrayList res = new ArrayList<TerrariumReadingItem>();
             for (int i = 0 ; i < items.length(); i++){
                 JSONObject item = items.getJSONObject(i);
@@ -236,6 +234,10 @@ public class TerrariumActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Adds session cookie to headers if exists.
+     * @param headers
+     */
     private final void addSessionCookie(Map<String, String> headers) {
         SharedPreferences settings = getSharedPreferences("Auth", 0);
         String sessionId = settings.getString(SESSION_COOKIE, "");
