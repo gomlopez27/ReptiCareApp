@@ -3,7 +3,6 @@ package com.example.repticare;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -21,19 +20,7 @@ public class NotificationSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_settings);
 
-        toolbar = findViewById(R.id.toolbar_notifications_settings);
-        setSupportActionBar(toolbar);
-
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(NotificationSettingsActivity.this, AccountActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
+        // Set notification switches to their previous state or to false, by default
         SharedPreferences notification_settings = getSharedPreferences("NOTIFICATIONS", 0);
         
         SwitchCompat issuesNotifications = findViewById(R.id.issues_notifications);
@@ -60,8 +47,6 @@ public class NotificationSettingsActivity extends AppCompatActivity {
                 } else {
                     PushNotifications.removeDeviceInterest(interest);
                 }
-
-                Log.e("issue" , "Boolean value = " + b);
             }
         });
 
@@ -75,12 +60,21 @@ public class NotificationSettingsActivity extends AppCompatActivity {
                 notification_editor.commit();
 
                 //TODO: Food notifications
-
-                Log.e("food" , "Boolean value = " + b);
             }
         });
 
+        toolbar = findViewById(R.id.toolbar_notifications_settings);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_dark_green));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NotificationSettingsActivity.this, AccountActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 }
-
