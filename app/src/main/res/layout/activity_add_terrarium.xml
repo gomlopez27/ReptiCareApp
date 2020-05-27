@@ -247,7 +247,6 @@
                     android:padding="10dp"
                     android:layout_below="@+id/tv_maxUV"
                     />
-
             </RelativeLayout>
 
             <RelativeLayout
