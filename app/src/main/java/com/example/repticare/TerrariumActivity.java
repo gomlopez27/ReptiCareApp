@@ -117,6 +117,13 @@ public class TerrariumActivity extends AppCompatActivity {
         });
 
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(TerrariumActivity.this, ListTerrariumsActivity.class);
+        setResult(RESULT_OK);
+        startActivity(intent);
+        finish();
+    }
 
     private void drawGraphs(GraphView graph, String attribute){
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);

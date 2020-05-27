@@ -100,6 +100,15 @@ public class EditTerrariumActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        final TerrariumItem t = (TerrariumItem) getIntent().getExtras().getSerializable("Terrarium");
+        Intent intent = new Intent(EditTerrariumActivity.this, TerrariumActivity.class);
+        intent.putExtra("Terrarium",t);
+        startActivity(intent);
+        finish();
+    }
+
     private void attemptDeleteTerrarium(TerrariumItem t) {
         String name = mName.getText().toString();
 
