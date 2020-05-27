@@ -269,12 +269,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/temp_graph_title_line"
-                    >
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Temperature in the last 24"
+                        android:text="Temperature in the last "
                         android:textSize="18dp"
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
@@ -287,6 +287,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
+                        android:text="x"
                         android:id="@+id/temp_graph_number"
                         android:layout_toRightOf="@id/temp_graph_title"
                         />
@@ -301,6 +302,7 @@
                         android:id="@+id/temp_graph_hours"
                         android:layout_toRightOf="@id/temp_graph_number"
                         />
+
                 </RelativeLayout>
 
                 <com.jjoe64.graphview.GraphView
@@ -308,7 +310,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/temp_graph"
                     android:layout_below="@+id/temp_graph_title_line"
-                    android:layout_margin="15dp"
+                    android:layout_margin="10dp"
                     />
 
 
@@ -323,47 +325,50 @@
                 android:layout_marginTop="10dp"
                 >
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/hum_graph_title_line"
+                android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Humidity in the last "
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/hum_graph_title"
+                        />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Humidity in the last "
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/hum_graph_title"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:text="x"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/hum_graph_number"
+                        android:layout_toRightOf="@id/hum_graph_title"
+                        />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/hum_graph_number"
-                    android:layout_toRightOf="@id/hum_graph_title"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" hours"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/hum_graph_hours"
+                        android:layout_toRightOf="@id/hum_graph_number" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" hours"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/hum_graph_hours"
-                    android:layout_toRightOf="@id/hum_graph_number"
-                    tools:ignore="DuplicateIds" />
+            </RelativeLayout>
 
                 <com.jjoe64.graphview.GraphView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/hum_graph"
-                    android:layout_below="@+id/hum_graph_title"
-                    android:layout_margin="15dp"/>
+                    android:layout_below="@+id/hum_graph_title_line"
+                    android:layout_margin="10dp"/>
 
             </RelativeLayout>
 
@@ -375,46 +380,50 @@
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="UV radiation in the last "
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/uv_graph_title"
-                    />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/uv_graph_title_line"
+                android:gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/uv_graph_number"
-                    android:layout_toRightOf="@id/uv_graph_title"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="UV radiation in the last "
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/uv_graph_title"
+                        />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" hours"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/uv_graph_hours"
-                    android:layout_toRightOf="@id/uv_graph_number"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:text="x"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/uv_graph_number"
+                        android:layout_toRightOf="@id/uv_graph_title"
+                        />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" hours"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/uv_graph_hours"
+                        android:layout_toRightOf="@id/uv_graph_number"
+                        />
+            </RelativeLayout>
                 <com.jjoe64.graphview.GraphView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/uv_graph"
-                    android:layout_below="@+id/uv_graph_title"
-                    android:layout_margin="15dp"
+                    android:layout_below="@+id/uv_graph_title_line"
+                    android:layout_margin="10dp"
                     />
             </RelativeLayout>
 
@@ -426,6 +435,12 @@
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
                 >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_graph_title_line"
+                android:gravity="center">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -433,7 +448,6 @@
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
-                    android:layout_centerHorizontal="true"
                     android:id="@+id/activity_graph_title"
                     />
 
@@ -443,7 +457,7 @@
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
-                    android:layout_centerHorizontal="true"
+                    android:text="x"
                     android:id="@+id/activity_graph_number"
                     android:layout_toRightOf="@id/activity_graph_title"
                     />
@@ -455,17 +469,17 @@
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
-                    android:layout_centerHorizontal="true"
                     android:id="@+id/activity_graph_hours"
                     android:layout_toRightOf="@id/activity_graph_number"
                     />
+            </RelativeLayout>
 
                 <com.jjoe64.graphview.GraphView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/activity_graph"
-                    android:layout_below="@+id/activity_graph_title"
-                    android:layout_margin="15dp"
+                    android:layout_below="@+id/activity_graph_title_line"
+                    android:layout_margin="10dp"
                     />
             </RelativeLayout>
 
