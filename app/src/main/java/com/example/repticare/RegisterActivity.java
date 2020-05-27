@@ -26,14 +26,16 @@ public class RegisterActivity extends AppCompatActivity {
     Button register_button;
     EditText mUsername, mEmail, mPassword, mPasswordConfirm;
     RadioGroup radioGender;
-    String sex;
     Toolbar toolbar;
+    String sex;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        sex = "f";
 
         register_button = findViewById(R.id.register_button);
         mUsername = findViewById(R.id.username_register);
