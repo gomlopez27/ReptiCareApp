@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,12 +25,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    Button button_login, register_here;
-    EditText mUsername, mPassword;
-    String url;
     private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
+    Button button_login, register_here;
+    EditText mUsername, mPassword;
 
 
     @Override
@@ -86,13 +84,11 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
           //pedido REST LOGIN
 
-            url = getString(R.string.server_url) + "login/";
+            String url = getString(R.string.server_url) + "login/";
 
             JSONObject user = new JSONObject();
             try {
@@ -102,16 +98,13 @@ public class LoginActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e("kk", user.toString());
+
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.POST, url, user, new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject response) {
-                            //textView.setText("Response: " + response.toString());
-
                             fill_cache();
-
                             Intent intent = new Intent(LoginActivity.this, ListTerrariumsActivity.class);
                             intent.putExtra("user_logged", username);
                             startActivity(intent);
@@ -121,13 +114,11 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), "Cannot Log in with given credentials", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Cannot login with given credentials", Toast.LENGTH_SHORT).show();
                         }
                     }) {
                     @Override
                     protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                        // since we don't know which of the two underlying network vehicles
-                        // will Volley use, we have to handle and store session cookies manually
                         Map<String, String> responseHeaders = response.headers;
                         checkSessionCookie(responseHeaders);
                         SharedPreferences settings = getSharedPreferences("Auth", 0);
@@ -177,16 +168,14 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
     private void fill_cache(){
-        url = getString(R.string.server_url) + "user/";
+        String url = getString(R.string.server_url) + "user/";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("user",response.toString());
                         SharedPreferences settings = getSharedPreferences("Auth", 0);
                         SharedPreferences.Editor editor = settings.edit();
                         try {
@@ -198,8 +187,6 @@ public class LoginActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         editor.commit();
-
-
                     }
                 }, new Response.ErrorListener() {
 
@@ -217,9 +204,5 @@ public class LoginActivity extends AppCompatActivity {
                 };
 
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
-
     }
-
-
-
 }

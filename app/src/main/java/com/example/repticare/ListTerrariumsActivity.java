@@ -3,7 +3,6 @@ package com.example.repticare;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,38 +37,19 @@ import Items.TerrariumItem;
 public class ListTerrariumsActivity extends AppCompatActivity {
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
-    RecyclerView recyclerView;
-    List mList;
-    ListTerrariumsAdapter adapter;
     TextView nrOfTerrariums_tv;
+    RecyclerView recyclerView;
+    ListTerrariumsAdapter adapter;
+    List mList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_terrariums);
+
         mList = new ArrayList();
 
-        // Issue Notifications
-        SharedPreferences notification_settings = getSharedPreferences("NOTIFICATIONS", 0);
-        Boolean notify = notification_settings.getBoolean("isIssueNotificationOn", false);
-        SharedPreferences settings = getSharedPreferences("Auth", 0);
-        String interest = settings.getString("user_logged", "");
-        if(  getIntent().getExtras() != null)
-            interest =getIntent().getExtras().getString("user_logged");
-
-
-
-        Log.i("user_logged", interest);
-        PushNotifications.start(getApplicationContext(), "ac2c54bd-7122-4618-ae8f-7d1def4df1d3");
-
-        if(notify) {
-            PushNotifications.addDeviceInterest(interest);
-        } else {
-            PushNotifications.removeDeviceInterest(interest);
-        }
-
-
-        // RecyclerView with adapter
         recyclerView = findViewById(R.id.list_my_terrariums);
         getTerrariums();
         adapter = new ListTerrariumsAdapter(ListTerrariumsActivity.this, mList);
@@ -88,6 +68,25 @@ public class ListTerrariumsActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+
+
+        // Issue Notifications
+        SharedPreferences settings = getSharedPreferences("Auth", 0);
+        String interest = settings.getString("user_logged", "");
+
+        if(getIntent().getExtras() != null)
+            interest = getIntent().getExtras().getString("user_logged");
+
+        SharedPreferences notification_settings = getSharedPreferences("NOTIFICATIONS", 0);
+        Boolean notify = notification_settings.getBoolean("isIssueNotificationOn", false);
+        PushNotifications.start(getApplicationContext(), "ac2c54bd-7122-4618-ae8f-7d1def4df1d3");
+
+        if(notify) {
+            PushNotifications.addDeviceInterest(interest);
+        } else {
+            PushNotifications.removeDeviceInterest(interest);
+        }
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_terrarium);
         Menu menu = bottomNavigationView.getMenu();
@@ -114,14 +113,10 @@ public class ListTerrariumsActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     private void getTerrariums() {
-        final ArrayList res = new ArrayList<TerrariumItem>();
-
         String url = getString(R.string.server_url) + "terrariums/";
-
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (Request.Method.GET, url,null,
@@ -131,13 +126,11 @@ public class ListTerrariumsActivity extends AppCompatActivity {
                         mList.addAll(parseTerrariums(response));
                         adapter.notifyDataSetChanged();
                         nrOfTerrariums_tv.setText(Integer.toString(mList.size()));
-                        Log.i("it", (String.valueOf(mList.size()) + " After Response"));
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("resp", error.toString());
                     }
                 })  {
                     @Override
@@ -149,12 +142,15 @@ public class ListTerrariumsActivity extends AppCompatActivity {
 
                 };
 
-
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 
 
+    /**
+     * Adds session cookie to headers if exists.
+     * @param headers
+     */
     private final void addSessionCookie(Map<String, String> headers) {
         SharedPreferences settings = getSharedPreferences("Auth", 0);
         String sessionId = settings.getString(SESSION_COOKIE, "");
@@ -175,7 +171,6 @@ public class ListTerrariumsActivity extends AppCompatActivity {
     private ArrayList<TerrariumItem> parseTerrariums(JSONArray response){
         try {
             JSONArray items = response;
-            Log.i("it",response.toString());
             ArrayList res = new ArrayList<TerrariumItem>();
             for (int i = 0 ; i < items.length(); i++){
                 JSONObject item = items.getJSONObject(i);
@@ -185,10 +180,21 @@ public class ListTerrariumsActivity extends AppCompatActivity {
                     other_users.add(users.getString(j));
                 }
 
-                TerrariumItem terrariumItem = new TerrariumItem(item.getInt("id"),item.getString("creator_admin"),item.getString("name"),item.getDouble("min_temp"),item.getDouble("max_temp"),item.getDouble("min_humidity"),item.getDouble("max_humidity"),item.getDouble("min_uv"),item.getDouble("max_uv"),item.getDouble("current_temp"),item.getDouble("current_humidity"),item.getDouble("current_uv"),other_users);
+                TerrariumItem terrariumItem = new TerrariumItem(item.getInt("id"),
+                        item.getString("creator_admin"),
+                        item.getString("name"),
+                        item.getDouble("min_temp"),
+                        item.getDouble("max_temp"),
+                        item.getDouble("min_humidity"),
+                        item.getDouble("max_humidity"),
+                        item.getDouble("min_uv"),
+                        item.getDouble("max_uv"),
+                        item.getDouble("current_temp"),
+                        item.getDouble("current_humidity"),
+                        item.getDouble("current_uv"),
+                        other_users);
                 res.add(terrariumItem);
             }
-
          return res;
 
         } catch (JSONException e) {

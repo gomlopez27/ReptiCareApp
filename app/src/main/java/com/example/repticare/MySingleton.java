@@ -11,9 +11,9 @@ import com.android.volley.toolbox.Volley;
 
 public class MySingleton {
     private static MySingleton instance;
+    private static Context ctx;
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
-    private static Context ctx;
 
     private MySingleton(Context context) {
         ctx = context;
@@ -45,8 +45,6 @@ public class MySingleton {
 
     public RequestQueue getRequestQueue() {
         if (requestQueue == null) {
-            // getApplicationContext() is key, it keeps you from leaking the
-            // Activity or BroadcastReceiver if someone passes one in.
             requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
         }
         return requestQueue;
@@ -56,7 +54,4 @@ public class MySingleton {
         getRequestQueue().add(req);
     }
 
-    public ImageLoader getImageLoader() {
-        return imageLoader;
-    }
 }

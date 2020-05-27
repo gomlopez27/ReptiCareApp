@@ -19,16 +19,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private static int TIME = 1000;
-    private static final String SET_COOKIE_KEY = "Set-Cookie";
     private static final String COOKIE_KEY = "Cookie";
     private static final String SESSION_COOKIE = "sessionid";
+    private static int TIME = 1000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences settings = getSharedPreferences("Auth", 0);
                 SharedPreferences.Editor editor = settings.edit();
                 String logged = settings.getString("user_logged", "");
-
 
                 if(logged.equalsIgnoreCase("")){
                     editor.clear();
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-
                                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                     startActivity(intent);
                                     finish();                                }
@@ -83,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }, TIME);
-
-
     }
 
 
@@ -107,4 +102,5 @@ public class MainActivity extends AppCompatActivity {
             headers.put(COOKIE_KEY, builder.toString());
         }
     }
+
 }
