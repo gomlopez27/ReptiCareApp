@@ -38,7 +38,8 @@ public class TerrariumActivity extends AppCompatActivity {
     private static final String SESSION_COOKIE = "sessionid";
     RelativeLayout box_with_other_users, box_without_other_users;
     Button other_users_button, edit_terrarium_button;
-    TextView terrarium_temperature, terrarium_humidity, terrarium_uv, terrarium_owner, terrarium_owner2;
+    TextView terrarium_temperature, terrarium_humidity, terrarium_uv, terrarium_owner, terrarium_owner2,
+            temp_graph_number, hum_graph_number, uv_graph_number, activity_graph_number;
     GraphView tempGraph, humGraph, uvGraph, activityGraph;
     Toolbar toolbar;
     List<TerrariumReadingItem> readingList;
@@ -57,6 +58,10 @@ public class TerrariumActivity extends AppCompatActivity {
         terrarium_uv = findViewById(R.id.terrarium_uv);
         terrarium_owner = findViewById(R.id.owner_name);
         terrarium_owner2 = findViewById(R.id.owner_name2);
+        temp_graph_number = findViewById(R.id.temp_graph_number);
+        hum_graph_number = findViewById(R.id.hum_graph_number);
+        uv_graph_number = findViewById(R.id.uv_graph_number);
+        activity_graph_number = findViewById(R.id.activity_graph_number);
 
         edit_terrarium_button = findViewById(R.id.edit_terrarium_button);
         other_users_button = findViewById(R.id.other_users_button);
@@ -127,7 +132,7 @@ public class TerrariumActivity extends AppCompatActivity {
         finish();
     }
 
-    private void drawGraphs(GraphView graph, String attribute){
+    private void drawGraphs(GraphView graph, String attribute, TextView number_hours){
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
         graph.getGridLabelRenderer().setPadding(32);
 
@@ -148,6 +153,7 @@ public class TerrariumActivity extends AppCompatActivity {
             readingIndex = allReadings - 24;
         }
 
+        number_hours.setText(size);
         DataPoint[] dpa = new DataPoint[size];
 
         for(int i = 0; i < size; i++) {
@@ -199,10 +205,10 @@ public class TerrariumActivity extends AppCompatActivity {
                                     uvGraph = findViewById(R.id.uv_graph);
                                     activityGraph = findViewById(R.id.activity_graph);
 
-                                    drawGraphs(tempGraph, "t");
-                                    drawGraphs(humGraph, "h");
-                                    drawGraphs(uvGraph, "u");
-                                    drawGraphs(activityGraph, "a");
+                                    drawGraphs(tempGraph, "t", temp_graph_number);
+                                    drawGraphs(humGraph, "h", hum_graph_number);
+                                    drawGraphs(uvGraph, "u", uv_graph_number);
+                                    drawGraphs(activityGraph, "a", activity_graph_number);
                                 }
                             }
                         },
