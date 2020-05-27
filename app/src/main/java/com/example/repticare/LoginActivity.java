@@ -58,7 +58,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
 
+    }
     private void attemptLogin() {
         mUsername.setError(null);
         mPassword.setError(null);
