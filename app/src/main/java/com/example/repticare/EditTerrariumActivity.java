@@ -1,5 +1,6 @@
 package com.example.repticare;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -66,8 +68,28 @@ public class EditTerrariumActivity extends AppCompatActivity {
         button_delete_terrarium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptDeleteTerrarium(t);
-                button_delete_terrarium.setEnabled(false);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditTerrariumActivity.this);
+
+                alertDialogBuilder.setTitle("Are you sure you want to delete this terrarium?");
+
+                alertDialogBuilder
+                        .setMessage("Click yes if you are sure.")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                attemptDeleteTerrarium(t);
+                                button_delete_terrarium.setEnabled(false);
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
             }
         });
 
