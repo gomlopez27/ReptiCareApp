@@ -44,15 +44,19 @@ public class IssueActivity extends AppCompatActivity {
         button_resolve_issue = findViewById(R.id.button_resolve_issue);
         text_issue_description = findViewById(R.id.text_issue_description);
         text_issue_description.setText(issueItem.getDesc());
-
-        button_resolve_issue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptResolveIssue();
-                button_resolve_issue.setEnabled(false);
-            }
-        });
-
+        if(issueItem.getResolved()){
+            button_resolve_issue.setVisibility(View.GONE);
+            //TODO
+        }
+        else {
+            button_resolve_issue.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    attemptResolveIssue();
+                    button_resolve_issue.setEnabled(false);
+                }
+            });
+        }
         toolbar = findViewById(R.id.toolbar_issue);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(issueItem.getName());

@@ -185,7 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_minUV"
-                android:text="Min uv (nm)"
+                android:text="Min UV (nm)"
                 android:textColor="@color/colorAppTitle"
                 android:layout_marginLeft="10dp"
                 />

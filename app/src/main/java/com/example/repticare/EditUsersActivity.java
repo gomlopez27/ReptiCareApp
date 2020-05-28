@@ -39,7 +39,7 @@ public class EditUsersActivity extends AppCompatActivity {
         List<String> other_users = terrarium.getOtherusers();
 
         for(String user:other_users){
-            if(!user.equalsIgnoreCase(terrarium.getOwner()))
+            if(!user.equalsIgnoreCase(terrarium.getOwner()) && !user.equalsIgnoreCase("admin"))
                 mList.add(new OtherUserItem(user));
         }
 
